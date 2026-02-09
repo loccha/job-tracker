@@ -1,0 +1,26 @@
+h2 {
+    font-size:30px;
+    color:white;
+    text-shadow: 2px 2px 5px #000000;
+}
+
+.status-column {
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+.status-column--to-apply {
+    background-color: #9dafff;
+}
+
+.status-column--pending{
+    background-color: #FFD164;
+}
+
+.status-column--interview{
+    background-color:#27e3b2;
+}
+
+.status-column--declined{
+    background-color:#fd5079;
+}
