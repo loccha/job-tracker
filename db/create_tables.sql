@@ -14,7 +14,9 @@ CREATE TABLE IF NOT EXISTS applications (
 	status application_status NOT NULL,
 	application_deadline DATE,
 	applying_date DATE,
-	creation_date DATE,
-	link VARCHAR(100) NOT NULL
+	link VARCHAR(100) NOT NULL,
+	cv_url VARCHAR(100),
+	letter_url VARCHAR(100),
+	created_at TIMESTAMP DEFAULT NOW()
 );
 

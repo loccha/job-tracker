@@ -1,8 +1,14 @@
 import dotenv from "dotenv";
 import express from 'express'
 import { Pool } from 'pg';
+import { v2 as cloudinary } from 'cloudinary';
 
 dotenv.config();
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
 const app = express();
 app.use(express.json());
@@ -27,14 +33,40 @@ app.get('/', async(req, res) => {
     }
 });
 
+async function uploadToCloudinary(file){
+    try {
+        console.log(file)
+        const result = cloudinary.uploader.upload(file, { 
+            use_filename: true
+        }).then(
+            result=>console.log(result)
+        );
+        return result
+        
+    } catch (e) {
+            console.error("Erreur upload :", e.message);
+    }
+}
+
+app.post('/update-file', async(req, res) => {
+    try {
+        const { file } = req.body
+        const result = await uploadToCloudinary(file)
+
+        res.status(201).json(result);
+    } catch(e) {
+        res.status(400).json({ error: e.message });
+    }
+})
+
 //TODO: data validation
 app.post('/applications', async (req, res) => {
-    const { title, company, description, status, application_deadline, applying_date, link } = req.body;
+    const { title, company, description, status, application_deadline, applying_date, link, cv_url } = req.body;
 
     try {
         const query = {
-            text: 'INSERT INTO application(title, company, description, status, application_deadline, applying_date, link) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *',
-            values: [title, company, description, status, application_deadline, applying_date, link],
+            text: 'INSERT INTO applications(title, company, description, status, application_deadline, applying_date, link, cv_url) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
+            values: [title, company, description, status, application_deadline, applying_date, link, cv_url],
         }
         
         const result = await pool.query(query)
@@ -43,6 +75,7 @@ app.post('/applications', async (req, res) => {
         res.status(400).json({ error: e.message });
     }
 });
+
 
 //TODO: data validation
 app.put('/applications/:id', async (req, res) => {
