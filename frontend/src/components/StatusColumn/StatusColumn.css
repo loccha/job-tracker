@@ -1,50 +1,13 @@
 h2 {
-    font-size:30px;
-    color:white;
-    text-shadow: 2px 2px 5px #0000008a;
+    font-size:24px;
+    font-weight:400;
+    text-align:left;
 }
 
 .status-column {
-    border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-
     display: flex;
     flex-direction: column;
 }
 
-.status-column--to-apply {
-    background-color: #c2cdff;
-}
 
-.status-column--pending{
-    background-color: #fff4d9;
-}
 
-.status-column--interview{
-    background-color: #abffe8;
-}
-
-.status-column--declined{
-    background-color: #ffc4d1;
-}
-
-.status-column__header {
-    border-radius: 15px 15px 0px 0px;
-
-}
-
-.status-column__header--to-apply{
-    background-color: #4567ff;
-}
-
-.status-column__header--pending{
-    background-color: #ffca4a;
-}
-
-.status-column__header--interview{
-    background-color: #008b66;
-}
-
-.status-column__header--declined{
-    background-color: #c71a43;
-}

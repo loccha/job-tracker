@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
-import express from 'express'
+import express from 'express';
+import cors from "cors";
 import { Pool } from 'pg';
 import { v2 as cloudinary } from 'cloudinary';
 
@@ -12,6 +13,7 @@ cloudinary.config({
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 const PORT = 3000;
 
@@ -24,9 +26,9 @@ const pool = new Pool({
 });
 await pool.connect();
 
-app.get('/', async(req, res) => {
+app.get('/api', async(req, res) => {
     try {
-        const result = await pool.query('SELECT * FROM application ORDER BY application_deadline');
+        const result = await pool.query('SELECT * FROM applications ORDER BY application_deadline');
         res.json(result.rows);
     } catch(e) {
         res.status(500).json({ error: e.message });
@@ -48,7 +50,7 @@ async function uploadToCloudinary(file){
     }
 }
 
-app.post('/update-file', async(req, res) => {
+app.post('/api/upload-file', async(req, res) => {
     try {
         const { file } = req.body
         const result = await uploadToCloudinary(file)
@@ -60,7 +62,7 @@ app.post('/update-file', async(req, res) => {
 })
 
 //TODO: data validation
-app.post('/applications', async (req, res) => {
+app.post('/api/applications', async (req, res) => {
     const { title, company, description, status, application_deadline, applying_date, link, cv_url } = req.body;
 
     try {
@@ -78,7 +80,7 @@ app.post('/applications', async (req, res) => {
 
 
 //TODO: data validation
-app.put('/applications/:id', async (req, res) => {
+app.put('/api/applications/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const { title, company, description, status, application_deadline, applying_date, link } = req.body;
@@ -95,7 +97,7 @@ app.put('/applications/:id', async (req, res) => {
     }
 });
 
-app.delete('/delete/:id', async (req, res) => {
+app.delete('/api/delete/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const query = {

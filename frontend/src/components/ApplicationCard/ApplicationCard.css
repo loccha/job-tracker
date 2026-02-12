@@ -1,0 +1,89 @@
+.application-card{
+    --application-background: #0c0c12;
+    --cv-color:#fb5b5b;
+    --letter-color:#68ffa4;
+    --link-color:#e7e7e7;
+
+    --interesting-job: #ff6464;
+    --very-interesting-job:#a5e;
+
+    margin: 15px 0px;
+    padding: 10px 15px 0px 15px;  
+    height:150px;
+    background-color:var(--application-background);
+    border-radius:10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    transition: transform 0.2s ease;
+}
+
+.application-card:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+.application-card * {
+    text-align:left;
+    margin:0
+}
+
+.application-card__attachments{
+    position: relative;
+    right: -5px;
+
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.application-card__icon{
+    font-size:14px;
+}
+
+.application-card__icon--link{
+    color:var(--link-color)
+}
+
+.application-card__icon--cv{
+    color:var(--cv-color)
+}
+
+.application-card__icon--letter{
+    color:var(--letter-color)
+}
+
+.application-card__title{
+    font-size:16px;
+}
+
+.application-card__company{
+    color: #ffffff5a;
+    font-size:10px;
+}
+
+.application-card__description{
+    color: #ffffffa8;
+    font-size: 12px;
+    text-align:justify;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;   
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.application-card__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.application-card__date{
+    font-size:11px;
+    text-align:right;
+    padding: 5px 0px;
+}
+
+
