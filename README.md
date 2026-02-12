@@ -7,7 +7,7 @@ A personal Applicant Tracking System (ATS) to manage job applications, documents
 ![demo](./doc/demo.png)
 
 ## Tech Stack
-* **Frontend:** React, Typescript
+* **Frontend:** React, TypeScript
 * **Backend:** Node.js
 * **Database:** PostgreSQL
 
