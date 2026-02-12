@@ -23,10 +23,12 @@ body {
 }
 
 .header__button{
-    padding: 7px 20px;
-    border-radius: 7px;
     border: 1px solid white;
+    border-radius: 7px;
     font-weight: 500;
+
+    padding: 7px 20px;
+    margin:0px 5px;
 }
 
 .kanban-board{
