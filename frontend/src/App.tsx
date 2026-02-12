@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react'
 import StatusColumn from './components/StatusColumn/StatusColumn'
 import './App.css'
 
+
 function App() {
 
-    const [jobs, setJobs] = useState([])
+    const [jobs, setJobs] = useState([]);
       useEffect(() => {
           fetch('http://localhost:3000/api')
           .then(res => res.json())
@@ -13,7 +14,7 @@ function App() {
       }, []);
 
     const columns = [
-        { id: 1, title: 'Applied', status: 'Pending' },
+        { id: 1, title: 'Applied', status: 'Applied' },
         { id: 2, title: 'Interview', status: 'Interview' },
         { id: 3, title: 'Declined', status: 'Declined' }
     ];
@@ -22,7 +23,10 @@ function App() {
     <div>
         <div className="header">
           <h1 className="header__title">JobTracker</h1>
-          <label className="header__button" htmlFor="New job">New job</label>
+          <div className="header__menu">
+                <label className="header__button" htmlFor="New job">New job</label>
+          </div>
+
         </div>
         <div className="kanban-board">
           {columns.map(column => (

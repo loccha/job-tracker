@@ -28,7 +28,7 @@ await pool.connect();
 
 app.get('/api', async(req, res) => {
     try {
-        const result = await pool.query('SELECT * FROM applications ORDER BY application_deadline');
+        const result = await pool.query('SELECT * FROM jobs ORDER BY created_at');
         res.json(result.rows);
     } catch(e) {
         res.status(500).json({ error: e.message });
@@ -37,7 +37,6 @@ app.get('/api', async(req, res) => {
 
 async function uploadToCloudinary(file){
     try {
-        console.log(file)
         const result = cloudinary.uploader.upload(file, { 
             use_filename: true
         }).then(
@@ -62,13 +61,13 @@ app.post('/api/upload-file', async(req, res) => {
 })
 
 //TODO: data validation
-app.post('/api/applications', async (req, res) => {
-    const { title, company, description, status, application_deadline, applying_date, link, cv_url } = req.body;
+app.post('/api/jobs', async (req, res) => {
+    const { title, company, description, applying_date, interview_date, link, cv_url, letter_url, estimated_score, status } = req.body;
 
     try {
         const query = {
-            text: 'INSERT INTO applications(title, company, description, status, application_deadline, applying_date, link, cv_url) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
-            values: [title, company, description, status, application_deadline, applying_date, link, cv_url],
+            text: 'INSERT INTO jobs(title, company, description, applying_date, interview_date, link, cv_url, letter_url, estimated_score, status) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *',
+            values: [title, company, description, applying_date, interview_date, link, cv_url, letter_url, estimated_score, status],
         }
         
         const result = await pool.query(query)
@@ -80,13 +79,13 @@ app.post('/api/applications', async (req, res) => {
 
 
 //TODO: data validation
-app.put('/api/applications/:id', async (req, res) => {
+app.put('/api/jobs/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        const { title, company, description, status, application_deadline, applying_date, link } = req.body;
+        const { title, company, description, applying_date, interview_date, link, cv_url, letter_url, estimated_score, status } = req.body;
 
         const query = {
-            text: 'UPDATE application SET title = $1, company = $2, description = $3, status = $4, application_deadline = $5, applying_date = $6, link = $7 WHERE id = $8',
+            text: 'UPDATE application SET title = $1, company = $2, description = $3, applying_date = $4, link = $5, cv_url = $6, letter_url = $7, estimated_score = $8, status = $9 WHERE id = $10',
             values: [title, company, description, status, application_deadline, applying_date, link, id],
         }
 
@@ -101,7 +100,7 @@ app.delete('/api/delete/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const query = {
-            text:'DELETE FROM application WHERE id = $1',
+            text:'DELETE FROM jobs WHERE id = $1',
             values: [id],
         }
         const result = await pool.query(query);

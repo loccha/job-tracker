@@ -1,9 +1,15 @@
 import ApplicationCard from '../ApplicationCard/ApplicationCard'
+import {Job} from '../../types/job'
 import './StatusColumn.css'
 
-function StatusColumn({ title, status, jobs }) {
+type StatusColumnProps = {
+    title: string;
+    status: string;
+    jobs: Job[];
+};
+
+function StatusColumn({ title, status, jobs }: StatusColumnProps) {
     const filteredJobs = jobs.filter(job => job.status === status);
-    console.log(filteredJobs)
     return (
     <div className={`status-column status-column--${status}`}>
         <div className={`status-column__header status-column__header--${status}`}>
@@ -14,7 +20,11 @@ function StatusColumn({ title, status, jobs }) {
                         company={job.company}
                         description={job.description}
                         appliedDate={job.applying_date}
+                        interviewDate={job.interview_date}
                         link={job.link}
+                        cvUrl={job.cv_url}
+                        letterUrl={job.letter_url}
+                        estimated_score={job.estimated_score}
                     />
                 ))  
                 }

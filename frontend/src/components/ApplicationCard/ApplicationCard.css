@@ -4,8 +4,8 @@
     --letter-color:#68ffa4;
     --link-color:#e7e7e7;
 
-    --interesting-job: #ff6464;
-    --very-interesting-job:#a5e;
+    --good-chances-score: #6cff70;
+    --high-chances-score:#be59fd;
 
     margin: 15px 0px;
     padding: 10px 15px 0px 15px;  
@@ -23,6 +23,14 @@
 .application-card:hover{
     transform: translateY(-2px);
     box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+.application-card--good-chances-score{
+    border:1px solid var(--good-chances-score)
+}
+
+.application-card--high-chances-score{
+    border:1px solid var(--high-chances-score)
 }
 
 .application-card * {
@@ -60,7 +68,7 @@
 
 .application-card__company{
     color: #ffffff5a;
-    font-size:10px;
+    font-size:11px;
 }
 
 .application-card__description{
