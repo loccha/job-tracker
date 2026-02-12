@@ -58,10 +58,10 @@ function ApplicationCard({
             <p className={"application-card__description"}>{description}</p>
         </div>
         <div className={"application-card__footer"}>
+            <p className={"application-card__date"}>Applied on {formattedDate}</p>
             {interviewDate ? (
                 <FontAwesomeIcon className="application-card__icon application-card__icon--calendar" icon={faCalendarDay} />
             ) : null}
-            <p className={"application-card__date"}>Applied on {formattedDate}</p>
         </div>
         
     </article>
