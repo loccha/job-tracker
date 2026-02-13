@@ -12,9 +12,9 @@ CREATE TABLE IF NOT EXISTS jobs (
 	description TEXT,
 	applying_date DATE NOT NULL,
 	interview_date DATE,
-	link VARCHAR(100) NOT NULL,
-	cv_url VARCHAR(100),
-	letter_url VARCHAR(100),
+	link TEXT NOT NULL,
+	cv_url TEXT,
+	letter_url TEXT,
 	created_at TIMESTAMP DEFAULT NOW(),
 	estimated_score INT DEFAULT 0,
 	status job_status NOT NULL

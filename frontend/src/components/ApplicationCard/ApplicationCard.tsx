@@ -46,7 +46,7 @@ function ApplicationCard({
     <article className={`application-card application-card--${scoreClass}`}>
         <div className={"application-card__attachments"}>
 
-            <a href={`${link}`}><FontAwesomeIcon className="application-card__icon application-card__icon--link" icon={faLink} /></a>
+            <a href={`${link}`} target="_blank" rel="noopener noreferrer"><FontAwesomeIcon className="application-card__icon application-card__icon--link" icon={faLink} /></a>
             <a href={`${cvUrl}`}><FontAwesomeIcon className="application-card__icon application-card__icon--cv" icon={faPaperclip} /></a>
             {letterUrl ? (
                 <a href={`${letterUrl}`}><FontAwesomeIcon className="application-card__icon application-card__icon--letter" icon={faPaperclip} /></a>

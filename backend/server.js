@@ -66,7 +66,7 @@ app.post('/api/jobs', async (req, res) => {
 
     try {
         const query = {
-            text: 'INSERT INTO jobs(title, company, description, applying_date, interview_date, link, cv_url, letter_url, estimated_score, status) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *',
+            text: 'INSERT INTO jobs(title, company, description, applying_date, interview_date, link, cv_url, letter_url, estimated_score, status) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *',
             values: [title, company, description, applying_date, interview_date, link, cv_url, letter_url, estimated_score, status],
         }
         
