@@ -39,6 +39,7 @@ const ApplicationForm = ({ onClose }: ApplicationFormProps) => {
         axios.post("http://localhost:3000/api/jobs", newPost)
             .then((response)=>{
                 console.log("PostCreatedSuccessfully");
+                onClose();
             })
             .catch((err)=> {
                 console.log("ErrorCreatingPost");
@@ -186,7 +187,7 @@ const ApplicationForm = ({ onClose }: ApplicationFormProps) => {
                     </div>
 
                     <div className="application-form__footer">
-                        <button className="application-form__button" onClick={onClose}>Add</button>
+                        <button className="application-form__button" type="submit">Add</button>
                     </div>                    
                 </div>
             </form>
