@@ -1,0 +1,64 @@
+.application-form{
+    padding: 20px;
+    color: black;
+    background-color: #ffffffd3;
+    box-shadow: 4px 4px 18px rgba(0,0,0,0.15);
+
+    width:50%;
+    height:65%;
+    min-height:fit-content;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.application-form__title{
+    text-align: center;
+    font-weight: 600;
+    font-size: 32px;
+}
+
+.application-form__dropbox{
+    width:40px;
+    height:40px;
+
+    border: dashed 1px black;
+    background-color:white;
+
+    display:inline-block;
+}
+
+.application-form__dropbox--filled{
+    background-image: url("/public/file-pdf-solid.svg");
+    background-repeat: no-repeat;
+    background-position:center;
+    background-size: 30px 30px;
+}
+
+.application-form__content{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.application-form__item{
+    display:flex;
+    flex-direction:column;
+    
+    margin: 0.5% 5%;
+    width: 40%;
+}
+
+.application-form__input{
+    padding: 7px;
+}
+
+.application-form__footer{
+    margin:20px
+}
+.application-form__button{
+    padding: 15px 30px;
+}

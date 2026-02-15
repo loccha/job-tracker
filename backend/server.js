@@ -1,5 +1,7 @@
 import dotenv from "dotenv";
 import express from 'express';
+import multer from 'multer';
+import path from "path";
 import cors from "cors";
 import { Pool } from 'pg';
 import { v2 as cloudinary } from 'cloudinary';
@@ -35,26 +37,23 @@ app.get('/api', async(req, res) => {
     }
 });
 
-async function uploadToCloudinary(file){
-    try {
-        const result = cloudinary.uploader.upload(file, { 
-            use_filename: true
-        }).then(
-            result=>console.log(result)
-        );
-        return result
-        
-    } catch (e) {
-            console.error("Erreur upload :", e.message);
+app.use('/uploads', express.static('uploads'));
+
+const storage = multer.diskStorage({
+    destination: 'uploads/',
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname))
     }
-}
+});
 
-app.post('/api/upload-file', async(req, res) => {
+const upload = multer({ storage })
+
+app.post('/api/upload-file', upload.single('file'), (req, res) => {
+
+    console.log('fichier reçu', req.file);
     try {
-        const { file } = req.body
-        const result = await uploadToCloudinary(file)
-
-        res.status(201).json(result);
+        //const { file } = req.body
+        res.json({filename: req.file.filename})
     } catch(e) {
         res.status(400).json({ error: e.message });
     }
@@ -62,12 +61,15 @@ app.post('/api/upload-file', async(req, res) => {
 
 //TODO: data validation
 app.post('/api/jobs', async (req, res) => {
-    const { title, company, description, applying_date, interview_date, link, cv_url, letter_url, estimated_score, status } = req.body;
-
+    console.log(req.body)
+    const { title, company, description, applyingDate, interviewDate, link, cvUrl, letterUrl, score, status } = req.body;
     try {
+        const estimatedScore = parseInt(score,10);
+        const safeInterviewDate = interviewDate || null; //change this.
+
         const query = {
             text: 'INSERT INTO jobs(title, company, description, applying_date, interview_date, link, cv_url, letter_url, estimated_score, status) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *',
-            values: [title, company, description, applying_date, interview_date, link, cv_url, letter_url, estimated_score, status],
+            values: [title, company, description, applyingDate, safeInterviewDate, link, cvUrl, letterUrl, estimatedScore, status],
         }
         
         const result = await pool.query(query)

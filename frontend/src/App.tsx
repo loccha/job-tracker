@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
 import StatusColumn from './components/StatusColumn/StatusColumn'
 import './App.css'
+import ApplicationForm from './components/ApplicationForm/ApplicationForm';
 
 
 function App() {
+    const[formVisible, setFormVisible] = useState(false)
 
     const [jobs, setJobs] = useState([]);
       useEffect(() => {
@@ -21,10 +23,13 @@ function App() {
 
   return (
     <div>
+        {formVisible && (
+          <ApplicationForm onClose={() => setFormVisible(false)}  />
+        )}
         <div className="header">
           <h1 className="header__title">JobTracker</h1>
           <div className="header__menu">
-                <label className="header__button" htmlFor="New job">New job</label>
+                <label className="header__button" htmlFor="New job" onClick={() => setFormVisible(true)}>New job</label>
           </div>
 
         </div>
@@ -40,7 +45,6 @@ function App() {
           }
         </div>
     </div>
-    
   );
 }
 
