@@ -1,13 +1,14 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import StatusColumn from './components/StatusColumn/StatusColumn'
+import ApplicationForm from './components/ApplicationForm/ApplicationForm'
+import { Job } from './types/job'
 import './App.css'
-import ApplicationForm from './components/ApplicationForm/ApplicationForm';
 
 
 function App() {
+    const[jobs, setJobs] = useState<Job[]>([]);
     const[formVisible, setFormVisible] = useState(false)
 
-    const [jobs, setJobs] = useState([]);
       useEffect(() => {
           fetch('http://localhost:3000/api')
           .then(res => res.json())
@@ -24,7 +25,10 @@ function App() {
   return (
     <div>
         {formVisible && (
-          <ApplicationForm onClose={() => setFormVisible(false)}  />
+          <ApplicationForm 
+            setJobs={setJobs} 
+            onClose={() => setFormVisible(false)}  
+          />
         )}
         <div className="header">
           <h1 className="header__title">JobTracker</h1>

@@ -61,4 +61,5 @@
 }
 .application-form__button{
     padding: 15px 30px;
+    cursor:pointer;
 }

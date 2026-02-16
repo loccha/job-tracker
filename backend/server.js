@@ -4,21 +4,20 @@ import multer from 'multer';
 import path from "path";
 import cors from "cors";
 import { Pool } from 'pg';
-import { v2 as cloudinary } from 'cloudinary';
 
+// Load environment variables from .env file
 dotenv.config();
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET
-});
 
+// Initialize Express application
 const app = express();
-app.use(express.json());
-app.use(cors());
+
+app.use(express.json());    // Parse JSON request bodies
+app.use(cors());            // Enable Cross-Origin Resource Sharing
 
 const PORT = 3000;
 
+// Database connection pool configuration
+// Uses environment variables for secure credential management
 const pool = new Pool({
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
@@ -26,8 +25,15 @@ const pool = new Pool({
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD
 });
+
+// Establish database connection
 await pool.connect();
 
+/**
+ * GET /api
+ * Retrieves all job applications from the database
+ * Returns jobs ordered by creation date
+ */
 app.get('/api', async(req, res) => {
     try {
         const result = await pool.query('SELECT * FROM jobs ORDER BY created_at');
@@ -37,42 +43,53 @@ app.get('/api', async(req, res) => {
     }
 });
 
+// Serve uploaded files statically from the uploads directory
 app.use('/uploads', express.static('uploads'));
 
+// File upload configuration using Multer
 const storage = multer.diskStorage({
     destination: 'uploads/',
     filename: (req, file, cb) => {
+        // Generate unique filename using timestamp + pdf extension
         cb(null, Date.now() + path.extname(file.originalname))
     }
 });
-
 const upload = multer({ storage })
 
-app.post('/api/upload-file', upload.single('file'), (req, res) => {
 
-    console.log('fichier reçu', req.file);
+/**
+ * POST /api/upload-file
+ * Handles single file upload (CV or cover letter)
+ * Returns the generated filename for database reference
+ */
+app.post('/api/upload-file', upload.single('file'), (req, res) => {
     try {
-        //const { file } = req.body
-        res.json({filename: req.file.filename})
+        // return filename so client can reference it later
+        res.json({filename: req.file.filename});
     } catch(e) {
         res.status(400).json({ error: e.message });
     }
-})
+});
 
-//TODO: data validation
+
+/**
+ * POST /api/jobs
+ * Creates a new job application entry
+ * Accepts job details including uploaded file references
+ * TODO: Implement comprehensive data validation
+ */
 app.post('/api/jobs', async (req, res) => {
-    console.log(req.body)
-    const { title, company, description, applyingDate, interviewDate, link, cvUrl, letterUrl, score, status } = req.body;
-    try {
-        const estimatedScore = parseInt(score,10);
-        const safeInterviewDate = interviewDate || null; //change this.
+    console.log(req.body); // debug log request body
 
+    const { title, company, description, applyingDate, interviewDate, link, cvUrl, letterUrl, estimatedScore, status } = req.body;
+    try {
+        const estimatedScoreInt = parseInt(estimatedScore,10);
+        const safeInterviewDate = interviewDate || null; 
         const query = {
             text: 'INSERT INTO jobs(title, company, description, applying_date, interview_date, link, cv_url, letter_url, estimated_score, status) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *',
-            values: [title, company, description, applyingDate, safeInterviewDate, link, cvUrl, letterUrl, estimatedScore, status],
-        }
-        
-        const result = await pool.query(query)
+            values: [title, company, description, applyingDate, safeInterviewDate, link, cvUrl, letterUrl, estimatedScoreInt, status],
+        };
+        const result = await pool.query(query);
         res.status(201).json(result.rows[0]);
     } catch(e) {
         res.status(400).json({ error: e.message });
@@ -80,31 +97,40 @@ app.post('/api/jobs', async (req, res) => {
 });
 
 
-//TODO: data validation
+/**
+ * PUT /api/jobs/:id
+ * Updates an existing job application by ID
+ * TODO: Implement comprehensive data validation
+ */
 app.put('/api/jobs/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        const { title, company, description, applying_date, interview_date, link, cv_url, letter_url, estimated_score, status } = req.body;
+        const { title, company, description, applyingDate, interviewDate, link, cvUrl, letterUrl, estimatedScore, status } = req.body;
 
         const query = {
-            text: 'UPDATE application SET title = $1, company = $2, description = $3, applying_date = $4, link = $5, cv_url = $6, letter_url = $7, estimated_score = $8, status = $9 WHERE id = $10',
-            values: [title, company, description, status, application_deadline, applying_date, link, id],
-        }
+            text: 'UPDATE jobs SET title = $1, company = $2, description = $3, applying_date = $4, interview_date = $5, link = $6, cv_url = $7, letter_url = $8, estimated_score = $9, status = $10 WHERE id = $11',
+            values: [title, company, description, applyingDate, interviewDate, link, cvUrl, letterUrl, estimatedScore, status, id],
+        };
 
-        const result = await pool.query(query)
+        const result = await pool.query(query);
         res.json(result.rows[0]);
     } catch(e) {
         res.status(400).json({ error: e.message });
     }
 });
 
+
+/**
+ * DELETE /api/delete/:id
+ * Removes a job application from the database by ID
+ */
 app.delete('/api/delete/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const query = {
             text:'DELETE FROM jobs WHERE id = $1',
             values: [id],
-        }
+        };
         const result = await pool.query(query);
         res.json(result.rows);
     } catch(e) {
@@ -112,7 +138,9 @@ app.delete('/api/delete/:id', async (req, res) => {
     }
 });
 
+
+// Start server and listen for incoming requests
 app.listen(PORT, () => {
-console.log(`Listening on port ${PORT}...`);
-});  
+    console.log(`Listening on port ${PORT}...`);
+});    
 

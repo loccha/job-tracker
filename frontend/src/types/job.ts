@@ -3,12 +3,12 @@ export type Job = {
       title: string;
       company: string;
       description: string;
-      applying_date: string;
-      interview_date: string;
+      applyingDate: string;
+      interviewDate: string;
       link: string;
-      cv_url: string;
-      letter_url?: string;
-      created_at: string;
-      estimated_score: number;
+      cvUrl?: string;
+      letterUrl?: string;
+      createdAt: string;
+      estimatedScore: string;
       status: string;
     };

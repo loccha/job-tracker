@@ -1,13 +1,17 @@
-import { SyntheticEvent, useState } from "react";
+import { useRef, useState } from "react";
 import axios from "axios";
+import { Job } from '../../types/job'
+import useClickOutside from '../../hooks/useClickOutside'
 import './ApplicationForm.css'
 
 type ApplicationFormProps = {
+    setJobs: React.Dispatch<React.SetStateAction<Job[]>>;
     onClose: () => void;
 };
 
-const ApplicationForm = ({ onClose }: ApplicationFormProps) => {
-    
+export type FormJobEntry = Omit<Job, "id" | "createdAt">;
+
+const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {    
     const[title, setTitle] = useState("");
     const[company, setCompany] = useState("");
     const[description, setDescription] = useState("");
@@ -16,14 +20,20 @@ const ApplicationForm = ({ onClose }: ApplicationFormProps) => {
     const[link, setLink] = useState("");
     const[cvUrl, setCvUrl] = useState("");
     const[letterUrl, setLetterUrl] = useState("");
-    const[score, setScore] = useState("0");
-    const[status, setStatus] = useState("Applied")
+    const[estimatedScore, setEstimatedScore] = useState("0");
+    const[status, setStatus] = useState("Applied");
 
+    const formRef = useRef<HTMLDivElement>(null);
+
+    useClickOutside({
+        ref: formRef,
+        onOutsideClick: onClose
+    });
 
     function handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
         event.preventDefault(); 
         
-        const newPost = {
+        const newJobEntry = {
             title,
             company,
             description,
@@ -32,33 +42,34 @@ const ApplicationForm = ({ onClose }: ApplicationFormProps) => {
             link,
             cvUrl,
             letterUrl,
-            score,
+            estimatedScore,
             status
         };
 
-        axios.post("http://localhost:3000/api/jobs", newPost)
-            .then((response)=>{
-                console.log("PostCreatedSuccessfully");
-                onClose();
-            })
-            .catch((err)=> {
-                console.log("ErrorCreatingPost");
-            });
-    };
+        const addJob = async (newJobEntry: FormJobEntry) => {      
+            try {
+                const res = await axios.post("http://localhost:3000/api/jobs", newJobEntry);
+                setJobs(prev => [...prev, res.data]);
+            } catch (err) {
+                console.error(err);
+            }
+        };
 
-   
+        addJob(newJobEntry);
+        onClose();
+    };
 
     const handleDrop = (event: React.DragEvent<HTMLDivElement>, setUrl: React.Dispatch<React.SetStateAction<string>>) => {
         event.preventDefault();
         if (event.dataTransfer) {
             const droppedFile = event.dataTransfer.files[0];
             uploadFile(droppedFile, setUrl)
-        }
-    }
+        };
+    };
 
     const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
-    }
+    };
     
 
     const uploadFile = async (fileToUpload: File, setUrl: React.Dispatch<React.SetStateAction<string>>) => {
@@ -77,11 +88,11 @@ const ApplicationForm = ({ onClose }: ApplicationFormProps) => {
 
         } catch (err) {
             console.log("couldn't upload file properly")
-        }
-    }
-    
+        };
+    };
+
     return (
-        <div className="application-form">
+        <div ref={formRef} className="application-form">
             <form className="application-form__form" onSubmit={handleSubmit}>
                 <h2 className="application-form__title">Add Position</h2>
 
@@ -149,8 +160,8 @@ const ApplicationForm = ({ onClose }: ApplicationFormProps) => {
                         <label htmlFor="estimated_score">Score: </label> 
                         <input type="text"
                             id="score" 
-                            value={score}
-                            onChange={(e) => setScore(e.target.value)}
+                            value={estimatedScore}
+                            onChange={(e) => setEstimatedScore(e.target.value)}
                             className="application-form__input"
                         />
                     </div>
