@@ -8,11 +8,11 @@ type ApplicationCardProps = {
     company: string;
     description: string;
     appliedDate: string;
-    interviewDate: string;
+    interviewDate: string | null;
     link: string;
     cvUrl: string;
     letterUrl?: string;
-    estimated_score: number;
+    confidenceScore: number;
 };
 
 function ApplicationCard({
@@ -24,7 +24,7 @@ function ApplicationCard({
     link,
     cvUrl,
     letterUrl,
-    estimated_score
+    confidenceScore
 }: ApplicationCardProps) {
 
     const formattedDate = new Date(appliedDate).toLocaleDateString("en-US", {
@@ -34,9 +34,9 @@ function ApplicationCard({
 
     let scoreClass = "";
 
-    if(estimated_score>85){
+    if(confidenceScore>85){
         scoreClass= "high-chances-score" 
-    } else if (estimated_score>70) {
+    } else if (confidenceScore>70) {
         scoreClass= "good-chances-score"
     } else {
         scoreClass= "average-chances-score"

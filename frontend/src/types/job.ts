@@ -4,11 +4,11 @@ export type Job = {
       company: string;
       description: string;
       applyingDate: string;
-      interviewDate: string;
+      interviewDate: string | null;
       link: string;
-      cvUrl?: string;
+      cvUrl: string;
       letterUrl?: string;
       createdAt: string;
-      estimatedScore: string;
-      status: string;
+      confidenceScore: number;
+      status: "Applied" | "Interview" | "Declined";
     };
