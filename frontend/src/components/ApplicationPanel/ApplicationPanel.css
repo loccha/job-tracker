@@ -1,0 +1,83 @@
+.application-panel{
+    color:rgba(255, 255, 255, 0.802);
+    padding:20px;
+
+    background: radial-gradient(ellipse at center, #222249 0%, #0c0c12 70%);
+    box-shadow: 0 0 4px 1px rgba(154, 73, 205, 0.671);
+    border-radius: 15px;
+
+    width: 60%;
+    height: 75%;
+    min-height:fit-content;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+
+}
+
+.application-panel__identity{
+    display:flex;
+}
+
+.application-panel__icon--link{
+    color:rgba(255, 255, 255, 0.83);
+    font-size: 22px;
+    padding: 10px;
+}
+
+
+.application-panel__title{
+    font-weight: 600;
+}
+
+.application-panel__company{
+    font-weight: 300;
+}
+
+.application-panel__badge{
+    display:flex;
+    margin:10px;
+}
+
+.application-panel__status,
+.application-panel__confidence{
+    padding:2px 5px;
+    font-size: 12px;
+    border: 1px solid #313145;
+}
+
+.application-panel__status{
+    border-radius: 7px 0px 0px 7px;
+    background-color:#313145;
+}
+
+.application-panel__confidence{
+    border-radius: 0px 7px 7px 0px;
+}
+
+.application-panel__line{
+    display: flex;
+    align-items: center;
+}
+
+.application-panel__line::before,
+.application-panel__line::after {
+  content: '';
+  height: 1px;
+  background: #92929228; 
+}
+
+.application-panel__line::before
+{
+    width:5%;
+}
+
+.application-panel__line::after {
+  flex: 1;
+}
+
+
+

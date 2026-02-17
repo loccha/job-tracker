@@ -24,6 +24,10 @@ body {
   background-image: linear-gradient(to bottom, #131126, #252250e2);
 }
 
+p, h2 {
+  margin: 0;
+}
+
 h1 {
   font-size: 2.5em;
   line-height: 1.1;

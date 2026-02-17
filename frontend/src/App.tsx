@@ -3,6 +3,7 @@ import StatusColumn from './components/StatusColumn/StatusColumn'
 import ApplicationForm from './components/ApplicationForm/ApplicationForm'
 import { Job } from './types/job'
 import './App.css'
+import ApplicationCardExtended from './components/ApplicationPanel/ApplicationPanel'
 
 
 function App() {

@@ -20,7 +20,7 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
     const[link, setLink] = useState("");
     const[cvUrl, setCvUrl] = useState("");
     const[letterUrl, setLetterUrl] = useState("");
-    const[estimatedScore, setEstimatedScore] = useState("0");
+    const[confidenceScore, setConfidenceScore] = useState(0);
     const[status, setStatus] = useState("Applied");
 
     const formRef = useRef<HTMLDivElement>(null);
@@ -42,7 +42,7 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
             link,
             cvUrl,
             letterUrl,
-            estimatedScore,
+            confidenceScore,
             status
         };
 
@@ -157,11 +157,11 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                     </div>
 
                     <div className="application-form__item">
-                        <label htmlFor="estimated_score">Score: </label> 
+                        <label htmlFor="confidence_score">Score: </label> 
                         <input type="text"
                             id="score" 
-                            value={estimatedScore}
-                            onChange={(e) => setEstimatedScore(e.target.value)}
+                            value={confidenceScore}
+                            onChange={(e) => setConfidenceScore(parseInt(e.target.value))}
                             className="application-form__input"
                         />
                     </div>

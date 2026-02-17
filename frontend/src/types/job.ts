@@ -10,5 +10,5 @@ export type Job = {
       letterUrl?: string;
       createdAt: string;
       confidenceScore: number;
-      status: "Applied" | "Interview" | "Declined";
+      status: string;
     };
