@@ -7,7 +7,7 @@ type ApplicationCardProps = {
     title: string;
     company: string;
     description: string;
-    appliedDate: string;
+    applyingDate: string;
     interviewDate: string | null;
     link: string;
     cvUrl: string;
@@ -19,7 +19,7 @@ function ApplicationCard({
     title,
     company,
     description,
-    appliedDate,
+    applyingDate,
     interviewDate,
     link,
     cvUrl,
@@ -27,7 +27,7 @@ function ApplicationCard({
     confidenceScore
 }: ApplicationCardProps) {
 
-    const formattedDate = new Date(appliedDate).toLocaleDateString("en-US", {
+    const formattedDate = new Date(applyingDate).toLocaleDateString("en-US", {
         month: "short",
         day: "numeric"
     });

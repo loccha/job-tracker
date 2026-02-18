@@ -10,7 +10,6 @@ type StatusColumnProps = {
 
 function StatusColumn({ title, status, jobs }: StatusColumnProps) {
     const filteredJobs = jobs.filter(job => job.status === status);
-
     return (
     <div className={`status-column status-column--${status}`}>
         <div className={`status-column__header status-column__header--${status}`}>
@@ -21,7 +20,7 @@ function StatusColumn({ title, status, jobs }: StatusColumnProps) {
                         title={job.title}
                         company={job.company}
                         description={job.description}
-                        appliedDate={job.applyingDate}
+                        applyingDate={job.applyingDate}
                         interviewDate={job.interviewDate}
                         link={job.link}
                         cvUrl={job.cvUrl}

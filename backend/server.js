@@ -81,13 +81,12 @@ app.post('/api/upload-file', upload.single('file'), (req, res) => {
 app.post('/api/jobs', async (req, res) => {
     console.log(req.body); // debug log request body
 
-    const { title, company, description, applyingDate, interviewDate, link, cvUrl, letterUrl, estimatedScore, status } = req.body;
+    const { title, company, description, applyingDate, interviewDate, link, cvUrl, letterUrl, confidenceScore, status } = req.body;
     try {
-        const estimatedScoreInt = parseInt(estimatedScore,10);
-        const safeInterviewDate = interviewDate || null; 
+        const safeInterviewDate = interviewDate || null;
         const query = {
-            text: 'INSERT INTO jobs(title, company, description, applying_date, interview_date, link, cv_url, letter_url, estimated_score, status) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *',
-            values: [title, company, description, applyingDate, safeInterviewDate, link, cvUrl, letterUrl, estimatedScoreInt, status],
+            text: 'INSERT INTO jobs(title, company, description, applying_date, interview_date, link, cv_url, letter_url, confidence_score, status) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *',
+            values: [title, company, description, applyingDate, safeInterviewDate, link, cvUrl, letterUrl, confidenceScore, status],
         };
         const result = await pool.query(query);
         res.status(201).json(result.rows[0]);

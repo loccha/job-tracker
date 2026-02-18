@@ -2,8 +2,18 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-  text-align: centser;
 }
+
+/*.dark-overlay{
+  position:fixed;
+  top:0;
+  height: 100%;
+  width: 100%;
+
+  background-color:rgba(0, 0, 0, 0.92);
+  z-index:1;
+}*/
+
 
 .header{
     display:flex;
@@ -48,6 +58,7 @@
     grid-gap: 0 2rem;
     min-height: 100vh;
 }
+
 
 
 

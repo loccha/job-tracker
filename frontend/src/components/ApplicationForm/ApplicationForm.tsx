@@ -1,6 +1,8 @@
 import { useRef, useState } from "react";
 import axios from "axios";
 import { Job } from '../../types/job'
+import { mapJobFromApi } from '../../mappers/jobMapper'
+
 import useClickOutside from '../../hooks/useClickOutside'
 import './ApplicationForm.css'
 
@@ -20,7 +22,7 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
     const[link, setLink] = useState("");
     const[cvUrl, setCvUrl] = useState("");
     const[letterUrl, setLetterUrl] = useState("");
-    const[confidenceScore, setConfidenceScore] = useState(0);
+    const[confidenceScore, setConfidenceScore] = useState("");
     const[status, setStatus] = useState("Applied");
 
     const formRef = useRef<HTMLDivElement>(null);
@@ -32,7 +34,8 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
 
     function handleSubmit(event: React.SyntheticEvent<HTMLFormElement>) {
         event.preventDefault(); 
-        
+
+        const parsedScore: number = Number(confidenceScore)
         const newJobEntry = {
             title,
             company,
@@ -42,14 +45,14 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
             link,
             cvUrl,
             letterUrl,
-            confidenceScore,
+            confidenceScore: parsedScore,
             status
         };
 
         const addJob = async (newJobEntry: FormJobEntry) => {      
             try {
                 const res = await axios.post("http://localhost:3000/api/jobs", newJobEntry);
-                setJobs(prev => [...prev, res.data]);
+                setJobs(prev => [...prev, mapJobFromApi(res.data)]);
             } catch (err) {
                 console.error(err);
             }
@@ -84,7 +87,6 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
 
             const data = await response.json();
             setUrl("http://localhost:3000/uploads/" + data.filename)
-            console.log("http://localhost:3000/uploads/" + data.filename)
 
         } catch (err) {
             console.log("couldn't upload file properly")
@@ -158,10 +160,10 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
 
                     <div className="application-form__item">
                         <label htmlFor="confidence_score">Score: </label> 
-                        <input type="text"
+                        <input type="number"
                             id="score" 
                             value={confidenceScore}
-                            onChange={(e) => setConfidenceScore(parseInt(e.target.value))}
+                            onChange={(e) => setConfidenceScore(e.target.value)}
                             className="application-form__input"
                         />
                     </div>

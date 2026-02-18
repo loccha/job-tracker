@@ -2,8 +2,9 @@ import { useEffect, useState, useRef } from 'react'
 import StatusColumn from './components/StatusColumn/StatusColumn'
 import ApplicationForm from './components/ApplicationForm/ApplicationForm'
 import { Job } from './types/job'
+import { mapJobFromApi } from './mappers/jobMapper'
 import './App.css'
-import ApplicationCardExtended from './components/ApplicationPanel/ApplicationPanel'
+import ApplicationPanel from './components/ApplicationPanel/ApplicationPanel'
 
 
 function App() {
@@ -14,21 +15,7 @@ function App() {
           fetch('http://localhost:3000/api')
           .then(res => res.json())
           .then(data => {
-            const mappedJobs: Job[] = data.map((job:any) => ({
-              id: job.id,
-              title: job.title,
-              company: job.company,
-              description: job.description,
-              applyingDate: job.applying_date,
-              interviewDate: job.interview_date,
-              link: job.link,
-              cvUrl: job.cv_url,
-              letterUrl: job.letter_url,
-              createdAt: job.created_at,
-              confidenceScore: job.confidence_score,
-              status: job.status
-            }));
-            
+            const mappedJobs: Job[] = data.map(mapJobFromApi);
             setJobs(mappedJobs);
           })
           .catch(err => console.log(err))
