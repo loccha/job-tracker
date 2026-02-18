@@ -8,6 +8,7 @@ type ApplicationPanelProps = {
     link:string;
     status:string;
     confidenceScore:number;
+    date:string;
 }
 
 function ApplicationPanel ({
@@ -15,12 +16,13 @@ function ApplicationPanel ({
     company,
     link,
     status,
-    confidenceScore
+    confidenceScore,
+    date
 }:ApplicationPanelProps) {
 
     return (
         <div className="application-panel">
-            <header className="application-panel__header">
+            <div className="application-panel__header">
                 <div className="application-panel__identity">
                     <a href={`${link}`}>
                         <FontAwesomeIcon className="application-panel__icon application-panel__icon--link" icon={faLink} />
@@ -36,8 +38,29 @@ function ApplicationPanel ({
                         <p className="application-panel__confidence">Confidence <b>{confidenceScore}%</b></p>
                     </span>
                 </div>
-            </header>
+            </div>
+
+            <div className="application-panel__body">
+                <div className="application-panel__main-column">
+                    <div className="application-panel__card application-panel__job-description" />
+                    <div className="application-panel__card application-panel__documents" />
+                </div>
+
+                <div className="application-panel__card application-panel__side-column">
+                    <div className="application-panel__top-section">
+                        <div className="application-panel__interview" />
+                        <div className="application-panel__screening" />
+                    </div>
+                    <div className="application-panel__notes" />
+                </div>
+                
+            </div>
             
+            <div className="application-panel__footer">
+                <p className="application-panel__date">{date}</p>
+            </div>
+
+
         </div>
     );
     
