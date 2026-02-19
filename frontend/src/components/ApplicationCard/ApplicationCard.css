@@ -1,11 +1,11 @@
 .application-card{
     --application-background: #0c0c12;
-    --cv-color:#fb5b5b;
-    --letter-color:#68ffa4;
+    --cv-color:#ff7272;
+    --letter-color:#84ff88;
     --link-color:#e7e7e7;
 
-    --good-chances-score: #6cff70;
-    --high-chances-score:#be59fd;
+    --good-chances-score: #72ff7781;
+    --high-chances-score:#a45dfb93;
 
     margin: 15px 0px;
     padding: 10px 15px 0px 15px;  
