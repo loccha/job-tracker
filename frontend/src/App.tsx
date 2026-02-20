@@ -30,10 +30,13 @@ function App() {
   return (
     <div>
         {formVisible && (
-          <ApplicationForm 
-            setJobs={setJobs} 
-            onClose={() => setFormVisible(false)}
-          />
+          <>
+            <div className="blur-overlay" onClick={() => setFormVisible(false)}></div>
+            <ApplicationForm 
+              setJobs={setJobs} 
+              onClose={() => setFormVisible(false)}
+            />
+          </>
         )}
         <div className="header">
           <h1 className="header__title">JobTracker</h1>

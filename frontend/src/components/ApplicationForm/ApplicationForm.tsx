@@ -105,6 +105,7 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
     /**
      * Handle file drop events for drag-and-drop upload
      * Extracts file from event and triggers upload process
+     * TODO: modify to upload only when user click on add.
      * 
      * @param event - Drag event containing dropped file
      * @param setUrl - State setter to update with uploaded file URL
@@ -113,7 +114,7 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
         event.preventDefault();
         if (event.dataTransfer) {
             const droppedFile = event.dataTransfer.files[0];
-            uploadFile(droppedFile, setUrl)
+            uploadFile(droppedFile, setUrl) 
         };
     };
 
