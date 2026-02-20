@@ -1,10 +1,10 @@
 .application-form{
     padding: 25px;
-    color: #E2E1E9;
+    color: var(--color-text-primary);
     /*background: radial-gradient(ellipse at center, #100F17 0%, #100F17 100%); */
-    background-color: #100F17;
+    background-color: var(--color-surface-form);
 
-    box-shadow: 0 0 4px 1px rgba(227, 227, 227, 0.74);
+    box-shadow: 0 0 4px 1px rgba(227, 227, 227, 0.5);
     border-radius:15px;
 
     width:37%;
@@ -32,19 +32,14 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .application-form__input{
-    background-color:#313145;
-    color:#D2D1D4;
+    background-color: var(--color-surface-tertiary);
+    color: var(--color-input-text);
     border-radius: 5px;
     border: none;
     padding: 5px;
 }
 
-label {
-    font-weight: 500;
-    font-size: 14px;
-}
-
-/*-----header------*/
+/*---------header---------*/
 
 .application-form__header{
     margin:20px 0px;
@@ -72,26 +67,15 @@ label {
 /*-----primary section-------*/
 
 .application-form__primary-section{
-    display: flex;
-    flex-direction: row;  
-    justify-content: space-between;
-}
-
-.application-form__input--title,
-.application-form__input--company{
-    width:97%
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 20px;
 }
 
 .application-form__link-date-row{
-    display:flex;
-    flex-direction:row;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.application-form__link-date-row > .application-form__item {
-    width:47%;
-
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
 }
 
 .application-form__score-section{
@@ -114,6 +98,7 @@ label {
     width:20px;
 }
 
+/*--PLACEHOLDER (hardcoded confidence score widget)--*/
 .application-form__confidence-score{
     width:80px;
     height: 80px;
@@ -130,7 +115,7 @@ label {
     position: absolute;
     width: 65px;
     height:65px;
-    background: #1a1a1a;
+    background: var(--color-surface-form);
     border-radius: 50%;
 }
 
@@ -139,36 +124,27 @@ label {
     z-index: 1;
     font-size: 24px;
     font-weight:bold;
-    color:white;
+    color:var(--color-text-primary);
 }
-
 
 
 /*---------Secondary section----------*/
-
-.application-form__input--short-description{
-    width: 98%;
-}
-
 .application-form__input--description{
     height: 75px;
     resize:none;
 }
 
 .application-form__documents-interview{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.application-form__documents{
-    width:60%;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap:40px;
 }
 
 .application-form__dropboxes{
-    display:flex;
-    flex-direction: row;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: start;
+    gap:10px;
 }
 
 .application-form__dropbox{
@@ -176,8 +152,8 @@ label {
     height:60px;
     text-align: center;
     border-radius:7px;
-    border: 1px solid #92929228;
-    background-color: #171621;
+    border: 1px solid var(--color-border-subtle);
+    background-color: var(--color-surface-primary);
 
     display: flex;
     flex-direction: column;
@@ -188,7 +164,7 @@ label {
 .application-form__dropbox > * {
     font-size: 14px;
     font-weight: 400;
-    color: grey;
+    color: var(--color-text-muted);
 }
 
 .application-form__upload-icon{
@@ -220,6 +196,8 @@ label {
     margin:0;
 }
 
+
+/*--------footer---------- */
 .application-form__footer{
     margin-top: 20px;
     display: flex;
@@ -229,7 +207,7 @@ label {
 .application-form__button{
     padding:7px;
     cursor:pointer;
-    margin:0 10px;
+    margin:0 5px;
 }
 
 

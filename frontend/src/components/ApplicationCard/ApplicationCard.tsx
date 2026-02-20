@@ -1,6 +1,8 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink, faPaperclip, faCalendarDay } from '@fortawesome/free-solid-svg-icons';
 import './ApplicationCard.css'
+import '../../styles/variables.css'
+
 
 /**
  * Props for the ApplicationCard component

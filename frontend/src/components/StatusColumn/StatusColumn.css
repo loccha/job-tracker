@@ -1,9 +1,3 @@
-h2 {
-    font-size:24px;
-    font-weight:400;
-    text-align:left;
-}
-
 .status-column {
     display: flex;
     flex-direction: column;

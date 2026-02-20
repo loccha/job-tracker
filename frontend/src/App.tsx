@@ -29,6 +29,15 @@ function App() {
 
   return (
     <div>
+        <ApplicationPanel
+            title={"Intern in UI development"}
+            company={"Hewlett Packard Enterprise"}
+            link={"https://careers.hpe.com/us/en/job/1201682/Stagiaire-en-d%C3%A9veloppement-d'interface-Intern-in-UI-development"}
+            status={"Applied"}
+            confidenceScore={88}
+            date={"2026-03-01"}
+        />
+
         {formVisible && (
           <ApplicationForm 
             setJobs={setJobs} 
@@ -38,7 +47,7 @@ function App() {
         <div className="header">
           <h1 className="header__title">JobTracker</h1>
           <div className="header__menu">
-                <label className="header__button" htmlFor="New job" onClick={() => setFormVisible(true)}>New job</label>
+                <label className="header__button" htmlFor="New Job" onClick={() => setFormVisible(true)}>New Job</label>
           </div>
 
         </div>

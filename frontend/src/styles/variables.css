@@ -1,0 +1,27 @@
+:root{
+
+  --color-bg-start: #131126;
+  --color-bg-end: rgb(37 34 80 / 0.89);;
+
+  --color-text-primary: rgb(255 255 255 / 0.87);
+  --color-text-secondary: rgb(255 255 255 / 0.80);
+  --color-text-muted: rgb(255 255 255 / 0.55);
+
+  --color-surface-form: #100F17;
+  --color-surface-primary: #171621;
+  --color-surface-secondary: #232233;
+  --color-surface-tertiary: #313145;
+
+  --color-input-text: #D2D1D4;
+
+  --color-border-subtle: #92929228;
+
+  --color-attachment-cv: #ff6a93;
+  --color-attachment-letter: #83d1ff;
+
+  --color-confidence-good: 114 255 119;
+  --color-confidence-high: 137 63 255;
+
+  --shadow-card: 0 6px 18px rgba(0,0,0,0.15);
+
+}

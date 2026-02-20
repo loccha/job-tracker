@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink } from '@fortawesome/free-solid-svg-icons';
 import './ApplicationPanel.css'
+import '../../styles/variables.css'
 
 type ApplicationPanelProps = {
     title:string;

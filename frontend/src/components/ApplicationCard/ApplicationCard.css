@@ -4,13 +4,13 @@
     --letter-color:#84ff88;
     --link-color:#e7e7e7;
 
-    --good-chances-score: #72ff7781;
+    
     --high-chances-score:#a45dfb93;
 
     margin: 15px 0px;
     padding: 10px 15px 0px 15px;  
     height:150px;
-    background-color:var(--application-background);
+    background-color:var(--color-surface-form);
     border-radius:10px;
 
     display: flex;
@@ -27,11 +27,11 @@
 }
 
 .application-card--good-chances-score{
-    border:1px solid var(--good-chances-score)
+    border:1px solid rgb(var(--color-confidence-good))
 }
 
 .application-card--high-chances-score{
-    border:1px solid var(--high-chances-score)
+    border:1px solid rgb(var(--color-confidence-high))
 }
 
 .application-card * {
@@ -52,15 +52,15 @@
 }
 
 .application-card__icon--link{
-    color:var(--link-color)
+    color: var(--color-text-primary);
 }
 
 .application-card__icon--cv{
-    color:var(--cv-color)
+    color:var(--color-attachment-cv);
 }
 
 .application-card__icon--letter{
-    color:var(--letter-color)
+    color:var(--color-attachment-letter);
 }
 
 .application-card__title{
@@ -68,12 +68,12 @@
 }
 
 .application-card__company{
-    color: #ffffff5a;
+    color: var(--color-text-muted);
     font-size:11px;
 }
 
 .application-card__description{
-    color: #ffffffa8;
+    color: var(--color-text-secondary);
     font-size: 12px;
     text-align:justify;
 

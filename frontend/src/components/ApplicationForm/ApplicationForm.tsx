@@ -10,6 +10,8 @@ import { mapJobFromApi } from '../../mappers/jobMapper'
 import useClickOutside from '../../hooks/useClickOutside'
 
 import './ApplicationForm.css'
+import '../../styles/variables.css'
+
 
 /**
  * Props for the ApplicationForm component
