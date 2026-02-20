@@ -32,7 +32,7 @@ function App() {
         {formVisible && (
           <ApplicationForm 
             setJobs={setJobs} 
-            onClose={() => setFormVisible(false)}  
+            onClose={() => setFormVisible(false)}
           />
         )}
         <div className="header">

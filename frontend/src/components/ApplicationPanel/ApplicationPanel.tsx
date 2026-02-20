@@ -42,16 +42,30 @@ function ApplicationPanel ({
 
             <div className="application-panel__body">
                 <div className="application-panel__main-column">
-                    <div className="application-panel__card application-panel__job-description" />
-                    <div className="application-panel__card application-panel__documents" />
+                    <div className="application-panel__card application-panel__job-description">
+                        <p className="application-panel__title application-panel__title--job-description">Job Description</p>
+                    </div>
+                     
+                    <div className="application-panel__card application-panel__documents">
+                        <p className="application-panel__title application-panel__title--documents">Documents</p>
+                    </div> 
                 </div>
 
                 <div className="application-panel__card application-panel__side-column">
                     <div className="application-panel__top-section">
-                        <div className="application-panel__interview" />
+                        <div className="application-panel__interview">
+                            <p className="application-panel__title application-panel__title--interview">Interview</p>
+                        </div>
                         <div className="application-panel__screening" />
                     </div>
-                    <div className="application-panel__notes" />
+                    <div className="application-panel__line" />
+
+                    <div className="application-panel__notes">
+                        <p className="application-panel__title application-panel__title--notes">Notes</p>
+                        <div className="application-panel__notes-card">
+
+                        </div>
+                    </div>
                 </div>
                 
             </div>

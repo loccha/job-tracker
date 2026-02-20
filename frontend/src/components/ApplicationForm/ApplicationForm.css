@@ -1,10 +1,14 @@
 .application-form{
-    padding: 20px;
-    color: black;
-    background-color: #ffffffd3;
-    box-shadow: 4px 4px 18px rgba(0,0,0,0.15);
+    padding: 25px;
+    color: #E2E1E9;
+    /*background: radial-gradient(ellipse at center, #100F17 0%, #100F17 100%); */
+    background-color: #100F17;
 
-    width:50%;
+    box-shadow: 0 0 4px 1px rgba(227, 227, 227, 0.74);
+    border-radius:15px;
+
+    width:37%;
+    min-width:fit-content;
     height:65%;
     min-height:fit-content;
 
@@ -12,54 +16,222 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 1;
+    z-index: 101;
 }
 
-.application-form__title{
-    text-align: center;
-    font-weight: 600;
-    font-size: 32px;
-}
-
-.application-form__dropbox{
-    width:40px;
-    height:40px;
-
-    border: dashed 1px black;
-    background-color:white;
-
-    display:inline-block;
-}
-
-.application-form__dropbox--filled{
-    background-image: url("/public/file-pdf-solid.svg");
-    background-repeat: no-repeat;
-    background-position:center;
-    background-size: 30px 30px;
-}
-
-.application-form__content{
-    display:flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
 }
 
 .application-form__item{
+    margin: 7px 0px;
+
     display:flex;
     flex-direction:column;
-    
-    margin: 0.5% 5%;
-    width: 40%;
 }
 
 .application-form__input{
-    padding: 7px;
+    background-color:#313145;
+    color:#D2D1D4;
+    border-radius: 5px;
+    border: none;
+    padding: 5px;
+}
+
+label {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+/*-----header------*/
+
+.application-form__header{
+    margin:20px 0px;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.application-form__title{
+    text-align: left;
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.application-form__status{
+    border-radius: 5px;
+    padding: 2px;
+    height: 30px;
+
+    cursor:pointer;
+}
+
+
+/*-----primary section-------*/
+
+.application-form__primary-section{
+    display: flex;
+    flex-direction: row;  
+    justify-content: space-between;
+}
+
+.application-form__input--title,
+.application-form__input--company{
+    width:97%
+}
+
+.application-form__link-date-row{
+    display:flex;
+    flex-direction:row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.application-form__link-date-row > .application-form__item {
+    width:47%;
+
+}
+
+.application-form__score-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.application-form__label-confidence-score{
+    margin-right: 10px;
+}
+
+.application-form__item--score{
+    flex-direction: row;
+    align-items:center;
+}
+
+.application-form__input--score{
+    width:20px;
+}
+
+.application-form__confidence-score{
+    width:80px;
+    height: 80px;
+    border-radius: 50%;
+    background: conic-gradient(#72ff77 72%, #1e421f 78%);
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    position:relative;
+}
+
+.application-form__confidence-score::after{
+    content:"";
+    position: absolute;
+    width: 65px;
+    height:65px;
+    background: #1a1a1a;
+    border-radius: 50%;
+}
+
+.application-form__score-text{
+    position: relative;
+    z-index: 1;
+    font-size: 24px;
+    font-weight:bold;
+    color:white;
+}
+
+
+
+/*---------Secondary section----------*/
+
+.application-form__input--short-description{
+    width: 98%;
+}
+
+.application-form__input--description{
+    height: 75px;
+    resize:none;
+}
+
+.application-form__documents-interview{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.application-form__documents{
+    width:60%;
+}
+
+.application-form__dropboxes{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.application-form__dropbox{
+    width:135px;
+    height:60px;
+    text-align: center;
+    border-radius:7px;
+    border: 1px solid #92929228;
+    background-color: #171621;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.application-form__dropbox > * {
+    font-size: 14px;
+    font-weight: 400;
+    color: grey;
+}
+
+.application-form__upload-icon{
+    font-size: 22px;
+}
+
+.application-form__upload-icon--file-pen{
+    margin: 0px 10px;
+}
+
+.application-form__interview-section{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin:5px 0px;
+}
+
+.application-form__checkbox{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.application-form__checkbox > input{
+    margin: 0px 7px;
+}
+
+.application-form__interview-section > div{
+    margin:0;
 }
 
 .application-form__footer{
-    margin:20px
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row-reverse;
 }
+
 .application-form__button{
-    padding: 15px 30px;
+    padding:7px;
     cursor:pointer;
+    margin:0 10px;
 }
+
+
+
+

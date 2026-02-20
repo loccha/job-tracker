@@ -26,7 +26,7 @@ function StatusColumn({ title, status, jobs }: StatusColumnProps) {
                         cvUrl={job.cvUrl}
                         letterUrl={job.letterUrl}
                         confidenceScore={job.confidenceScore}
-                    /> //check if title, company, description etc how they formatted in
+                    /> 
                 ))  
                 }
         </div>
