@@ -6,7 +6,15 @@
   color-scheme: dark;
   color: var(--color-text-primary);
 
-  background-image: linear-gradient(to bottom, #131126, #252250e2);
+  /*background-image: linear-gradient(to bottom, #131126, #252250e2);*/
+  /*background-color: var(--color-main-bg);*/
+
+  background: linear-gradient(
+    135deg,
+    var(--color-bg-start) 0%, 
+    var(--color-bg-middle) 50%,  
+    var(--color-bg-end) 100%  
+);
   
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -26,12 +34,13 @@ h1 {
 }
 
 h2 {
+    margin: 20px 0px;
     font-size:24px;
-    font-weight:400;
+    font-weight:600;
     text-align:left;
 }
 
-p, h2 {
+p {
   margin: 0;
 }
 

@@ -6,10 +6,10 @@ import { mapJobFromApi } from './mappers/jobMapper'
 import './App.css'
 import ApplicationPanel from './components/ApplicationPanel/ApplicationPanel'
 
-
-function App() {
+const App = () => {
     const[jobs, setJobs] = useState<Job[]>([]);
     const[formVisible, setFormVisible] = useState(false)
+    const[selectedJob, setSelectedJob] = useState<number | null>(null)
 
       useEffect(() => {
           fetch('http://localhost:3000/api')
@@ -27,8 +27,21 @@ function App() {
         { id: 3, title: 'Declined', status: 'Declined' }
     ];
 
+  const handleSelectJob = (id: number) => {
+      setSelectedJob(id);
+  };
+
   return (
     <div>
+        {selectedJob && (
+          <>
+            <div className="blur-overlay" onClick={() => setSelectedJob(null)}></div>
+            <ApplicationPanel
+              job = {jobs.find(job => job.id === selectedJob)!}
+            />
+          </>
+        )}
+
         {formVisible && (
           <>
             <div className="blur-overlay" onClick={() => setFormVisible(false)}></div>
@@ -52,6 +65,8 @@ function App() {
                   title={column.title}
                   status={column.status}
                   jobs={jobs}
+
+                  onSelectJob={handleSelectJob}
               />
             ))
           }

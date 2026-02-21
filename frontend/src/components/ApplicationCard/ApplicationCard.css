@@ -1,12 +1,4 @@
 .application-card{
-    --application-background: #0c0c12;
-    --cv-color:#ff6a93;
-    --letter-color:#84ff88;
-    --link-color:#e7e7e7;
-
-    
-    --high-chances-score:#a45dfb93;
-
     margin: 15px 0px;
     padding: 10px 15px 0px 15px;  
     height:150px;
@@ -26,13 +18,13 @@
     cursor:pointer;
 }
 
-.application-card--good-chances-score{
+/*.application-card--good-chances-score{
     border:1px solid rgb(var(--color-confidence-good))
 }
 
 .application-card--high-chances-score{
     border:1px solid rgb(var(--color-confidence-high))
-}
+}*/
 
 .application-card * {
     text-align:left;
@@ -49,6 +41,7 @@
 
 .application-card__icon{
     font-size:14px;
+    margin: 0px 1px;
 }
 
 .application-card__icon--link{

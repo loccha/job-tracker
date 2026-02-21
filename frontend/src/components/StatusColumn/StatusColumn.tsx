@@ -6,9 +6,10 @@ type StatusColumnProps = {
     title: string;
     status: string;
     jobs: Job[];
+    onSelectJob: (id: number) => void;
 };
 
-function StatusColumn({ title, status, jobs }: StatusColumnProps) {
+function StatusColumn({ title, status, jobs, onSelectJob }: StatusColumnProps) {
     const filteredJobs = jobs.filter(job => job.status === status);
     return (
     <div className={`status-column status-column--${status}`}>
@@ -26,6 +27,8 @@ function StatusColumn({ title, status, jobs }: StatusColumnProps) {
                         cvUrl={job.cvUrl}
                         letterUrl={job.letterUrl}
                         confidenceScore={job.confidenceScore}
+
+                        onClick={() => onSelectJob(job.id)}
                     /> 
                 ))  
                 }

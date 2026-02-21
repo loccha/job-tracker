@@ -4,8 +4,10 @@
     /*background: radial-gradient(ellipse at center, #100F17 0%, #100F17 100%); */
     background-color: var(--color-surface-form);
 
-    box-shadow: 0 0 4px 1px rgba(227, 227, 227, 0.5);
-    border-radius:15px;
+    /*box-shadow: 0 0 4px 1px rgba(227, 227, 227, 0.5);*/
+    border-radius:5px;
+    border: 1px solid var(--color-border-subtle);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
 
     min-width:fit-content;
     min-height:fit-content;

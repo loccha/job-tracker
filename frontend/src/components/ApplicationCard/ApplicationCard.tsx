@@ -1,5 +1,8 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLink, faPaperclip, faCalendarDay } from '@fortawesome/free-solid-svg-icons';
+import { faLink, faFileLines, faIdCard, faCalendarDay } from '@fortawesome/free-solid-svg-icons';
+
+import { useState } from "react";
+
 import './ApplicationCard.css'
 import '../../styles/variables.css'
 
@@ -9,6 +12,7 @@ import '../../styles/variables.css'
  * Represents a single job application with associated metadata
  */
 type ApplicationCardProps = {
+    key: number;
     title: string;
     company: string;
     description: string;
@@ -18,6 +22,8 @@ type ApplicationCardProps = {
     cvUrl: string;
     letterUrl?: string;
     confidenceScore: number;
+    
+    onClick: () => void;
 };
 
 /**
@@ -38,9 +44,9 @@ function ApplicationCard({
     link,
     cvUrl,
     letterUrl,
-    confidenceScore
-}: ApplicationCardProps) {
-    
+    confidenceScore,
+    onClick
+}: ApplicationCardProps) {    
     // Format application date for display (e.g., "Jan 15")
     const formattedDate = new Date(applyingDate).toLocaleDateString("en-US", {
         month: "short",
@@ -58,7 +64,10 @@ function ApplicationCard({
     }
 
     return (
-    <article className={`application-card application-card--${scoreClass}`}>
+    <article 
+        className={`application-card application-card--${scoreClass}`}
+        onClick={onClick}
+    >
 
         {/* Document attachments section - links to external resources */}
         <div className={"application-card__attachments"}>
@@ -70,13 +79,13 @@ function ApplicationCard({
 
             {/* Link to uploaded CV/resume */}
             <a href={`${cvUrl}`} target="_blank">
-                <FontAwesomeIcon className="application-card__icon application-card__icon--cv" icon={faPaperclip} />
+                <FontAwesomeIcon className="application-card__icon application-card__icon--cv" icon={faIdCard} />
             </a>
 
             {/* Optional link to cover letter (if provided) */}
             {letterUrl ? (
                 <a href={`${letterUrl}`} target="_blank">
-                    <FontAwesomeIcon className="application-card__icon application-card__icon--letter" icon={faPaperclip} />
+                    <FontAwesomeIcon className="application-card__icon application-card__icon--letter" icon={faFileLines} />
                 </a>
             ) : null}
         </div>
