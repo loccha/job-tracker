@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLink } from '@fortawesome/free-solid-svg-icons';
+import { faLink, faTrashCan, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import './ApplicationPanel.css'
 import '../../styles/variables.css'
 import { Job } from '../../types/job';
@@ -22,10 +22,14 @@ function ApplicationPanel ({
                         <h2 className="application-panel__title">{job.title}</h2>
                         <p className="application-panel__company">{job.company}</p>
                     </div>
+                    <div className="application-panel__menu">
+                        <FontAwesomeIcon className="application-panel__icon application-panel__menu application-panel__icon--pen-to-square" icon={faPenToSquare} />
+                        <FontAwesomeIcon className="application-panel__icon application-panel__menu application-panel__icon--trash-can" icon={faTrashCan} />
+                    </div>
                 </div>
                 <div className="application-panel__line">
                     <span className="application-panel__badge">
-                        <p className="application-panel__status">{job.status}</p>
+                        <p className="application-panel__status">{(job.status).toUpperCase()}</p>
                         <p className="application-panel__confidence">Confidence <b>{job.confidenceScore}%</b></p>
                     </span>
                 </div>

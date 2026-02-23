@@ -36,7 +36,7 @@ await pool.connect();
  */
 app.get('/api', async(req, res) => {
     try {
-        const result = await pool.query('SELECT * FROM jobs_data ORDER BY created_at');
+        const result = await pool.query('SELECT * FROM jobs ORDER BY created_at');
         res.json(result.rows);
     } catch(e) {
         res.status(500).json({ error: e.message });

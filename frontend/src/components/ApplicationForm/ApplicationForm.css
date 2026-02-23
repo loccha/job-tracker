@@ -104,7 +104,7 @@ input[type="number"]::-webkit-outer-spin-button {
     width:80px;
     height: 80px;
     border-radius: 50%;
-    background: conic-gradient(#2eb88c 72%, #114a38 78%);
+    background: conic-gradient(#f9664e 72%, #752e23 78%);
     display:flex;
     align-items: center;
     justify-content: center;

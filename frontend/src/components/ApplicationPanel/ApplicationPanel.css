@@ -25,11 +25,18 @@
 
 /*----Application-panel header----*/
 
-.application-panel__identity{
-    display:flex;
+.application-panel__identity {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    justify-content: space-between;
+    justify-items: end;
 }
 
-.application-panel__icon--link{
+.application-panel__menu {
+    margin: 0px 3px;
+}
+
+.application-panel__icon--link {
     color: var(--color-text-primary);
     font-size: 22px;
     padding: 10px;
