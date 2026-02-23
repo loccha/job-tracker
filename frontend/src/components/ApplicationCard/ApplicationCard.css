@@ -52,10 +52,10 @@
     font-size:11px;
 }
 
-.application-card__description{
+.application-card__short-description{
     color: var(--color-text-secondary);
     font-size: 12px;
-    text-align:justify;
+    text-align:left;
 
     display: -webkit-box;
     -webkit-line-clamp: 2;   

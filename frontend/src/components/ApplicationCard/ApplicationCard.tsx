@@ -70,7 +70,7 @@ function ApplicationCard({
         <div className={"application-card__content"}>
             <h3 className={"application-card__title"}>{job.title}</h3>
             <p className={"application-card__company"}>{job.company}</p>
-            <p className={"application-card__description"}>{job.shortDescription}</p>
+            <p className={"application-card__short-description"}>{job.shortDescription}</p>
         </div>
 
         {/* Footer section - application date and interview indicator */}
