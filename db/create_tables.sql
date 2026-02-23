@@ -1,7 +1,8 @@
 CREATE TYPE job_status AS ENUM (
-	'Applied', 
-	'Interview', 
-	'Declined'
+	'applied', 
+	'interview', 
+	'offer',
+	'declined'
 );
 
 
@@ -17,7 +18,7 @@ CREATE TABLE IF NOT EXISTS jobs (
 	cv_url TEXT,
 	letter_url TEXT,
 	created_at TIMESTAMP DEFAULT NOW(),
-	estimated_score INT DEFAULT 0,
+	confidence_score INT DEFAULT 0,
 	status job_status NOT NULL
 );
 

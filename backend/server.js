@@ -36,7 +36,7 @@ await pool.connect();
  */
 app.get('/api', async(req, res) => {
     try {
-        const result = await pool.query('SELECT * FROM jobs ORDER BY created_at');
+        const result = await pool.query('SELECT * FROM jobs_data ORDER BY created_at');
         res.json(result.rows);
     } catch(e) {
         res.status(500).json({ error: e.message });
@@ -104,11 +104,11 @@ app.post('/api/jobs', async (req, res) => {
 app.put('/api/jobs/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        const { title, company, shortDescription, description, applyingDate, interviewDate, link, cvUrl, letterUrl, estimatedScore, status } = req.body;
+        const { title, company, shortDescription, description, applyingDate, interviewDate, link, cvUrl, letterUrl, confidenceScore, status } = req.body;
 
         const query = {
-            text: 'UPDATE jobs SET title = $1, company = $2, short_description = $3, description = $4, applying_date = $5, interview_date = $6, link = $7, cv_url = $8, letter_url = $9, estimated_score = $10, status = $11 WHERE id = $12',
-            values: [title, company, shortDescription, description, applyingDate, interviewDate, link, cvUrl, letterUrl, estimatedScore, status, id],
+            text: 'UPDATE jobs SET title = $1, company = $2, short_description = $3, description = $4, applying_date = $5, interview_date = $6, link = $7, cv_url = $8, letter_url = $9, confidence_score = $10, status = $11 WHERE id = $12',
+            values: [title, company, shortDescription, description, applyingDate, interviewDate, link, cvUrl, letterUrl, confidenceScore, status, id],
         };
 
         const result = await pool.query(query);

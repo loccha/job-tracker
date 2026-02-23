@@ -1,0 +1,36 @@
+/* Pdf's name inside the dropbox field  */
+.application-form__dropbox-field > p {
+    margin: 2px 0px;
+    font-size: 12px;
+}
+
+/* Base dropbox styles */
+.application-form__dropbox {
+    width:135px;
+    height:60px;
+    text-align: center;
+    border-radius:7px;
+    border: 1px solid var(--color-border-subtle);
+    background-color: var(--color-surface-primary);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    transition: 0.2s;
+}
+
+/* Dragging state — visual feedback while file is hovering */
+.application-form__dropbox--dragging {
+    background-color: #fb852b25;
+    border: 1px dashed var(--color-accent);
+}
+
+/* Uniform style for the label and the icon of the dropbox */
+.application-form__dropbox > * {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--color-text-muted);
+}
+

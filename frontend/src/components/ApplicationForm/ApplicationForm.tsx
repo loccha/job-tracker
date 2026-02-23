@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowUpFromBracket, faFilePen } from '@fortawesome/free-solid-svg-icons';
+import { faFilePen } from '@fortawesome/free-solid-svg-icons';
 
 import { useRef, useState } from "react";
 import axios from "axios";
@@ -8,6 +8,8 @@ import { Job } from '../../types/job'
 import { mapJobFromApi } from '../../mappers/jobMapper'
 
 import useClickOutside from '../../hooks/useClickOutside'
+
+import Dropbox from "../Dropbox/Dropbox";
 
 import './ApplicationForm.css'
 import '../../styles/variables.css'
@@ -49,14 +51,14 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
     const[interviewDate, setInterviewDate] = useState("");
     const[link, setLink] = useState("");
 
-    const[cvUrl, setCvUrl] = useState<string>("");                      // Server URL after CV upload
+    const[cvUrl, setCvUrl] = useState<string>("");          // Server URL after CV upload
     const[cvFile, setCvFile] = useState<File | null>(null)
 
-    const[letterUrl, setLetterUrl] = useState<string | undefined>("");              // Server URL after cover letter upload
+    const[letterUrl, setLetterUrl] = useState<string | undefined>("");   // Server URL after cover letter upload
     const[letterFile, setLetterFile] = useState<File | null>(null)
 
     const[confidenceScore, setConfidenceScore] = useState("");
-    const[status, setStatus] = useState("applied");             // Application status (applied, interview, offer, declined)
+    const[status, setStatus] = useState("applied");         // Application status (applied, interview, offer, declined)
 
     // Ref for click-outside detection
     const formRef = useRef<HTMLDivElement>(null);
@@ -125,32 +127,7 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
 
         addJob(newJobEntry);
         onClose();
-    };
-
-
-    /**
-     * Handle file drop events for drag-and-drop upload
-     * Extracts file from event and triggers upload process
-     * TODO: modify to upload only when user click on add.
-     * 
-     * @param event - Drag event containing dropped file
-     * @param setFile - State setter for the corresponding file (CV or cover letter)
-     */
-    const handleDrop = (event: React.DragEvent<HTMLDivElement>, setFile: React.Dispatch<React.SetStateAction<File | null>>) => {
-        event.preventDefault();
-        if (event.dataTransfer) {
-            setFile(event.dataTransfer.files[0]);
-        };
-    };
-
-
-    /**
-     * Prevent default drag-over behavior to enable drop functionality
-     */
-    const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
-        event.preventDefault();
-    };
-    
+    };  
 
     /**
      * Upload file to server and retrieve accessible URL
@@ -302,29 +279,16 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                             <div className="application-form__item application-form__item--documents">
                                 <label htmlFor="documents">Documents</label>
                                 <div className="application-form__dropboxes">
-
-                                    {/* CV/Resume dropzone */}
-                                    <div
-                                        className={`application-form__dropbox ${cvUrl ? "application-form__dropbox--filled" : ""}`}
-                                        onDrop={(event) => handleDrop(event, setCvFile)} 
-                                        onDragOver={handleDragOver}
-                                    >
-                                       
-                                        <FontAwesomeIcon className="application-form__upload-icon application-form__upload-icon--arrow-up" icon={faArrowUpFromBracket} />
-                                        <p>Resume</p>
-                                        
-                                    </div>
-
+                                    {/* Resume dropzone */}
+                                    <Dropbox
+                                        onDrop={(file) => setLetterFile(file)}
+                                        label={"Resume"}
+                                    />
                                     {/* Cover letter dropzone */}
-                                    <div 
-                                        className={`application-form__dropbox ${letterUrl ? "application-form__dropbox--filled" : ""}`}
-                                        onDrop={(event) => handleDrop(event, setLetterFile)} 
-                                        onDragOver={handleDragOver}
-                                    >
-                                        <FontAwesomeIcon className="application-form__upload-icon application-form__upload-icon--arrow-up" icon={faArrowUpFromBracket} />
-                                        <p>Cover Letter</p>
-                                    </div>
-
+                                    <Dropbox
+                                        onDrop={(file) => setLetterFile(file)}
+                                        label={"Cover Letter"}
+                                    />
                                 </div>
                             </div>  
                         </div>

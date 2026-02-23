@@ -28,9 +28,10 @@ const App = () => {
       }, []);
 
     const columns = [
-        { id: 1, title: 'Applied', status: 'Applied' },
-        { id: 2, title: 'Interview', status: 'Interview' },
-        { id: 3, title: 'Declined', status: 'Declined' }
+        { id: 1, title: 'Applied', status: 'applied' },
+        { id: 2, title: 'Interview', status: 'interview' },
+        { id: 3, title: 'Offer', status: 'offer' },
+        { id: 4, title: 'Declined', status: 'declined' }
     ];
 
   const handleSelectJob = (id: number) => {

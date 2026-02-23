@@ -15,6 +15,7 @@ function StatusColumn({ title, status, jobs, onSelectJob }: StatusColumnProps) {
     <div className={`status-column status-column--${status}`}>
         <div className={`status-column__header status-column__header--${status}`}>
             <h2 className="status-column__title">{`${title}`}</h2>
+        </div>
                 {filteredJobs.map(job => (
                     <ApplicationCard
                         key={job.id} 
@@ -24,7 +25,7 @@ function StatusColumn({ title, status, jobs, onSelectJob }: StatusColumnProps) {
                     /> 
                 ))  
                 }
-        </div>
+        
     </div>
     )
 }

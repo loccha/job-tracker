@@ -1,12 +1,18 @@
 :root{
     --color-applied-column: #9d32db;
-    --color-interview-column: #269874;
+    --color-interview-column: #32c2db;
+    --color-offer-column: #28a768;
     --color-declined-column: #ff3c72e6;
 }
 
 .status-column {
     display: flex;
     flex-direction: column;
+
+    box-shadow: rgb(0 0 0 / 5%) 0px -4px 10px 1px;
+    padding: 0 15px;
+    border-radius: 15px;
+    background-color: #ffffff06;
 }
 
 .status-column__title{
@@ -14,16 +20,28 @@
 }
 
 
-.status-column--Applied .application-card {
-    box-shadow: -3px 1px 2px 0px var(--color-applied-column);
+.status-column--applied .application-card {
+    box-shadow: 
+        -3px 1px 2px 0px var(--color-applied-column),
+        0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
-.status-column--Interview .application-card {
-    box-shadow: -3px 1px 2px 0px var(--color-interview-column);
+.status-column--interview .application-card {
+    box-shadow: 
+        -3px 1px 2px 0px var(--color-interview-column),
+         0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
-.status-column--Declined .application-card {
-    box-shadow: -3px 1px 2px 0px var(--color-declined-column);
+.status-column--offer .application-card {
+    box-shadow: 
+        -3px 1px 2px 0px var(--color-offer-column),
+         0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.status-column--declined .application-card {
+    box-shadow: 
+        -3px 1px 2px 0px var(--color-declined-column),
+         0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
 

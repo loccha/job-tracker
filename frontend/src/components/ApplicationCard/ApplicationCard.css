@@ -1,7 +1,9 @@
 .application-card{
-    margin: 15px 0px;
+    margin: 7px 0px;
     padding: 10px 15px 0px 15px;  
     height:150px;
+    min-height: fit-content;
+
     background-color:var(--color-surface-form);
     border-radius:10px;
 
@@ -17,14 +19,6 @@
     box-shadow: 0 6px 18px rgba(0,0,0,0.15);
     cursor:pointer;
 }
-
-/*.application-card--good-chances-score{
-    border:1px solid rgb(var(--color-confidence-good))
-}
-
-.application-card--high-chances-score{
-    border:1px solid rgb(var(--color-confidence-high))
-}*/
 
 .application-card * {
     text-align:left;
@@ -50,7 +44,7 @@
 }
 
 .application-card__title{
-    font-size:16px;
+    font-size:14px;
 }
 
 .application-card__company{
@@ -67,6 +61,13 @@
     -webkit-line-clamp: 2;   
     -webkit-box-orient: vertical;
     overflow: hidden;
+}
+
+.application-card__content{
+    display: grid;
+    grid-template-rows: 1fr auto auto;
+    align-items: center;
+    gap: 3px;
 }
 
 .application-card__footer {
