@@ -48,10 +48,15 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
     const[applyingDate, setApplyingDate] = useState("");
     const[interviewDate, setInterviewDate] = useState("");
     const[link, setLink] = useState("");
-    const[cvUrl, setCvUrl] = useState("");                      // Server URL after CV upload
-    const[letterUrl, setLetterUrl] = useState("");              // Server URL after cover letter upload
+
+    const[cvUrl, setCvUrl] = useState<string>("");                      // Server URL after CV upload
+    const[cvFile, setCvFile] = useState<File | null>(null)
+
+    const[letterUrl, setLetterUrl] = useState<string | undefined>("");              // Server URL after cover letter upload
+    const[letterFile, setLetterFile] = useState<File | null>(null)
+
     const[confidenceScore, setConfidenceScore] = useState("");
-    const[status, setStatus] = useState("Applied");             // Application status (Applied, Interview, Declined)
+    const[status, setStatus] = useState("applied");             // Application status (applied, interview, offer, declined)
 
     // Ref for click-outside detection
     const formRef = useRef<HTMLDivElement>(null);
@@ -90,9 +95,30 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
          * Async function to persist new job entry to database
          * Maps API response to client-side Job type and updates state
          */
-        const addJob = async (newJobEntry: FormJobEntry) => {      
+        const addJob = async (newJobEntry: FormJobEntry) => {    
             try {
-                const res = await axios.post("http://localhost:3000/api/jobs", newJobEntry);
+
+                let finalCvUrl = cvUrl;
+                let finalLetterUrl = letterUrl;
+
+                if(cvFile != null){
+                    finalCvUrl = await uploadFile(cvFile) ?? "";
+                    setCvUrl(finalCvUrl);
+                }
+
+                if (letterFile != null) {
+                    finalLetterUrl = await uploadFile(letterFile) ?? undefined;
+                    setLetterUrl(finalLetterUrl);
+                }
+                
+                const jobToSend = {
+                    ...newJobEntry,
+                    cvUrl: finalCvUrl,
+                    letterUrl: finalLetterUrl,
+                };
+                console.log(2)  
+                const res = await axios.post("http://localhost:3000/api/jobs", jobToSend);
+                console.log(3) 
                 setJobs(prev => [...prev, mapJobFromApi(res.data)]);
             } catch (err) {
                 console.error(err);
@@ -110,13 +136,12 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
      * TODO: modify to upload only when user click on add.
      * 
      * @param event - Drag event containing dropped file
-     * @param setUrl - State setter to update with uploaded file URL
+     * @param setFile - State setter for the corresponding file (CV or cover letter)
      */
-    const handleDrop = (event: React.DragEvent<HTMLDivElement>, setUrl: React.Dispatch<React.SetStateAction<string>>) => {
+    const handleDrop = (event: React.DragEvent<HTMLDivElement>, setFile: React.Dispatch<React.SetStateAction<File | null>>) => {
         event.preventDefault();
         if (event.dataTransfer) {
-            const droppedFile = event.dataTransfer.files[0];
-            uploadFile(droppedFile, setUrl) 
+            setFile(event.dataTransfer.files[0]);
         };
     };
 
@@ -134,9 +159,9 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
      * Uses FormData for multipart/form-data encoding
      * 
      * @param fileToUpload - File object from drag-and-drop or input
-     * @param setUrl - State setter to store the returned file URL
+     * @returns Full URL of the uploaded file, or undefined on failure
      */
-    const uploadFile = async (fileToUpload: File, setUrl: React.Dispatch<React.SetStateAction<string>>) => {
+    const uploadFile = async (fileToUpload: File) => {
         const formData = new FormData();
         formData.append('file', fileToUpload);
 
@@ -149,7 +174,7 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
             const data = await response.json();
 
             // Construct full URL for uploaded file
-            setUrl("http://localhost:3000/uploads/" + data.filename)
+            return ("http://localhost:3000/uploads/" + data.filename);
 
         } catch (err) {
             console.log("couldn't upload the file properly")
@@ -174,9 +199,9 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                             onChange={(e) => setStatus(e.target.value)}
                             className="application-form__status"
                     >
-                        <option value="Applied">Applied</option>
-                        <option value="Interview">Interview</option>
-                        <option value="Declined">Declined</option>
+                        <option value="applied">Applied</option>
+                        <option value="interview">Interview</option>
+                        <option value="declined">Declined</option>
                     </select>
                 </div>
 
@@ -283,7 +308,7 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                                     {/* CV/Resume dropzone */}
                                     <div
                                         className={`application-form__dropbox ${cvUrl ? "application-form__dropbox--filled" : ""}`}
-                                        onDrop={(event) => handleDrop(event, setCvUrl)} 
+                                        onDrop={(event) => handleDrop(event, setCvFile)} 
                                         onDragOver={handleDragOver}
                                     >
                                        
@@ -295,7 +320,7 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                                     {/* Cover letter dropzone */}
                                     <div 
                                         className={`application-form__dropbox ${letterUrl ? "application-form__dropbox--filled" : ""}`}
-                                        onDrop={(event) => handleDrop(event, setLetterUrl)} 
+                                        onDrop={(event) => handleDrop(event, setLetterFile)} 
                                         onDragOver={handleDragOver}
                                     >
                                         <FontAwesomeIcon className="application-form__upload-icon application-form__upload-icon--arrow-up" icon={faArrowUpFromBracket} />
