@@ -116,9 +116,7 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                     cvUrl: finalCvUrl,
                     letterUrl: finalLetterUrl,
                 };
-                console.log(2)  
                 const res = await axios.post("http://localhost:3000/api/jobs", jobToSend);
-                console.log(3) 
                 setJobs(prev => [...prev, mapJobFromApi(res.data)]);
             } catch (err) {
                 console.error(err);
