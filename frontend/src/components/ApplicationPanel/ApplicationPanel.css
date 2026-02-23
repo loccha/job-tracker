@@ -1,6 +1,6 @@
 .application-panel{
     color: var(--color-text-primary);
-    padding:20px;
+    padding:30px;
 
     /*background: radial-gradient(ellipse at center, #222249 0%, #0c0c12 70%);*/
     background-color: var(--color-surface-form);
@@ -98,6 +98,15 @@
     border: 1px solid var(--color-border-subtle);
     border-radius:10px;
     padding:10px;
+}
+
+.application-panel__card--job-description{
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.application-panel__job-description{
+    text-align: justify;
 }
 
 .application-panel__main-column {

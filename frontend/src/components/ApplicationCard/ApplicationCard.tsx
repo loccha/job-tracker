@@ -1,7 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink, faFileLines, faIdCard, faCalendarDay } from '@fortawesome/free-solid-svg-icons';
-
-import { useState } from "react";
+import { Job } from '../../types/job';
 
 import './ApplicationCard.css'
 import '../../styles/variables.css'
@@ -12,16 +11,7 @@ import '../../styles/variables.css'
  * Represents a single job application with associated metadata
  */
 type ApplicationCardProps = {
-    key: number;
-    title: string;
-    company: string;
-    description: string;
-    applyingDate: string;
-    interviewDate: string | null;
-    link: string;
-    cvUrl: string;
-    letterUrl?: string;
-    confidenceScore: number;
+    job: Job;
     
     onClick: () => void;
 };
@@ -36,28 +26,14 @@ type ApplicationCardProps = {
  * - Interview indicator when scheduled
  */
 function ApplicationCard({
-    title,
-    company,
-    description,
-    applyingDate,
-    interviewDate,
-    link,
-    cvUrl,
-    letterUrl,
-    confidenceScore,
+    job,
     onClick
 }: ApplicationCardProps) {    
-    // Format application date for display (e.g., "Jan 15")
-    const formattedDate = new Date(applyingDate).toLocaleDateString("en-US", {
-        month: "short",
-        day: "numeric"
-    });
-
     let scoreClass = "";
 
-    if(confidenceScore>87){                     
+    if(job.confidenceScore>87){                     
         scoreClass= "high-chances-score";               // High confidence (88-100)
-    } else if (confidenceScore>76) {
+    } else if (job.confidenceScore>76) {
         scoreClass= "good-chances-score";               // Good confidence (77-87)
     } else {
         scoreClass= "average-chances-score";            // Average confidence (0-76)
@@ -72,19 +48,19 @@ function ApplicationCard({
         {/* Document attachments section - links to external resources */}
         <div className={"application-card__attachments"}>
 
+            {/* Link to uploaded CV/resume */}
+            <a href={`${job.cvUrl}`} target="_blank">
+                <FontAwesomeIcon className="application-card__icon application-card__icon--cv" icon={faIdCard} />
+            </a>
+            
             {/* Link to original job posting */}
-            <a href={`${link}`} target="_blank">
+            <a href={`${job.link}`} target="_blank">
                 <FontAwesomeIcon className="application-card__icon application-card__icon--link" icon={faLink} />
             </a>
 
-            {/* Link to uploaded CV/resume */}
-            <a href={`${cvUrl}`} target="_blank">
-                <FontAwesomeIcon className="application-card__icon application-card__icon--cv" icon={faIdCard} />
-            </a>
-
             {/* Optional link to cover letter (if provided) */}
-            {letterUrl ? (
-                <a href={`${letterUrl}`} target="_blank">
+            {job.letterUrl ? (
+                <a href={`${job.letterUrl}`} target="_blank">
                     <FontAwesomeIcon className="application-card__icon application-card__icon--letter" icon={faFileLines} />
                 </a>
             ) : null}
@@ -92,17 +68,17 @@ function ApplicationCard({
 
         {/* Main content section - job details */}
         <div className={"application-card__content"}>
-            <h3 className={"application-card__title"}>{title}</h3>
-            <p className={"application-card__company"}>{company}</p>
-            <p className={"application-card__description"}>{description}</p>
+            <h3 className={"application-card__title"}>{job.title}</h3>
+            <p className={"application-card__company"}>{job.company}</p>
+            <p className={"application-card__description"}>{job.shortDescription}</p>
         </div>
 
         {/* Footer section - application date and interview indicator */}
         <div className={"application-card__footer"}>
-            <p className={"application-card__date"}>Applied on {formattedDate}</p>
+            <p className={"application-card__date"}>Applied on {job.applyingDate}</p>
 
             {/* Show calendar icon if interview is scheduled */}
-            {interviewDate && (
+            {job.interviewDate && (
                 <FontAwesomeIcon className="application-card__icon application-card__icon--calendar" icon={faCalendarDay} />
             )}
         </div>

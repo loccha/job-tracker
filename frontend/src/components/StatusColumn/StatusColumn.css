@@ -1,12 +1,16 @@
 :root{
-    --color-applied-column: #6c5af7;
+    --color-applied-column: #9d32db;
     --color-interview-column: #269874;
-    --color-declined-column: #ff6a93;
+    --color-declined-column: #ff3c72e6;
 }
 
 .status-column {
     display: flex;
     flex-direction: column;
+}
+
+.status-column__title{
+    margin: 24px 0px;
 }
 
 

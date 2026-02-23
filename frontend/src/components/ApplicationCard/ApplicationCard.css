@@ -42,18 +42,11 @@
 .application-card__icon{
     font-size:14px;
     margin: 0px 1px;
-}
-
-.application-card__icon--link{
-    color: var(--color-text-primary);
+    color:var(--color-text-primary);
 }
 
 .application-card__icon--cv{
-    color:var(--color-attachment-cv);
-}
-
-.application-card__icon--letter{
-    color:var(--color-attachment-letter);
+    color:var(--color-accent);
 }
 
 .application-card__title{

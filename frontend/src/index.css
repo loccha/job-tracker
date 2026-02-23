@@ -34,19 +34,39 @@ h1 {
 }
 
 h2 {
-    margin: 20px 0px;
     font-size:24px;
     font-weight:600;
     text-align:left;
 }
 
-p {
+h2, p {
   margin: 0;
 }
 
 label {
     font-weight: 500;
     font-size: 14px;
+}
+
+.button-primary {
+    font-weight: 500;
+    font-size: 14px;
+
+    border-radius: 7px;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 6px 10px 3px;
+
+    background: #b34830;
+    background: linear-gradient(46deg,rgba(179, 72, 48, 1) 30%, rgba(199, 95, 80, 1) 80%, rgba(255, 122, 102, 1) 100%);
+
+    padding: 9px 14px;
+    margin:0px 5px;
+    
+    cursor:pointer;
+}
+
+.button-primary:hover{
+       background: #a1412b; /* Darker color on hover */
 }
 
 

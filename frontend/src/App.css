@@ -23,32 +23,28 @@
     font-size: 2.5em;
 }
 
-.header__menu{
-  display:flex;
-}
-
-.header_searchbar{
-  width: 250px;
-  padding: 0px 5px;
-  margin: 0px 15px;
+.header__briefcase{
+  margin: 0px 10px;
+  color: var(--color-accent);
 }
 
 .header__button{
-    border: 1px solid white;
-    border-radius: 7px;
-    font-weight: 500;
+  font-size: 16px;
+}
 
-    padding: 7px 20px;
-    margin:0px 5px;
-    
-    cursor:pointer;
+.button__plus-sign{
+  margin-right: 5px;
+}
+
+.header__menu{
+  display:flex;
 }
 
 .kanban-board{
     background-color:#3653731c;
     padding:10px 30px;
     border-radius:15px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 
     display: grid;
     grid-template-columns: repeat(3, 300px);

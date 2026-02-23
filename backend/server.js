@@ -81,12 +81,12 @@ app.post('/api/upload-file', upload.single('file'), (req, res) => {
 app.post('/api/jobs', async (req, res) => {
     console.log(req.body); // debug log request body
 
-    const { title, company, description, applyingDate, interviewDate, link, cvUrl, letterUrl, confidenceScore, status } = req.body;
+    const { title, company, shortDescription, description, applyingDate, interviewDate, link, cvUrl, letterUrl, confidenceScore, status } = req.body;
     try {
         const safeInterviewDate = interviewDate || null;
         const query = {
-            text: 'INSERT INTO jobs(title, company, description, applying_date, interview_date, link, cv_url, letter_url, confidence_score, status) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *',
-            values: [title, company, description, applyingDate, safeInterviewDate, link, cvUrl, letterUrl, confidenceScore, status],
+            text: 'INSERT INTO jobs(title, company, short_description, description, applying_date, interview_date, link, cv_url, letter_url, confidence_score, status) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *',
+            values: [title, company, shortDescription, description, applyingDate, safeInterviewDate, link, cvUrl, letterUrl, confidenceScore, status],
         };
         const result = await pool.query(query);
         res.status(201).json(result.rows[0]);
@@ -104,11 +104,11 @@ app.post('/api/jobs', async (req, res) => {
 app.put('/api/jobs/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        const { title, company, description, applyingDate, interviewDate, link, cvUrl, letterUrl, estimatedScore, status } = req.body;
+        const { title, company, shortDescription, description, applyingDate, interviewDate, link, cvUrl, letterUrl, estimatedScore, status } = req.body;
 
         const query = {
-            text: 'UPDATE jobs SET title = $1, company = $2, description = $3, applying_date = $4, interview_date = $5, link = $6, cv_url = $7, letter_url = $8, estimated_score = $9, status = $10 WHERE id = $11',
-            values: [title, company, description, applyingDate, interviewDate, link, cvUrl, letterUrl, estimatedScore, status, id],
+            text: 'UPDATE jobs SET title = $1, company = $2, short_description = $3, description = $4, applying_date = $5, interview_date = $6, link = $7, cv_url = $8, letter_url = $9, estimated_score = $10, status = $11 WHERE id = $12',
+            values: [title, company, shortDescription, description, applyingDate, interviewDate, link, cvUrl, letterUrl, estimatedScore, status, id],
         };
 
         const result = await pool.query(query);

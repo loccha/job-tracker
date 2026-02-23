@@ -1,7 +1,4 @@
 :root{
-
-  /*--color-bg-start: #131126;
-  --color-bg-end: rgb(37 34 80 / 0.89);*/
   --color-bg-start: #0f172a;
   --color-bg-middle: #111827;
   --color-bg-end: #0b1120;
@@ -17,12 +14,11 @@
 
   --color-surface-kanban: #3653731c;
 
+  --color-input-bg: #4e536154;
   --color-input-text: #D2D1D4;
-
   --color-border-subtle: #92929228;
 
-  --color-attachment-cv: rgb(255 255 255 / 0.80);
-  --color-attachment-letter: rgb(255 255 255 / 0.80);
+  --color-accent: #f9664e;
 
   /*--color-confidence-good: 114 255 119;
   --color-confidence-high: 137 63 255;*/

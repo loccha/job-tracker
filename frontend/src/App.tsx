@@ -1,10 +1,16 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
+
 import StatusColumn from './components/StatusColumn/StatusColumn'
 import ApplicationForm from './components/ApplicationForm/ApplicationForm'
+import ApplicationPanel from './components/ApplicationPanel/ApplicationPanel'
+
 import { Job } from './types/job'
 import { mapJobFromApi } from './mappers/jobMapper'
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBriefcase, faPlus} from '@fortawesome/free-solid-svg-icons';
+
 import './App.css'
-import ApplicationPanel from './components/ApplicationPanel/ApplicationPanel'
 
 const App = () => {
     const[jobs, setJobs] = useState<Job[]>([]);
@@ -29,6 +35,7 @@ const App = () => {
 
   const handleSelectJob = (id: number) => {
       setSelectedJob(id);
+      console.log(jobs)
   };
 
   return (
@@ -52,9 +59,20 @@ const App = () => {
           </>
         )}
         <div className="header">
-          <h1 className="header__title">JobTracker</h1>
+          <h1 className="header__title">
+              <FontAwesomeIcon 
+                  className="header__briefcase" 
+                  icon={faBriefcase} 
+              />JobTracker
+          </h1>
           <div className="header__menu">
-                <label className="header__button" htmlFor="New Job" onClick={() => setFormVisible(true)}>New Job</label>
+                <label className="button-primary header__button" htmlFor="New Job" onClick={() => setFormVisible(true)}>
+                  {<FontAwesomeIcon 
+                      className="button__plus-sign" 
+                      icon={faPlus} 
+                  /> }
+                   New Job
+                </label>
           </div>
 
         </div>

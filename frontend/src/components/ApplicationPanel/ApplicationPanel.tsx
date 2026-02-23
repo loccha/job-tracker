@@ -11,7 +11,6 @@ type ApplicationPanelProps = {
 function ApplicationPanel ({
     job
 }:ApplicationPanelProps) {
-
     return (
         <div className="application-panel">
             <div className="application-panel__header">
@@ -34,8 +33,9 @@ function ApplicationPanel ({
 
             <div className="application-panel__body">
                 <div className="application-panel__main-column">
-                    <div className="application-panel__card application-panel__job-description">
-                        <p className="application-panel__title application-panel__title--job-description">Job Description</p>
+                    <div className="application-panel__card application-panel__card--job-description">
+                        <p className="application-panel__title application-panel__title--job-description">Job Description</p> <br />
+                        <p className="application-panel__job-description ">{job.description}</p>
                     </div>
                      
                     <div className="application-panel__card application-panel__documents">
@@ -63,7 +63,7 @@ function ApplicationPanel ({
             </div>
             
             <div className="application-panel__footer">
-                <p className="application-panel__date">{job.applyingDate}</p>
+                <p className="application-panel__date">Applied on {job.applyingDate}</p>
             </div>
 
 

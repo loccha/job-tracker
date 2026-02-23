@@ -14,19 +14,11 @@ function StatusColumn({ title, status, jobs, onSelectJob }: StatusColumnProps) {
     return (
     <div className={`status-column status-column--${status}`}>
         <div className={`status-column__header status-column__header--${status}`}>
-            <h2>{`${title}`}</h2>
+            <h2 className="status-column__title">{`${title}`}</h2>
                 {filteredJobs.map(job => (
                     <ApplicationCard
                         key={job.id} 
-                        title={job.title}
-                        company={job.company}
-                        description={job.description}
-                        applyingDate={job.applyingDate}
-                        interviewDate={job.interviewDate}
-                        link={job.link}
-                        cvUrl={job.cvUrl}
-                        letterUrl={job.letterUrl}
-                        confidenceScore={job.confidenceScore}
+                        job={job}
 
                         onClick={() => onSelectJob(job.id)}
                     /> 

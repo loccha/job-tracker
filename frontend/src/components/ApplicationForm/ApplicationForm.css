@@ -33,7 +33,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .application-form__input{
-    background-color: var(--color-surface-tertiary);
+    background-color: var(--color-input-bg);
     color: var(--color-input-text);
     border-radius: 5px;
     border: none;
@@ -104,7 +104,7 @@ input[type="number"]::-webkit-outer-spin-button {
     width:80px;
     height: 80px;
     border-radius: 50%;
-    background: conic-gradient(#72ff77 72%, #1e421f 78%);
+    background: conic-gradient(#2eb88c 72%, #114a38 78%);
     display:flex;
     align-items: center;
     justify-content: center;
@@ -203,12 +203,6 @@ input[type="number"]::-webkit-outer-spin-button {
     margin-top: 20px;
     display: flex;
     flex-direction: row-reverse;
-}
-
-.application-form__button{
-    padding:7px;
-    cursor:pointer;
-    margin:0 5px;
 }
 
 

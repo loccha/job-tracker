@@ -43,6 +43,7 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
     // Form state management - individual fields for controlled inputs    
     const[title, setTitle] = useState("");
     const[company, setCompany] = useState("");
+    const[shortDescription, setShortDescription] = useState("");
     const[description, setDescription] = useState("");
     const[applyingDate, setApplyingDate] = useState("");
     const[interviewDate, setInterviewDate] = useState("");
@@ -73,6 +74,7 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
         const newJobEntry = {
             title,
             company,
+            shortDescription,
             description,
             applyingDate,
             interviewDate,
@@ -255,6 +257,8 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                             className="application-form__input application-form__input--short-description"
                             id="short-description"
                             placeholder="Short Description"
+                            value={shortDescription}
+                            onChange={(e) => setShortDescription(e.target.value)}
                         />
                     </div>
 
@@ -263,9 +267,9 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                         <label htmlFor="description">Detailed Description</label>
                         <textarea
                             className="application-form__input application-form__input--description"
-                            id="description" 
+                            id="description"
                             value={description}
-                            onChange={(e) => setDescription(e.target.value)}
+                            onChange={(e) => setDescription(e.target.value)} 
                         />
                     </div>
 
@@ -326,8 +330,8 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
 
                 {/* Footer - form submission */}
                 <div className="application-form__footer">
-                    <button className="application-form__button" type="submit">Save Job</button>
-                    <button className="application-form__button">Cancel</button>
+                    <button className="button-primary application-form__button" type="submit">Save Job</button>
+                    <button className="button application-form__button">Cancel</button>
                 </div>
                                       
             </form>
