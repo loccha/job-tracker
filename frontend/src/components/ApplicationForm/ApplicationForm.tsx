@@ -281,7 +281,7 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                                 <div className="application-form__dropboxes">
                                     {/* Resume dropzone */}
                                     <Dropbox
-                                        onDrop={(file) => setLetterFile(file)}
+                                        onDrop={(file) => setCvFile(file)}
                                         label={"Resume"}
                                     />
                                     {/* Cover letter dropzone */}
