@@ -36,6 +36,10 @@
     margin: 0px 3px;
 }
 
+.application-panel__icon{
+    cursor: pointer;
+}
+
 .application-panel__icon--link {
     color: var(--color-text-primary);
     font-size: 22px;

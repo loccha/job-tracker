@@ -1,7 +1,10 @@
 import dotenv from "dotenv";
 import express from 'express';
+
 import multer from 'multer';
-import path from "path";
+import path, { relative } from "path";
+import fs from "fs";
+
 import cors from "cors";
 import { Pool } from 'pg';
 
@@ -36,7 +39,7 @@ await pool.connect();
  */
 app.get('/api', async(req, res) => {
     try {
-        const result = await pool.query('SELECT * FROM jobs ORDER BY created_at');
+        const result = await pool.query('SELECT * FROM jobs_data ORDER BY created_at');
         res.json(result.rows);
     } catch(e) {
         res.status(500).json({ error: e.message });
@@ -85,7 +88,7 @@ app.post('/api/jobs', async (req, res) => {
     try {
         const safeInterviewDate = interviewDate || null;
         const query = {
-            text: 'INSERT INTO jobs(title, company, short_description, description, applying_date, interview_date, link, cv_url, letter_url, confidence_score, status) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *',
+            text: 'INSERT INTO jobs_data(title, company, short_description, description, applying_date, interview_date, link, cv_url, letter_url, confidence_score, status) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *',
             values: [title, company, shortDescription, description, applyingDate, safeInterviewDate, link, cvUrl, letterUrl, confidenceScore, status],
         };
         const result = await pool.query(query);
@@ -126,12 +129,44 @@ app.put('/api/jobs/:id', async (req, res) => {
 app.delete('/api/delete/:id', async (req, res) => {
     try {
         const id = req.params.id;
-        const query = {
-            text:'DELETE FROM jobs WHERE id = $1',
+        const urls_query = {
+            text: 'SELECT cv_url, letter_url from jobs_data WHERE id = $1',
             values: [id],
         };
-        const result = await pool.query(query);
+
+        const urls_response = await pool.query(urls_query);
+        const relativePathCvUrl = "." + new URL(urls_response.rows[0].cv_url).pathname;
+
+        const relativePathLetterUrl = "";
+        if(urls_response.rows[0].letter_url){
+            relativePathLetterUrl = "." + new URL(urls_response.rows[0].letter_url).pathname;
+        }
+
+        fs.unlink(relativePathCvUrl, (err) =>{
+            if(err){
+                return res.status(404).json({error : "Unable to find the file."});
+            }
+            res.json({ message: "File successfully deleted"});
+        });
+
+        if(relativePathLetterUrl){
+            fs.unlink(relativePathLetterUrl, (err) =>{
+                if(err){
+                    return res.status(404).json({error : "Unable to find the file."})
+                }
+            res.json({ message: "File successfully deleted"})
+            });
+        }
+        
+
+        const delete_query = {
+            text:'DELETE FROM jobs_data WHERE id = $1',
+            values: [id],
+        };
+
+        const result = await pool.query(delete_query);
         res.json(result.rows);
+        
     } catch(e) {
         res.status(500).json({ error: e.message });
     }

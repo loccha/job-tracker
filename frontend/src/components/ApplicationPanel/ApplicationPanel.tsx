@@ -6,11 +6,28 @@ import { Job } from '../../types/job';
 
 type ApplicationPanelProps = {
     job: Job;
+    setJobs: React.Dispatch<React.SetStateAction<Job[]>>;
+    onClose: () => void;
 }
 
-function ApplicationPanel ({
-    job
-}:ApplicationPanelProps) {
+function ApplicationPanel ({ job, setJobs, onClose }:ApplicationPanelProps) {
+
+    const onHandleDelete = async ({}) => {
+        try {
+            const response = await fetch(`http://localhost:3000/api/delete/${job.id}`, {
+                method: 'DELETE',
+                body: 'none',
+            });
+        //update jobs
+        setJobs(prev => prev.filter(j => j.id !== job.id));
+
+        } catch (err) {
+            console.log("Couldn't delete the application properly")
+        };
+
+        onClose();
+    }
+
     return (
         <div className="application-panel">
             <div className="application-panel__header">
@@ -24,7 +41,11 @@ function ApplicationPanel ({
                     </div>
                     <div className="application-panel__menu">
                         <FontAwesomeIcon className="application-panel__icon application-panel__menu application-panel__icon--pen-to-square" icon={faPenToSquare} />
-                        <FontAwesomeIcon className="application-panel__icon application-panel__menu application-panel__icon--trash-can" icon={faTrashCan} />
+                        <FontAwesomeIcon 
+                            className="application-panel__icon application-panel__menu application-panel__icon--trash-can" 
+                            icon={faTrashCan}
+                            onClick = {onHandleDelete} 
+                        />
                     </div>
                 </div>
                 <div className="application-panel__line">

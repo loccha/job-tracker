@@ -36,7 +36,6 @@ const App = () => {
 
   const handleSelectJob = (id: number) => {
       setSelectedJob(id);
-      console.log(jobs)
   };
 
   return (
@@ -46,6 +45,8 @@ const App = () => {
             <div className="blur-overlay" onClick={() => setSelectedJob(null)}></div>
             <ApplicationPanel
               job = {jobs.find(job => job.id === selectedJob)!}
+              setJobs={setJobs}
+              onClose={() => setSelectedJob(null)}
             />
           </>
         )}

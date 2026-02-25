@@ -152,7 +152,7 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
             return ("http://localhost:3000/uploads/" + data.filename);
 
         } catch (err) {
-            console.log("couldn't upload the file properly")
+            console.log("Couldn't upload the file properly")
         };
     };
 
