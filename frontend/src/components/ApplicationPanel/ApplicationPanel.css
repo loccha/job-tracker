@@ -2,10 +2,7 @@
     color: var(--color-text-primary);
     padding:30px;
 
-    /*background: radial-gradient(ellipse at center, #222249 0%, #0c0c12 70%);*/
     background-color: var(--color-surface-form);
-    
-    box-shadow: 0 0 4px 2px rgb(var(--color-confidence-high) / 0.5);
     border-radius: 15px;
 
     width: 60%;
@@ -20,7 +17,7 @@
 
     display: grid;
     grid-template-rows: 1fr 4fr auto;
-    gap: 20px;
+    gap: var(--grid-gap-md);
 }
 
 /*----Application-panel header----*/
@@ -100,7 +97,7 @@
 .application-panel__body{
     display: grid;
     grid-template-columns: 3fr 2fr;
-    gap: 10px;
+    gap: var(--grid-gap-sm);
 }
 
 .application-panel__card{
@@ -123,7 +120,7 @@
 .application-panel__main-column {
     display: grid;
     grid-template-rows: 4fr 1fr;
-    gap: 10px;
+    gap: var(--grid-gap-sm);
 }
 
 .application-panel__side-column{

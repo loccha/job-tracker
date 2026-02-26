@@ -1,17 +1,35 @@
+:root{
+    --color-offer-column-faded: #1665346d;
+    --color-interview-column-faded:#1555867d;
+    --color-declined-column-faded:#440013b6 ;
+
+    --form-padding: 25px;
+    --form-item-margin: 7px 0px;
+
+    --form-input-padding: 5px;
+
+    --form-border-radius: 5px;
+    --form-box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+
+    --form-title-size: 24px;
+    --form-title-weight: 600;
+
+    --score-size: 80px;
+    --score-inner-size: 65px;
+    --score-text-size: 24px; 
+}
+
 .application-form{
-    padding: 25px;
+    padding: var(--form-padding);
     color: var(--color-text-primary);
-    /*background: radial-gradient(ellipse at center, #100F17 0%, #100F17 100%); */
     background-color: var(--color-surface-form);
 
-    /*box-shadow: 0 0 4px 1px rgba(227, 227, 227, 0.5);*/
-    border-radius:5px;
+    border-radius:var(--form-border-radius);
     border: 1px solid var(--color-border-subtle);
-    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    box-shadow: var(--form-box-shadow);
 
     min-width:fit-content;
     min-height:fit-content;
-
 
     position: fixed;
     top: 50%;
@@ -26,7 +44,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .application-form__item{
-    margin: 7px 0px;
+    margin: var(--form-item-margin);
 
     display:flex;
     flex-direction:column;
@@ -35,9 +53,9 @@ input[type="number"]::-webkit-outer-spin-button {
 .application-form__input{
     background-color: var(--color-input-bg);
     color: var(--color-input-text);
-    border-radius: 5px;
+    border-radius: var(--form-border-radius);
     border: none;
-    padding: 5px;
+    padding: var(--form-input-padding);
 }
 
 /*---------header---------*/
@@ -52,12 +70,12 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .application-form__title{
     text-align: left;
-    font-weight: 600;
-    font-size: 24px;
+    font-weight: var(--form-title-weight);
+    font-size: var(--form-title-size);
 }
 
 .application-form__status{
-    border-radius: 5px;
+    border-radius: var(--form-border-radius);
     padding: 2px;
     height: 30px;
 
@@ -70,13 +88,13 @@ input[type="number"]::-webkit-outer-spin-button {
 .application-form__primary-section{
     display: grid;
     grid-template-columns: 1fr auto;
-    gap: 20px;
+    gap: var(--grid-gap-md);
 }
 
 .application-form__link-date-row{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    gap: var(--grid-gap-md);
 }
 
 .application-form__score-section{
@@ -99,23 +117,43 @@ input[type="number"]::-webkit-outer-spin-button {
     width:20px;
 }
 
-/*--PLACEHOLDER (hardcoded confidence score widget)--*/
+
+@property --score {
+    syntax: "<number>";
+    inherits: false;
+    initial-value: 0;
+}
+
+@property --fill {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: #ff3c53e6;
+}
+
+@property --trail {
+    syntax: "<color>";
+    inherits: false;
+    initial-value: #59142e;
+}
+
 .application-form__confidence-score{
-    width:80px;
-    height: 80px;
+    width: var(--score-size);
+    height: var(--score-size);
     border-radius: 50%;
-    background: conic-gradient(#f9664e 72%, #752e23 78%);
     display:flex;
     align-items: center;
     justify-content: center;
     position:relative;
+
+    background: conic-gradient(var(--fill) calc(var(--score) * 1% - 2%), var(--trail) calc(var(--score) * 1% + 2%));
+    transition: --score 0.4s ease, --fill 0.3s ease, --trail 0.3s ease;
 }
 
 .application-form__confidence-score::after{
     content:"";
     position: absolute;
-    width: 65px;
-    height:65px;
+    width: var(--score-inner-size);
+    height: var(--score-inner-size);
     background: var(--color-surface-form);
     border-radius: 50%;
 }
@@ -123,7 +161,7 @@ input[type="number"]::-webkit-outer-spin-button {
 .application-form__score-text{
     position: relative;
     z-index: 1;
-    font-size: 24px;
+    font-size: var(--score-text-size);
     font-weight:bold;
     color:var(--color-text-primary);
 }
@@ -138,14 +176,14 @@ input[type="number"]::-webkit-outer-spin-button {
 .application-form__documents-interview{
     display: grid;
     grid-template-columns: 1fr auto;
-    gap:40px;
+    gap:var(--grid-gap-lg);
 }
 
 .application-form__dropboxes{
     display: grid;
     grid-template-columns: 1fr 1fr;
     justify-items: start;
-    gap:10px;
+    gap:var(--grid-gap-sm);
 }
 
 .application-form__upload-icon{

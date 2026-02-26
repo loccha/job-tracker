@@ -1,6 +1,7 @@
 import ApplicationCard from '../ApplicationCard/ApplicationCard'
 import {Job} from '../../types/job'
 import './StatusColumn.css'
+import '../../styles/variables.css'
 
 type StatusColumnProps = {
     title: string;

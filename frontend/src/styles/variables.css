@@ -20,10 +20,18 @@
 
   --color-accent: #f9664e;
 
-  /*--color-confidence-good: 114 255 119;
-  --color-confidence-high: 137 63 255;*/
-
   --shadow-card: 0 6px 18px rgba(0,0,0,0.15);
+
+  
+  --color-applied-column: #9d32db;
+  --color-interview-column: #32c2db;
+  --color-offer-column: #28a768;
+  --color-declined-column: #ff4258;
+
+
+  --grid-gap-sm: 10px;
+  --grid-gap-md: 20px;
+  --grid-gap-lg: 40px;
 
 }
 

@@ -156,6 +156,16 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
         };
     };
 
+    const score = Number(confidenceScore) || 0;
+    const getScoreColor = (score: number) => {
+        if (score >= 85) return { fill: 'var(--color-offer-column)', trail: 'var(--color-offer-column-faded)' };
+        if (score >= 60) return { fill: 'var(--color-interview-column)', trail: 'var(--color-interview-column-faded)' };
+
+        return { fill: 'var(--color-declined-column)', trail: 'var(--color-declined-column-faded)' };
+    };
+
+    const { fill, trail } = getScoreColor(score);
+    
     return (
         <div ref={formRef} className="application-form">
             <form className="application-form__form" onSubmit={handleSubmit}>
@@ -244,8 +254,11 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                         </div>
                         
                         {/* Visual display of confidence score */}
-                        <div className="application-form__confidence-score">
-                            <span className="application-form__score-text">75%</span>
+                        <div 
+                            className="application-form__confidence-score"
+                                style={{ "--score": score, "--fill": fill, "--trail": trail } as React.CSSProperties}
+                        >
+                            <span className="application-form__score-text">{ score }%</span>
                         </div>
                     </div>
                 </div>

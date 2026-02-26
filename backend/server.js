@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 import express from 'express';
 
 import multer from 'multer';
-import path, { relative } from "path";
+import path from "path";
 import fs from "fs";
 
 import cors from "cors";
@@ -110,7 +110,7 @@ app.put('/api/jobs/:id', async (req, res) => {
         const { title, company, shortDescription, description, applyingDate, interviewDate, link, cvUrl, letterUrl, confidenceScore, status } = req.body;
 
         const query = {
-            text: 'UPDATE jobs SET title = $1, company = $2, short_description = $3, description = $4, applying_date = $5, interview_date = $6, link = $7, cv_url = $8, letter_url = $9, confidence_score = $10, status = $11 WHERE id = $12',
+            text: 'UPDATE jobs_data SET title = $1, company = $2, short_description = $3, description = $4, applying_date = $5, interview_date = $6, link = $7, cv_url = $8, letter_url = $9, confidence_score = $10, status = $11 WHERE id = $12',
             values: [title, company, shortDescription, description, applyingDate, interviewDate, link, cvUrl, letterUrl, confidenceScore, status, id],
         };
 

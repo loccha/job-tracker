@@ -4,6 +4,8 @@ import './ApplicationPanel.css'
 import '../../styles/variables.css'
 import { Job } from '../../types/job';
 
+import Calendar from "../Calendar/Calendar";
+
 type ApplicationPanelProps = {
     job: Job;
     setJobs: React.Dispatch<React.SetStateAction<Job[]>>;
@@ -72,6 +74,10 @@ function ApplicationPanel ({ job, setJobs, onClose }:ApplicationPanelProps) {
                     <div className="application-panel__top-section">
                         <div className="application-panel__interview">
                             <p className="application-panel__title application-panel__title--interview">Interview</p>
+                                <Calendar
+                                    date={job.interviewDate}
+                                />
+                            
                         </div>
                         <div className="application-panel__screening" />
                     </div>
