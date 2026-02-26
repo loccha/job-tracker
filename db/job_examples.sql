@@ -1,4 +1,4 @@
-INSERT INTO jobs (
+INSERT INTO jobs_data (
     title, company, short_description, description,
     applying_date, interview_date, link,
     cv_url, letter_url, confidence_score, status
