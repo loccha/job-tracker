@@ -48,6 +48,16 @@ label {
     font-size: 14px;
 }
 
+button, 
+select {
+  cursor:pointer;
+}
+
+button {
+  width: 100px;
+  height: 40px;
+}
+
 .button-primary {
     font-weight: 500;
     font-size: 14px;
@@ -66,7 +76,33 @@ label {
 }
 
 .button-primary:hover{
-       background: #a1412b; 
+       background: #803322; 
+}
+
+.button-subtle{
+    font-weight: 500;
+    font-size: 14px;
+
+    border: none;
+    border-radius: 7px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 6px 10px 3px;
+
+    background-color: #393947a1;
+
+    padding: 9px 14px;
+    margin:0px 5px;
+}
+
+.button-subtle:hover{
+       background: #272730a1; 
+}
+
+select {
+  background-color: #393947a1;
+  border:none;
+  border-radius: 5px;
+  padding: 2px 5px;
+  height: 30px;
 }
 
 

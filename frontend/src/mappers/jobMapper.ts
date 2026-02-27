@@ -16,12 +16,16 @@ export const mapJobFromApi = (job: any): Job => ({
             day: "numeric"
             })
         :null,
+    screeningCompleted: job.screening_completed,
     link: job.link,
     cvUrl: job.cv_url,
+    cvOriginalName: job.cv_original_name,
     letterUrl: job.letter_url,
+    letterOriginalName: job.letter_original_name,
     createdAt: job.created_at,
     confidenceScore: job.confidence_score,
-    status: job.status
+    status: job.status,
+    personnalNotes: job.personnal_notes
 });
 
 

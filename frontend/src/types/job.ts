@@ -6,10 +6,14 @@ export type Job = {
       description: string;
       applyingDate: string;
       interviewDate: string | null;
+      screeningCompleted: boolean;
       link: string;
       cvUrl: string;
+      cvOriginalName: string;
       letterUrl?: string;
+      letterOriginalName?: string;
       createdAt: string;
       confidenceScore: number;
       status: string;
+      personnalNotes: string;
     };

@@ -49,17 +49,21 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
     const[description, setDescription] = useState("");
     const[applyingDate, setApplyingDate] = useState("");
     const[interviewDate, setInterviewDate] = useState("");
+    const[screeningCompleted, setScreeningCompleted] = useState(false);
     const[link, setLink] = useState("");
 
     const[cvUrl, setCvUrl] = useState<string>("");          // Server URL after CV upload
-    const[cvFile, setCvFile] = useState<File | null>(null)
+    const[cvOriginalName, setCvOriginalName] = useState("");
+    const[cvFile, setCvFile] = useState<File | null>(null);
 
     const[letterUrl, setLetterUrl] = useState<string | undefined>("");   // Server URL after cover letter upload
-    const[letterFile, setLetterFile] = useState<File | null>(null)
+    const[letterOriginalName, setLetterOriginalName] = useState("");
+    const[letterFile, setLetterFile] = useState<File | null>(null);
 
     const[confidenceScore, setConfidenceScore] = useState("");
     const[status, setStatus] = useState("applied");         // Application status (applied, interview, offer, declined)
 
+    const[personnalNotes, setPersonnalNotes] = useState("");
     // Ref for click-outside detection
     const formRef = useRef<HTMLDivElement>(null);
 
@@ -85,11 +89,15 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
             description,
             applyingDate,
             interviewDate,
+            screeningCompleted,
             link,
             cvUrl,
+            cvOriginalName,
             letterUrl,
+            letterOriginalName,
             confidenceScore: parsedScore,
-            status
+            status,
+            personnalNotes
         };
 
 
@@ -117,6 +125,8 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                     ...newJobEntry,
                     cvUrl: finalCvUrl,
                     letterUrl: finalLetterUrl,
+                    cvOriginalName: cvFile?.name,
+                    letterOriginalName: letterFile?.name
                 };
                 const res = await axios.post("http://localhost:3000/api/jobs", jobToSend);
                 setJobs(prev => [...prev, mapJobFromApi(res.data)]);
@@ -186,6 +196,7 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                     >
                         <option value="applied">Applied</option>
                         <option value="interview">Interview</option>
+                        <option value="offer">Offer</option>
                         <option value="declined">Declined</option>
                     </select>
                 </div>
@@ -232,10 +243,10 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                             <div className="application-form__item application-form__item--application-date">
                                 <label htmlFor="applying_date">Application Date</label>
                                 <input type="date"
+                                    className="application-form__input application-form__input-date"
                                     id="applyingDate" 
                                     value={applyingDate}
                                     onChange={(e) => setApplyingDate(e.target.value)}
-                                    className="application-form__input"
                                 />
                             </div>
                         </div>
@@ -290,7 +301,7 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                     <div className="application-form__documents-interview">
                         <div className="application-form__documents">
                             <div className="application-form__item application-form__item--documents">
-                                <label htmlFor="documents">Documents</label>
+                                <label htmlFor="documents">Documents (.pdf)</label>
                                 <div className="application-form__dropboxes">
                                     {/* Resume dropzone */}
                                     <Dropbox
@@ -311,17 +322,21 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                             <div className="application-form__item">
                                 <label htmlFor="interview_date">Interview</label>
                                 <input type="date"
+                                    className="application-form__input application-form__input-date"
                                     id="interviewDate" 
                                     value={interviewDate}
                                     onChange={(e) => setInterviewDate(e.target.value)}
-                                    className="application-form__input"
                                 />
                             </div>
                             
                             {/* Screening completion checkbox */}
                             <div className="application-form__item">
                                 <label className="application-form__checkbox">
-                                    <input type="checkbox" />Screening Completed
+                                    <input 
+                                        type="checkbox" 
+                                        checked={screeningCompleted}
+                                        onChange={(e) => setScreeningCompleted(e.target.checked)}
+                                    />Screening Completed
                                 </label>
                             </div>
                         </div>
@@ -330,8 +345,8 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
 
                 {/* Footer - form submission */}
                 <div className="application-form__footer">
-                    <button className="button-primary application-form__button" type="submit">Save Job</button>
-                    <button className="button application-form__button">Cancel</button>
+                    <button className="button-primary application-form__button application-form__button--save-job" type="submit">Save Job</button>
+                    <button className="button-subtle application-form__button application-form__button--cancel">Cancel</button>
                 </div>
                                       
             </form>

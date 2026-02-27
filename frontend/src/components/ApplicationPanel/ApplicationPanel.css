@@ -3,6 +3,7 @@
     padding:30px;
 
     background-color: var(--color-surface-form);
+    border: 1px solid var(--color-border-subtle);
     border-radius: 15px;
 
     width: 60%;
@@ -101,7 +102,6 @@
 }
 
 .application-panel__card{
-   /* background: radial-gradient(ellipse at center, #69699700 0%, #15151e 70%);*/
     background-color: var(--color-surface-primary);
     border: 1px solid var(--color-border-subtle);
     border-radius:10px;
@@ -123,9 +123,35 @@
     gap: var(--grid-gap-sm);
 }
 
+.application-panel__documents-section{
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap:var(--grid-gap-sm);
+    align-items: center;
+}
+
+.application-panel__document{
+    margin: 0px 5px;
+    font-size:12px;
+}
+
 .application-panel__side-column{
     display: grid;
     grid-template-rows: 10fr 1fr 10fr;
+}
+
+.application-panel__date,
+.application-panel__screening{
+    font-size: 14px;
+}
+
+.application-panel__screening{
+    margin: 5px;
+}
+
+.application-panel__check{
+    font-size: 12px;
+    color: #0eb33a;
 }
 
 .application-panel__notes{
@@ -141,6 +167,7 @@
     background-color: var(--color-surface-secondary);
     border-radius:10px;
     flex:1;
+    padding:10px;
 }
 
 .application-panel__date{

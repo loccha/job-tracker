@@ -2,6 +2,7 @@
 .application-form__dropbox-field > p {
     margin: 2px 0px;
     font-size: 12px;
+    word-break: break-all;
 }
 
 /* Base dropbox styles */

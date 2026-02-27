@@ -74,14 +74,6 @@ input[type="number"]::-webkit-outer-spin-button {
     font-size: var(--form-title-size);
 }
 
-.application-form__status{
-    border-radius: var(--form-border-radius);
-    padding: 2px;
-    height: 30px;
-
-    cursor:pointer;
-}
-
 
 /*-----primary section-------*/
 
@@ -205,10 +197,12 @@ input[type="number"]::-webkit-outer-spin-button {
     display:flex;
     flex-direction: row;
     align-items: center;
+    cursor:pointer;
 }
 
 .application-form__checkbox > input{
     margin: 0px 7px;
+    cursor:pointer;
 }
 
 .application-form__interview-section > div{

@@ -27,18 +27,23 @@ const Dropbox = ({
                 `}
                 onDragEnter={(e) => {
                     e.preventDefault();
-                    setIsDragging(true)
+                    setIsDragging(true);
                 }}
                 onDragLeave={() => setIsDragging(false)}
-                onDragOver={(e) => e.preventDefault()}
+                onDragOver={(e) => {
+                    e.preventDefault();
+                    setIsDragging(true);
+                }}
                 onDrop={(event) => {
                     event.preventDefault();
                     setIsDragging(false);
                     const file = event.dataTransfer.files[0];
                     if (file){
                         onDrop(file);
-                        setIsFilled(true);
-                        setFileName(file.name)
+                        if(file.type=="application/pdf"){
+                            setIsFilled(true);
+                            setFileName(file.name);
+                        }                        
                     } 
                 }}
             >                                

@@ -28,10 +28,11 @@
   --color-offer-column: #28a768;
   --color-declined-column: #ff4258;
 
-
   --grid-gap-sm: 10px;
   --grid-gap-md: 20px;
   --grid-gap-lg: 40px;
+
+  --padding-lg: 25px;
 
 }
 

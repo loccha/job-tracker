@@ -1,10 +1,16 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLink, faTrashCan, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
-import './ApplicationPanel.css'
-import '../../styles/variables.css'
+import { faLink, faTrashCan, faPenToSquare, faCheck } from '@fortawesome/free-solid-svg-icons';
+
+import { useState } from "react";
+
 import { Job } from '../../types/job';
 
 import Calendar from "../Calendar/Calendar";
+import Popup from "../Popup/Popup";
+
+import './ApplicationPanel.css'
+import '../../styles/variables.css'
+
 
 type ApplicationPanelProps = {
     job: Job;
@@ -14,7 +20,9 @@ type ApplicationPanelProps = {
 
 function ApplicationPanel ({ job, setJobs, onClose }:ApplicationPanelProps) {
 
-    const onHandleDelete = async ({}) => {
+    const[popupVisible, setPopupVisible] = useState(false);
+
+    const onHandleDelete = async ({}) => { 
         try {
             const response = await fetch(`http://localhost:3000/api/delete/${job.id}`, {
                 method: 'DELETE',
@@ -32,6 +40,12 @@ function ApplicationPanel ({ job, setJobs, onClose }:ApplicationPanelProps) {
 
     return (
         <div className="application-panel">
+            {popupVisible &&
+                <Popup 
+                    onClose={() => setPopupVisible(false)}
+                    onHandleDelete={onHandleDelete}
+                /> 
+            }
             <div className="application-panel__header">
                 <div className="application-panel__identity">
                     <a href={`${job.link}`}>
@@ -46,7 +60,7 @@ function ApplicationPanel ({ job, setJobs, onClose }:ApplicationPanelProps) {
                         <FontAwesomeIcon 
                             className="application-panel__icon application-panel__menu application-panel__icon--trash-can" 
                             icon={faTrashCan}
-                            onClick = {onHandleDelete} 
+                            onClick = {()=>setPopupVisible(true)} 
                         />
                     </div>
                 </div>
@@ -65,8 +79,22 @@ function ApplicationPanel ({ job, setJobs, onClose }:ApplicationPanelProps) {
                         <p className="application-panel__job-description ">{job.description}</p>
                     </div>
                      
-                    <div className="application-panel__card application-panel__documents">
+                    <div className="application-panel__card application-panel__documents-section">
                         <p className="application-panel__title application-panel__title--documents">Documents</p>
+                        <div className="application-panel__documents">
+                            <a 
+                                className="application-panel__document application-panel__document--letter" 
+                                href={job.letterUrl}
+                                target="_blank"
+                            >{job.letterOriginalName}
+                            </a>
+                            <a 
+                                className="application-panel__document application-panel__document--cv" 
+                                href={job.cvUrl}
+                                target="_blank"
+                            >{job.cvOriginalName}
+                            </a>
+                        </div>
                     </div> 
                 </div>
 
@@ -77,6 +105,12 @@ function ApplicationPanel ({ job, setJobs, onClose }:ApplicationPanelProps) {
                                 <Calendar
                                     date={job.interviewDate}
                                 />
+                                {job.screeningCompleted &&
+                                    <>
+                                        <FontAwesomeIcon className="application-panel__check" icon={faCheck} />
+                                        <span className="application-panel__screening"><b>Screening:</b> Completed</span>
+                                    </>  
+                                }   
                             
                         </div>
                         <div className="application-panel__screening" />
@@ -86,7 +120,7 @@ function ApplicationPanel ({ job, setJobs, onClose }:ApplicationPanelProps) {
                     <div className="application-panel__notes">
                         <p className="application-panel__title application-panel__title--notes">Notes</p>
                         <div className="application-panel__notes-card">
-
+                                {job.personnalNotes}
                         </div>
                     </div>
                 </div>

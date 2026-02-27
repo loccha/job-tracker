@@ -84,12 +84,12 @@ app.post('/api/upload-file', upload.single('file'), (req, res) => {
 app.post('/api/jobs', async (req, res) => {
     console.log(req.body); // debug log request body
 
-    const { title, company, shortDescription, description, applyingDate, interviewDate, link, cvUrl, letterUrl, confidenceScore, status } = req.body;
+    const { title, company, shortDescription, description, applyingDate, interviewDate, screeningCompleted, link, cvUrl, cvOriginalName, letterUrl, letterOriginalName, confidenceScore, status, personnalNotes } = req.body;
     try {
         const safeInterviewDate = interviewDate || null;
         const query = {
-            text: 'INSERT INTO jobs_data(title, company, short_description, description, applying_date, interview_date, link, cv_url, letter_url, confidence_score, status) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *',
-            values: [title, company, shortDescription, description, applyingDate, safeInterviewDate, link, cvUrl, letterUrl, confidenceScore, status],
+            text: 'INSERT INTO jobs_data(title, company, short_description, description, applying_date, interview_date, screening_completed, link, cv_url, cv_original_name, letter_url, letter_original_name, confidence_score, status, personnal_notes) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING *',
+            values: [title, company, shortDescription, description, applyingDate, safeInterviewDate, screeningCompleted, link, cvUrl, cvOriginalName, letterUrl, letterOriginalName, confidenceScore, status, personnalNotes],
         };
         const result = await pool.query(query);
         res.status(201).json(result.rows[0]);
@@ -107,11 +107,11 @@ app.post('/api/jobs', async (req, res) => {
 app.put('/api/jobs/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        const { title, company, shortDescription, description, applyingDate, interviewDate, link, cvUrl, letterUrl, confidenceScore, status } = req.body;
+        const { title, company, shortDescription, description, applyingDate, interviewDate, screeningCompleted, link, cvUrl, cvOriginalName, letterUrl, letterOriginalName, confidenceScore, status, personnalNotes } = req.body;
 
         const query = {
-            text: 'UPDATE jobs_data SET title = $1, company = $2, short_description = $3, description = $4, applying_date = $5, interview_date = $6, link = $7, cv_url = $8, letter_url = $9, confidence_score = $10, status = $11 WHERE id = $12',
-            values: [title, company, shortDescription, description, applyingDate, interviewDate, link, cvUrl, letterUrl, confidenceScore, status, id],
+            text: 'UPDATE jobs_data SET title = $1, company = $2, short_description = $3, description = $4, applying_date = $5, interview_date = $6, screening_completed = $7, link = $8, cv_url = $9, cv_original_name = $10, letter_url = $11, letter_original_name = $12, confidence_score = $13, status = $14, personnal_notes = $15 WHERE id = $16',
+            values: [title, company, shortDescription, description, applyingDate, interviewDate, screeningCompleted, link, cvUrl, cvOriginalName, letterUrl, letterOriginalName, confidenceScore, status, personnalNotes, id],
         };
 
         const result = await pool.query(query);
@@ -135,37 +135,24 @@ app.delete('/api/delete/:id', async (req, res) => {
         };
 
         const urls_response = await pool.query(urls_query);
-        const relativePathCvUrl = "." + new URL(urls_response.rows[0].cv_url).pathname;
+        const row = urls_response.rows[0];
 
-        const relativePathLetterUrl = "";
-        if(urls_response.rows[0].letter_url){
-            relativePathLetterUrl = "." + new URL(urls_response.rows[0].letter_url).pathname;
+        const relativePathCvUrl = "." + new URL(row.cv_url).pathname;
+        await fs.promises.unlink(relativePathCvUrl);
+
+        if(row.letter_url){
+            const relativePathLetterUrl = "." + new URL(row.letter_url).pathname;
+            await fs.promises.unlink(relativePathLetterUrl);
         }
-
-        fs.unlink(relativePathCvUrl, (err) =>{
-            if(err){
-                return res.status(404).json({error : "Unable to find the file."});
-            }
-            res.json({ message: "File successfully deleted"});
-        });
-
-        if(relativePathLetterUrl){
-            fs.unlink(relativePathLetterUrl, (err) =>{
-                if(err){
-                    return res.status(404).json({error : "Unable to find the file."})
-                }
-            res.json({ message: "File successfully deleted"})
-            });
-        }
-        
 
         const delete_query = {
             text:'DELETE FROM jobs_data WHERE id = $1',
             values: [id],
         };
 
-        const result = await pool.query(delete_query);
-        res.json(result.rows);
+        await pool.query(delete_query);
+
+        res.json({ message: "Entry and files successfully deleted" });
         
     } catch(e) {
         res.status(500).json({ error: e.message });
