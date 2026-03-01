@@ -1,0 +1,22 @@
+.application-form__score--edit{
+    padding:2px;
+    text-align: center;
+    margin: 0 5px;
+}
+
+.application-panel__status--edit{
+    padding:0;
+}
+
+.job-description--edit{
+    display: flex;
+    flex-direction: column;
+}
+
+.application-panel__job-description--edit{
+    flex: 1;
+}
+
+.application-form__input-date--edit{
+    margin: 0px 10px;
+}

@@ -6,13 +6,13 @@ letter_url, letter_original_name, confidence_score, status, personnal_notes
 
 (
 'Junior Software Developer',
-'Air Canada',
-'Junior software development role',
-'As a Junior Software Developer, you will support the design, development, and maintenance of applications used across internal operations and customer-facing platforms. Working under the guidance of senior developers, you will write clean, maintainable code, assist in debugging issues, and participate in code reviews. You will collaborate with cross-functional teams including analysts, QA specialists, and product owners in an Agile environment.
+'NovaTech Solutions',
+'Junior dev role in a growing SaaS company',
+'NovaTech Solutions is a mid-sized SaaS company building cloud-based project management tools for enterprise clients. As a Junior Software Developer, you will be part of a product team responsible for developing and improving core platform features. You will write and review code, participate in sprint planning, and work closely with UX designers and product managers to deliver reliable software.
 
-The ideal candidate has a degree in Computer Science or a related field and demonstrates a solid understanding of programming fundamentals such as data structures, control flow, and debugging practices. Familiarity with modern development tools, REST APIs, and relational databases is required. Strong attention to detail, reliability, and the ability to learn quickly in a fast-paced environment are essential. This role offers an excellent opportunity to gain hands-on experience while contributing to reliable and scalable software systems.',
+We are looking for someone with a strong foundation in object-oriented programming and a genuine curiosity for building quality software. Familiarity with REST APIs and relational databases is expected. You should be comfortable in a collaborative environment, open to feedback, and able to manage your time effectively across multiple tasks. This is a great opportunity to grow alongside a passionate team working on a product used by thousands of companies worldwide.',
 '2026-02-10','2026-02-25',true,
-'https://careers.aircanada.com/job1',
+'https://novatechsolutions.io/careers/junior-dev',
 '/uploads/cv1.pdf','John_Doe_CV.pdf',
 '/uploads/letter1.pdf','John_Doe_Letter.pdf',
 85,'interview','Positive interview experience.'
@@ -20,13 +20,13 @@ The ideal candidate has a degree in Computer Science or a related field and demo
 
 (
 'Junior Full-Stack Developer',
-'National Bank of Canada',
-'Entry-level software developer',
-'We are seeking a Junior Full-Stack Developer to join our digital banking team. In this role, you will assist in developing and maintaining internal applications that support business operations and customer services. Responsibilities include implementing features, troubleshooting issues, participating in testing activities, and collaborating with senior developers to ensure high-quality software delivery.
+'Meridian Digital',
+'Full-stack role at a digital services firm',
+'Meridian Digital is a digital transformation consultancy helping mid-market businesses modernize their internal tools and customer-facing applications. The Junior Full-Stack Developer will contribute to client projects by implementing new features, fixing bugs, and collaborating with senior developers during code reviews and design sessions.
 
-The ideal candidate holds a degree in Computer Science or a related discipline and demonstrates strong knowledge of programming fundamentals. Experience with web technologies such as JavaScript, backend frameworks, and SQL databases is considered an asset. Candidates should possess good analytical thinking, attention to detail, and the ability to work effectively within Agile teams. A proactive attitude, strong communication skills, and willingness to continuously learn new technologies are key to success in this role.',
+Applicants should have a solid grasp of web development fundamentals, including experience with JavaScript on both the front-end and back-end. Knowledge of SQL databases and HTTP protocols is required. We value candidates who communicate clearly, adapt well to shifting priorities, and take ownership of their work. Prior experience with Agile workflows is a plus. Meridian Digital offers mentorship programs and structured career growth paths for junior developers.',
 '2026-02-15',NULL,false,
-'https://bnc.ca/job2',
+'https://meridiandigital.dev/jobs/fullstack-junior',
 '/uploads/cv2.pdf','John_Doe_CV.pdf',
 '/uploads/letter2.pdf','John_Doe_Letter.pdf',
 70,'applied','Referral from employee.'
@@ -34,13 +34,13 @@ The ideal candidate holds a degree in Computer Science or a related discipline a
 
 (
 'Software Developer Intern',
-'CGI',
-'Junior Agile software role',
-'As a Software Developer Intern, you will contribute to enterprise software projects by supporting development, testing, and documentation activities. Under supervision, you will write modular code, assist in debugging issues, and participate in Agile ceremonies such as sprint planning and daily stand-ups. You will also gain exposure to collaborative development practices including version control, code reviews, and continuous integration workflows.
+'Arcturus Labs',
+'Internship in an R&D-focused tech company',
+'Arcturus Labs develops data analytics and automation tools for the logistics industry. As a Software Developer Intern, you will be embedded in an engineering team and contribute to real projects from day one. Tasks include building small features, writing automated tests, and improving internal tooling used by the development team.
 
-Candidates should be currently completing or recently graduated from a Computer Science or Software Engineering program. A strong foundation in programming concepts and familiarity with at least one modern programming language is required. Knowledge of web development fundamentals, APIs, and database concepts is considered an asset. Successful candidates are detail-oriented, eager to learn, and able to adapt to a fast-paced professional environment.',
+This role is ideal for a student or recent graduate who is eager to learn in a hands-on environment. You should have a working knowledge of at least one programming language, an understanding of basic data structures, and a willingness to ask questions and grow quickly. Exposure to Git and basic database querying will be considered an asset. Interns at Arcturus Labs are treated as full team members and are given meaningful responsibilities throughout their term.',
 '2026-02-05','2026-02-20',true,
-'https://cgi.com/job3',
+'https://arcturuslabs.com/internships/dev-2026',
 '/uploads/cv3.pdf','John_Doe_CV.pdf',
 NULL,NULL,
 60,'interview','Technical screening completed.'
@@ -48,13 +48,13 @@ NULL,NULL,
 
 (
 'Junior Backend Developer',
-'Desjardins',
-'Backend development role',
-'The Junior Backend Developer will support the development and maintenance of internal systems by implementing APIs, integrating services, and resolving technical issues. Working alongside experienced engineers, you will participate in designing scalable solutions, writing unit tests, and ensuring application reliability through proper debugging and documentation practices.
+'Crestfield Group',
+'Backend role at a financial services company',
+'Crestfield Group provides software infrastructure for credit unions and regional financial institutions across the country. The Junior Backend Developer will join a small but experienced engineering team tasked with maintaining and evolving a suite of internal processing systems. You will implement API endpoints, optimize database queries, write technical documentation, and support production deployments.
 
-Applicants should possess a degree in Computer Science and demonstrate a solid understanding of backend development concepts, including RESTful architecture, database interactions, and version control workflows. Experience with Java, Python, or similar backend technologies is considered beneficial. Strong analytical skills, attention to detail, and the ability to collaborate effectively within multidisciplinary teams are essential.',
+Candidates must have a strong understanding of backend development principles and be comfortable working with server-side languages such as Python or Java. Experience with PostgreSQL or similar relational databases is required. You should be meticulous, dependable, and able to work independently on well-defined tasks. Prior experience in regulated industries is not required but will be considered an advantage.',
 '2026-01-28',NULL,false,
-'https://desjardins.com/job4',
+'https://crestfieldgroup.ca/careers/backend-junior',
 '/uploads/cv4.pdf','John_Doe_CV.pdf',
 '/uploads/letter4.pdf','John_Doe_Letter.pdf',
 55,'applied','Requires Java experience.'
@@ -62,13 +62,13 @@ Applicants should possess a degree in Computer Science and demonstrate a solid u
 
 (
 'Junior Web Developer',
-'Shopify',
-'Full-stack web development role',
-'As a Junior Web Developer, you will help build and maintain web-based tools used by merchants worldwide. Responsibilities include developing user-facing features, integrating backend services, participating in code reviews, and ensuring code quality through testing and documentation.
+'Luminary Commerce',
+'Web dev role at an e-commerce platform startup',
+'Luminary Commerce is building the next generation of tools for independent online retailers. Our platform helps small businesses manage their storefronts, inventory, and customer data from a single dashboard. As a Junior Web Developer, you will work on both the front-end and back-end of our web application, helping to ship new features and improve performance across the platform.
 
-The ideal candidate demonstrates strong knowledge of web development fundamentals including HTML, CSS, JavaScript, and API integration. Experience with modern frameworks and collaborative development workflows is considered an asset. We are looking for candidates who are curious, proactive, and comfortable working in fast-paced, team-oriented environments.',
+The ideal candidate has hands-on experience with HTML, CSS, and JavaScript, and is comfortable working with RESTful APIs. Familiarity with React or a similar front-end framework is a strong asset. We are a fast-moving team that values initiative, good communication, and a shared commitment to building something useful. You will have direct access to senior developers and real ownership over the features you build.',
 '2026-02-12','2026-02-27',true,
-'https://shopify.com/job5',
+'https://luminarycommerce.co/jobs/web-dev-junior',
 '/uploads/cv5.pdf','John_Doe_CV.pdf',
 NULL,NULL,
 90,'interview','Great product alignment.'
@@ -76,13 +76,13 @@ NULL,NULL,
 
 (
 'Software Developer Trainee',
-'Bombardier',
-'Trainee software developer',
-'In this trainee role, you will support the development of internal software systems used in aviation operations. Responsibilities include assisting in coding tasks, troubleshooting technical issues, participating in testing processes, and documenting system behavior.
+'Stratos Engineering',
+'Trainee dev role in an aerospace tech firm',
+'Stratos Engineering develops specialized software systems used in the simulation and monitoring of aircraft maintenance operations. As a Software Developer Trainee, you will support the internal tools team in building and maintaining desktop and web-based applications used by engineers and technicians on the floor.
 
-Candidates should demonstrate a foundational understanding of programming concepts, operating systems basics, and software development lifecycle practices. Familiarity with C++, Python, or Java is an asset. The successful candidate is detail-oriented, reliable, and eager to gain experience within a highly structured engineering environment.',
+This role requires strong attention to detail and a methodical approach to problem solving. You should have a foundational understanding of programming logic and be familiar with at least one compiled or scripted language. Experience with C++ or Python is preferred. Stratos Engineering operates in a highly structured environment with strict quality standards, and the ideal candidate thrives under clear processes and well-documented requirements.',
 '2026-02-02',NULL,false,
-'https://bombardier.com/job6',
+'https://stratosengineering.net/careers/trainee-dev',
 '/uploads/cv6.pdf','John_Doe_CV.pdf',
 NULL,NULL,
 50,'declined','Less aligned tech stack.'
@@ -90,13 +90,13 @@ NULL,NULL,
 
 (
 'Junior Software Engineer',
-'Ubisoft',
-'Entry-level game development role',
-'The Junior Software Engineer will assist in developing backend services supporting online gaming infrastructure. You will collaborate with multidisciplinary teams to implement features, optimize performance, and maintain system reliability.
+'Vortex Studio',
+'Junior engineer role at an indie game studio',
+'Vortex Studio is an independent game development company known for multiplayer titles with large online communities. The Junior Software Engineer will contribute to the backend services that power matchmaking, player progression, and live event systems. You will work alongside game designers and senior engineers to implement and maintain features in a live production environment.
 
-Candidates should have a degree in Computer Science and a solid understanding of programming fundamentals, debugging techniques, and version control systems. Familiarity with network programming or distributed systems is considered beneficial. Strong problem-solving skills, teamwork, and adaptability are essential.',
+Candidates should have a solid understanding of software engineering fundamentals and be comfortable writing code in a team setting. Familiarity with networked systems, concurrency, or real-time data processing is a definite asset. You should be a self-starter who enjoys solving complex problems and is passionate about the gaming space. Experience with game engines is not required for this role.',
 '2026-02-18',NULL,false,
-'https://ubisoft.com/job7',
+'https://vortexstudio.gg/jobs/junior-engineer',
 '/uploads/cv7.pdf','John_Doe_CV.pdf',
 '/uploads/letter7.pdf','John_Doe_Letter.pdf',
 65,'applied','Highly competitive.'
@@ -104,13 +104,13 @@ Candidates should have a degree in Computer Science and a solid understanding of
 
 (
 'Software Developer I',
-'IBM',
-'Junior enterprise developer role',
-'As a Software Developer I, you will contribute to enterprise-level applications by implementing features, debugging issues, and supporting testing efforts. You will work closely with experienced engineers to ensure code quality and system reliability.
+'Helix Systems',
+'Entry-level developer at a large IT services firm',
+'Helix Systems is a global IT services provider delivering software solutions to clients in the public sector, healthcare, and manufacturing. The Software Developer I will be assigned to a client delivery team and will contribute to the development of custom enterprise applications. Responsibilities include coding, debugging, writing unit tests, and participating in technical reviews.
 
-Candidates should demonstrate a solid understanding of software development principles, database concepts, and collaborative development practices. Familiarity with Agile methodologies and modern programming languages is required.',
+Applicants should demonstrate a working knowledge of software development practices and be familiar with common enterprise technologies and frameworks. Strong written communication is important in this role, as developers are expected to document their work clearly for both technical and non-technical stakeholders. Experience with Agile or Scrum is preferred. This role offers structured onboarding and access to a large internal knowledge base.',
 '2026-02-08',NULL,false,
-'https://ibm.com/job9',
+'https://helixsystems.com/careers/software-dev-1',
 '/uploads/cv9.pdf','John_Doe_CV.pdf',
 '/uploads/letter9.pdf','John_Doe_Letter.pdf',
 60,'applied','Long hiring process.'
@@ -118,13 +118,13 @@ Candidates should demonstrate a solid understanding of software development prin
 
 (
 'Junior Application Developer',
-'Intact Insurance',
-'Junior enterprise dev role',
-'This role involves supporting the maintenance and development of internal insurance systems. Responsibilities include debugging applications, implementing new features, participating in testing processes, and documenting system behavior.
+'Pinnacle Insurance Group',
+'App dev role at a mid-size insurance company',
+'Pinnacle Insurance Group is a regional insurance provider modernizing its internal operations through custom software. The Junior Application Developer will support the IT department in maintaining and enhancing a set of proprietary tools used by underwriters, brokers, and claims adjusters. Tasks include bug fixes, feature additions, database updates, and participation in user acceptance testing.
 
-Candidates should possess strong attention to detail, solid programming fundamentals, and familiarity with relational databases and API concepts.',
+We are looking for a candidate who is reliable, detail-oriented, and capable of working within an established codebase. Familiarity with relational databases and basic web application architecture is required. You should be comfortable communicating with non-technical stakeholders to understand requirements and translate them into working solutions. Prior experience in insurance or finance is not necessary.',
 '2026-01-25','2026-02-10',true,
-'https://intact.ca/job12',
+'https://pinnacleinsurancegroup.com/it-jobs/app-dev-junior',
 '/uploads/cv12.pdf','John_Doe_CV.pdf',
 '/uploads/letter12.pdf','John_Doe_Letter.pdf',
 72,'offer','Offer received.'
@@ -132,13 +132,13 @@ Candidates should possess strong attention to detail, solid programming fundamen
 
 (
 'Full-Stack Developer Junior',
-'Nuvei',
-'Junior fintech development role',
-'The Junior Full-Stack Developer will assist in developing features for payment processing platforms. Responsibilities include coding front-end and backend components, debugging issues, and collaborating with QA teams to ensure system reliability.
+'Quantum Pay',
+'Junior dev role at a fintech startup',
+'Quantum Pay is a fintech startup building payment infrastructure for small and mid-sized online businesses. Our platform handles payment routing, fraud detection, and merchant onboarding across multiple markets. As a Junior Full-Stack Developer, you will contribute to both the front-end dashboard used by merchants and the backend services that process transactions.
 
-Candidates should have a degree in Computer Science and demonstrate knowledge of web development technologies, APIs, and database fundamentals. Strong communication skills and willingness to learn are essential.',
+The ideal candidate has experience with web technologies on both sides of the stack and is comfortable navigating codebases that are actively evolving. Knowledge of security practices related to financial data is a strong asset. You should be eager to learn, not afraid to ask questions, and capable of working in a fast-paced startup environment where priorities can shift quickly. Quantum Pay offers competitive compensation and meaningful equity participation.',
 '2026-02-06','2026-02-22',true,
-'https://nuvei.com/job15',
+'https://quantumpay.io/careers/fullstack-junior',
 '/uploads/cv15.pdf','John_Doe_CV.pdf',
 '/uploads/letter15.pdf','John_Doe_Letter.pdf',
 88,'interview','Second interview planned.'

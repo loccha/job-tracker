@@ -5,10 +5,10 @@
     --calendar-muted-primary-color:rgb(211, 211, 211);
     --calendar-muted-secondary-color: #383838;
 
-    --empty-calendar-width: 50px;
-    --empty-calendar-height: 63px;
+    --calendar-width: 57px;
+    --calendar-height: 63px;
 
-    --empty-calendar-header-height: 18px;
+    --empty-calendar-header-height: 16px;
 }
 
 .calendar {
@@ -22,12 +22,15 @@
     border-radius: 5px;
 
     margin: 7px 0px;
-    width: fit-content;
+    
+    width: var(--calendar-width);
+    min-width: fit-content;
+    height:var(--calendar-height);
 }
 
 .calendar--empty{
-    width: var(--empty-calendar-width);
-    height: var(--empty-calendar-height);
+    width: var(--calendar-width);
+    height: var(--calendar-height);
     opacity: 0.3;
 
     background-color: var(--calendar-muted-primary-color);

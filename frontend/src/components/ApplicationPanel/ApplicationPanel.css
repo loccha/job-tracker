@@ -1,6 +1,6 @@
-.application-panel{
+.application-panel > div{
     color: var(--color-text-primary);
-    padding:30px;
+    padding:35px;
 
     background-color: var(--color-surface-form);
     border: 1px solid var(--color-border-subtle);
@@ -9,6 +9,7 @@
     width: 60%;
     height: 75%;
     min-height:fit-content;
+    min-width:fit-content;
 
     position: fixed;
     top: 50%;
@@ -59,7 +60,7 @@
 
 .application-panel__status,
 .application-panel__confidence{
-    padding:2px 5px;
+    padding:2px 7px;
     font-size: 12px;
     border: 1px solid var(--color-surface-tertiary);
 }
@@ -67,6 +68,8 @@
 .application-panel__status{
     border-radius: 7px 0px 0px 7px;
     background-color: var(--color-surface-tertiary);
+    width:fit-content;
+    text-align:center;
 }
 
 .application-panel__confidence{
@@ -111,10 +114,14 @@
 .application-panel__card--job-description{
     max-height: 200px;
     overflow-y: auto;
+
+    display:flex;
+    flex-direction:column;
 }
 
+.application-panel__notes,
 .application-panel__job-description{
-    text-align: justify;
+    font-size:15px;
 }
 
 .application-panel__main-column {
@@ -130,9 +137,15 @@
     align-items: center;
 }
 
+.application-panel__documents{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
 .application-panel__document{
     margin: 0px 5px;
     font-size:12px;
+    word-break: break-all;
 }
 
 .application-panel__side-column{
@@ -170,8 +183,11 @@
     padding:10px;
 }
 
-.application-panel__date{
-    text-align:right;
+.application-panel__footer{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    align-items: center;
 }
 
 
