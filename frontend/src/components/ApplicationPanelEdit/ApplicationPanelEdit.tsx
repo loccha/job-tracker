@@ -254,7 +254,7 @@ const ApplicationPanelEdit = ({job, setJobs, setPopupVisible, setIsEditing, onSa
                     <div className="application-panel__card application-panel__side-column">
                         <div className="application-panel__top-section">
                             <div className="application-panel__interview">
-                                <p className="application-panel__title application-panel__title--interview">Interview: 
+                                <p className="application-panel__title application-panel__title--interview">Interview 
                                     <span>
                                         <input 
                                             type="date"
@@ -302,7 +302,7 @@ const ApplicationPanelEdit = ({job, setJobs, setPopupVisible, setIsEditing, onSa
                 
                 <div className="application-panel__footer">
                     <p className="application-panel__date">
-                        Applied on:
+                        Applied on
                         <span>
                             <input type="date"
                                     className="input editable application-panel__input-date--edit"
