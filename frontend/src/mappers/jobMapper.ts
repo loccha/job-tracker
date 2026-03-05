@@ -6,16 +6,8 @@ export const mapJobFromApi = (job: any): Job => ({
     company: job.company,
     shortDescription: job.short_description,
     description:job.description,
-    applyingDate: new Date(job.applying_date).toLocaleDateString("en-US", {
-        month: "short",
-        day: "numeric"
-    }),
-    interviewDate: job.interview_date 
-        ? new Date(job.interview_date).toLocaleDateString("en-US", {
-            month: "short",
-            day: "numeric"
-            })
-        :null,
+    applyingDate: job.applying_date.slice(0,10),
+    interviewDate: job.interview_date?.slice(0,10) ?? null,
     screeningCompleted: job.screening_completed,
     link: job.link,
     cvUrl: job.cv_url,

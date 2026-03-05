@@ -1,3 +1,13 @@
+.application-panel__identity.application-panel__identity--edit{
+    grid-template-columns: auto 1fr;
+}
+
+.application-panel__icon--link.application-panel__icon--link-edit{
+    font-size:12px;
+    margin: 0 3px 0 10px;
+    padding: 0;
+}
+
 .application-form__score--edit{
     padding:2px;
     text-align: center;
@@ -6,6 +16,10 @@
 
 .application-panel__status--edit{
     padding:0;
+}
+
+.application-panel__short-description--edit{
+    margin-bottom:10px;
 }
 
 .job-description--edit{
@@ -19,4 +33,23 @@
 
 .application-form__input-date--edit{
     margin: 0px 10px;
+}
+
+.application-panel__documents--edit .dropbox{
+    height:fit-content;
+    width:fit-content;
+    padding:5px;
+    font-size:11px;
+}
+
+.application-panel__title--edit,
+.application-panel__company--edit{
+    field-sizing: content;
+    min-width: 2ch;
+    margin: 3px 0;
+}
+
+.application-panel__title--edit{
+    font-weight: 600;
+    font-size: 24px;
 }

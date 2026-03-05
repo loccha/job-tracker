@@ -5,7 +5,7 @@ export type Job = {
       shortDescription: string;
       description: string;
       applyingDate: string;
-      interviewDate: string | null;
+      interviewDate: string | undefined;
       screeningCompleted: boolean;
       link: string;
       cvUrl: string;

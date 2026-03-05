@@ -50,8 +50,10 @@ function ApplicationPanel ({ job, setJobs, onClose }:ApplicationPanelProps) {
             {isEditing ? (
                 <ApplicationPanelEdit
                     job={job}
+                    setJobs={setJobs}
                     setPopupVisible={() => setPopupVisible(true)}
                     setIsEditing={() => setIsEditing(false)}
+                    onSave={() => setIsEditing(false)}
                 />
             ) : (
                 <ApplicationPanelRead

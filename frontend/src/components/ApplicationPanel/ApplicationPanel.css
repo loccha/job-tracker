@@ -1,4 +1,4 @@
-.application-panel > div{
+.application-panel > div:last-child{
     color: var(--color-text-primary);
     padding:35px;
 
@@ -126,7 +126,7 @@
 
 .application-panel__main-column {
     display: grid;
-    grid-template-rows: 4fr 1fr;
+    grid-template-rows:1fr auto;
     gap: var(--grid-gap-sm);
 }
 
@@ -140,6 +140,7 @@
 .application-panel__documents{
     display: grid;
     grid-template-columns: 1fr 1fr;
+    gap:var(--grid-gap-sm);
 }
 
 .application-panel__document{

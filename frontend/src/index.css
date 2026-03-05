@@ -111,6 +111,20 @@ p {
   white-space: pre-wrap;
 }
 
+.input{
+    background-color: var(--color-input-bg);
+    color: var(--color-input-text);
+    border-radius: var(--border-radius-input);
+    padding: var(--padding-input);
+    border: none;
+}
+
+.editable{
+  border: 1px solid #c55d4db6;
+}
+
+
+
 
 
 

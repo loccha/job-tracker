@@ -7,23 +7,25 @@ import './Dropbox.css'
 type DropboxProps = {
     onDrop: (file:File) => void;
     label: string;
+    fileName: string | undefined;
 }
 
 const Dropbox = ({
     onDrop,     // Callback triggered when a file is dropped
-    label       // Label displayed inside the dropbox (Resume/Cover Letter)
+    label,       // Label displayed inside the dropbox (Resume/Cover Letter)
+    fileName: initialFileName
 }: DropboxProps) => {
     const[isDragging, setIsDragging] = useState(false);
     const[isFilled, setIsFilled] = useState(false);
-    const[fileName, setFileName] = useState("");
+    const[fileName, setFileName] = useState(initialFileName);
 
     return(
-        <div className="application-form__dropbox-field">
+        <div className="dropbox-field">
             <div
                 className={`
-                    application-form__dropbox 
-                    ${isDragging ? "application-form__dropbox--dragging" : ""}
-                    ${isFilled ? "application-form__dropbox--filled" : ""}
+                    dropbox 
+                    ${isDragging ? "dropbox--dragging" : ""}
+                    ${isFilled ? "dropbox--filled" : ""}
                 `}
                 onDragEnter={(e) => {
                     e.preventDefault();
@@ -46,15 +48,21 @@ const Dropbox = ({
                         }                        
                     } 
                 }}
-            >                                
-            <FontAwesomeIcon 
-                className="application-form__upload-icon application-form__upload-icon--arrow-up" 
-                icon={faArrowUpFromBracket} 
-            />
-                {label}                      
+            > 
+            <p>
+                {label}
+                <span>
+                    <FontAwesomeIcon 
+                        className="dropbox__upload-icon dropbox__upload-icon--arrow-up" 
+                        icon={faArrowUpFromBracket} 
+                    />
+                </span>
+            </p>                               
+            
+                                      
             </div>
             {/* Display the dropped file's name below the dropbox */}
-            <p className="application-form__filename">{fileName}</p>
+            <p className="dropbox__filename">{fileName}</p>
         </div>
     );
 }

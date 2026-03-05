@@ -1,18 +1,22 @@
 import './Calendar.css'
 
 type CalendarProps = {
-    date: string | null
+    date: string | undefined;
 }
 
 const Calendar = ({date}: CalendarProps) => {
-
+    
+    const formattedDate = date ? new Date(date).toLocaleDateString("en-US", { month: "short", day: "numeric" })
+                                : null;
+    
+    
     return (
         <div className={`calendar ${!date ? "calendar--empty" : ""}`}>
             <div className="calendar__header">
-                <p className="calendar__month-day">{date ?? ""}</p>
+                <p className="calendar__month-day">{formattedDate ?? ""}</p>
             </div>
             <div className="calendar__content">
-                <p className="calendar__day">{date ? date.slice(4) : "—"}</p>
+                <p className="calendar__day">{formattedDate ? formattedDate.slice(4) : "—"}</p>
             </div>
         </div>
     )

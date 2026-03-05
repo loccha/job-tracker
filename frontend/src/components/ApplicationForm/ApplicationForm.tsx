@@ -151,7 +151,7 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
         formData.append('file', fileToUpload);
 
         try {
-            const response = await fetch('http://localhost:3000/api/upload-file', {
+            const response = await fetch('http://localhost:3000/api/upsert-file', {
                 method: 'POST',
                 body: formData,
             });
@@ -208,7 +208,7 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                         {/* Job title input */}
                         <div className="application-form__item">
                             <input type="text"
-                                className="application-form__input application-form__input--title"
+                                className="input application-form__input--title"
                                 id="title"
                                 placeholder="Job Title" 
                                 value={title}
@@ -219,7 +219,7 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                         {/* Company name input */}
                         <div className="application-form__item">
                             <input type="text" 
-                                className="application-form__input application-form__input--company"
+                                className="input application-form__input--company"
                                 id="company" 
                                 value={company}
                                 placeholder="Company"
@@ -235,7 +235,7 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                                     id="link" 
                                     value={link}
                                     onChange={(e) => setLink(e.target.value)} 
-                                    className="application-form__input"
+                                    className="input"
                                 /> 
                             </div>
                             
@@ -243,7 +243,7 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                             <div className="application-form__item application-form__item--application-date">
                                 <label htmlFor="applying_date">Application Date</label>
                                 <input type="date"
-                                    className="application-form__input application-form__input-date"
+                                    className="input application-form__input-date"
                                     id="applyingDate" 
                                     value={applyingDate}
                                     onChange={(e) => setApplyingDate(e.target.value)}
@@ -257,7 +257,7 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                         <div className="application-form__item application-form__item--score">
                             <label className="application-form__label-confidence-score" htmlFor="confidence_score">Confidence Score: </label> 
                             <input type="number"
-                                className="application-form__input application-form__input--score"
+                                className="input application-form__input--score"
                                 id="score" 
                                 value={confidenceScore}
                                 onChange={(e) => setConfidenceScore(e.target.value)}
@@ -278,7 +278,7 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                 <div className="application-form__secondary-section">
                     <div className="application-form__item">
                         <input type="text"
-                            className="application-form__input application-form__input--short-description"
+                            className="input application-form__input--short-description"
                             id="short-description"
                             placeholder="Short Description"
                             value={shortDescription}
@@ -290,7 +290,7 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                     <div className="application-form__item application-form__item--description">
                         <label htmlFor="description">Detailed Description</label>
                         <textarea
-                            className="application-form__input application-form__input--description"
+                            className="input application-form__input--description"
                             id="description"
                             value={description}
                             onChange={(e) => setDescription(e.target.value)} 
@@ -307,11 +307,13 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                                     <Dropbox
                                         onDrop={(file) => setCvFile(file)}
                                         label={"Resume"}
+                                        fileName={undefined}
                                     />
                                     {/* Cover letter dropzone */}
                                     <Dropbox
                                         onDrop={(file) => setLetterFile(file)}
                                         label={"Cover Letter"}
+                                        fileName={undefined}
                                     />
                                 </div>
                             </div>  
@@ -322,7 +324,7 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                             <div className="application-form__item">
                                 <label htmlFor="interview_date">Interview</label>
                                 <input type="date"
-                                    className="application-form__input application-form__input-date"
+                                    className="input application-form__input-date"
                                     id="interviewDate" 
                                     value={interviewDate}
                                     onChange={(e) => setInterviewDate(e.target.value)}
@@ -332,7 +334,7 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                             {/* Screening completion checkbox */}
                             <div className="application-form__item">
                                 <label className="application-form__checkbox">
-                                    <input 
+                                    <input
                                         type="checkbox" 
                                         checked={screeningCompleted}
                                         onChange={(e) => setScreeningCompleted(e.target.checked)}

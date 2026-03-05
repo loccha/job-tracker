@@ -11,6 +11,7 @@
   --color-surface-primary: #151c2d75;
   --color-surface-secondary: #232e4975;
   --color-surface-tertiary: #313145;
+  --color-input-bg:#1D2336;
 
   --color-surface-kanban: #3653731c;
 
@@ -33,6 +34,11 @@
   --grid-gap-lg: 40px;
 
   --padding-lg: 25px;
+  --padding-input: 7px;
+
+  --border-radius-input:5px;
+
+
 
 }
 

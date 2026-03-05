@@ -8,11 +8,17 @@ import './ApplicationPanelRead.css'
 
 type ApplicationPanelReadProps = {
     job: Job;
+
     setPopupVisible: () => void;
     setIsEditing: () => void;
 }
 
 const ApplicationPanelRead = ({job, setPopupVisible, setIsEditing}: ApplicationPanelReadProps) => {
+    console.log(job)
+    console.log("titre: ", job.title)
+    console.log("lien: ", job.link)
+
+
     return (
         <div className="application-panel-read">
             <div className="application-panel__header">
@@ -93,7 +99,7 @@ const ApplicationPanelRead = ({job, setPopupVisible, setIsEditing}: ApplicationP
                         <div className="application-panel__notes">
                             <p className="application-panel__title application-panel__title--notes">Notes</p>
                             <div className="application-panel__notes-card">
-                                    {job.personnalNotes}
+                                    <p>{job.personnalNotes}</p>
                             </div>
                         </div>
                     </div>

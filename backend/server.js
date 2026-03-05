@@ -18,6 +18,7 @@ app.use(express.json());    // Parse JSON request bodies
 app.use(cors());            // Enable Cross-Origin Resource Sharing
 
 const PORT = 3000;
+const database = "jobs_data";
 
 // Database connection pool configuration
 // Uses environment variables for secure credential management
@@ -39,7 +40,7 @@ await pool.connect();
  */
 app.get('/api', async(req, res) => {
     try {
-        const result = await pool.query('SELECT * FROM jobs_data ORDER BY created_at');
+        const result = await pool.query(`SELECT * FROM ${database} ORDER BY created_at`);
         res.json(result.rows);
     } catch(e) {
         res.status(500).json({ error: e.message });
@@ -61,13 +62,18 @@ const upload = multer({ storage })
 
 
 /**
- * POST /api/upload-file
+ * POST /api/upsert-file
  * Handles single file upload (CV or cover letter)
  * Returns the generated filename for database reference
  */
-app.post('/api/upload-file', upload.single('file'), (req, res) => {
+app.post('/api/upsert-file', upload.single('file'), async (req, res) => {
     try {
-        // return filename so client can reference it later
+        //delete old file if there is one
+        if(req.body.old_url){
+            const relativePathUrl = "." + new URL(req.body.old_url).pathname;
+            await fs.promises.unlink(relativePathUrl);
+        }
+
         res.json({filename: req.file.filename});
     } catch(e) {
         res.status(400).json({ error: e.message });
@@ -82,13 +88,13 @@ app.post('/api/upload-file', upload.single('file'), (req, res) => {
  * TODO: Implement comprehensive data validation
  */
 app.post('/api/jobs', async (req, res) => {
-    console.log(req.body); // debug log request body
+    //console.log(req.body); // debug log request body
 
     const { title, company, shortDescription, description, applyingDate, interviewDate, screeningCompleted, link, cvUrl, cvOriginalName, letterUrl, letterOriginalName, confidenceScore, status, personnalNotes } = req.body;
     try {
         const safeInterviewDate = interviewDate || null;
         const query = {
-            text: 'INSERT INTO jobs_data(title, company, short_description, description, applying_date, interview_date, screening_completed, link, cv_url, cv_original_name, letter_url, letter_original_name, confidence_score, status, personnal_notes) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING *',
+            text: `INSERT INTO ${database}(title, company, short_description, description, applying_date, interview_date, screening_completed, link, cv_url, cv_original_name, letter_url, letter_original_name, confidence_score, status, personnal_notes) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING *`,
             values: [title, company, shortDescription, description, applyingDate, safeInterviewDate, screeningCompleted, link, cvUrl, cvOriginalName, letterUrl, letterOriginalName, confidenceScore, status, personnalNotes],
         };
         const result = await pool.query(query);
@@ -105,13 +111,17 @@ app.post('/api/jobs', async (req, res) => {
  * TODO: Implement comprehensive data validation
  */
 app.put('/api/jobs/:id', async (req, res) => {
+
     try {
         const { id } = req.params;
         const { title, company, shortDescription, description, applyingDate, interviewDate, screeningCompleted, link, cvUrl, cvOriginalName, letterUrl, letterOriginalName, confidenceScore, status, personnalNotes } = req.body;
+        
+        const safeApplyingDate = applyingDate || null;
+        const safeInterviewDate = interviewDate || null;
 
         const query = {
-            text: 'UPDATE jobs_data SET title = $1, company = $2, short_description = $3, description = $4, applying_date = $5, interview_date = $6, screening_completed = $7, link = $8, cv_url = $9, cv_original_name = $10, letter_url = $11, letter_original_name = $12, confidence_score = $13, status = $14, personnal_notes = $15 WHERE id = $16',
-            values: [title, company, shortDescription, description, applyingDate, interviewDate, screeningCompleted, link, cvUrl, cvOriginalName, letterUrl, letterOriginalName, confidenceScore, status, personnalNotes, id],
+            text: `UPDATE ${database} SET title = $1, company = $2, short_description = $3, description = $4, applying_date = $5, interview_date = $6, screening_completed = $7, link = $8, cv_url = $9, cv_original_name = $10, letter_url = $11, letter_original_name = $12, confidence_score = $13, status = $14, personnal_notes = $15 WHERE id = $16 RETURNING *`,
+            values: [title, company, shortDescription, description, safeApplyingDate, safeInterviewDate, screeningCompleted, link, cvUrl, cvOriginalName, letterUrl, letterOriginalName, confidenceScore, status, personnalNotes, id],
         };
 
         const result = await pool.query(query);
@@ -130,7 +140,7 @@ app.delete('/api/delete/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const urls_query = {
-            text: 'SELECT cv_url, letter_url from jobs_data WHERE id = $1',
+            text: `SELECT cv_url, letter_url from ${database} WHERE id = $1`,
             values: [id],
         };
 
@@ -146,7 +156,7 @@ app.delete('/api/delete/:id', async (req, res) => {
         }
 
         const delete_query = {
-            text:'DELETE FROM jobs_data WHERE id = $1',
+            text:`DELETE FROM ${database} WHERE id = $1`,
             values: [id],
         };
 
