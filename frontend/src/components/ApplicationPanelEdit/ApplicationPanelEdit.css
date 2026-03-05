@@ -8,7 +8,8 @@
     padding: 0;
 }
 
-.application-form__score--edit{
+.application-panel__score--edit{
+    width: 30px;
     padding:2px;
     text-align: center;
     margin: 0 5px;
@@ -31,15 +32,8 @@
     flex: 1;
 }
 
-.application-form__input-date--edit{
+.application-panel__input-date--edit{
     margin: 0px 10px;
-}
-
-.application-panel__documents--edit .dropbox{
-    height:fit-content;
-    width:fit-content;
-    padding:5px;
-    font-size:11px;
 }
 
 .application-panel__title--edit,

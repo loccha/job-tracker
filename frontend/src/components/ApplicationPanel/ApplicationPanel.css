@@ -7,9 +7,10 @@
     border-radius: 15px;
 
     width: 60%;
-    height: 75%;
-    min-height:fit-content;
     min-width:fit-content;
+    
+    min-height:fit-content;
+    height: 85%;
 
     position: fixed;
     top: 50%;
@@ -18,7 +19,8 @@
     z-index: 101;
 
     display: grid;
-    grid-template-rows: 1fr 4fr auto;
+    grid-template-rows: 1fr minmax(0,4fr) 0.5fr;
+
     gap: var(--grid-gap-md);
 }
 
@@ -102,6 +104,7 @@
     display: grid;
     grid-template-columns: 3fr 2fr;
     gap: var(--grid-gap-sm);
+    max-height:100%;
 }
 
 .application-panel__card{
@@ -111,8 +114,18 @@
     padding:10px;
 }
 
+.application-panel__main-column {
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto;
+    gap: var(--grid-gap-sm);
+
+    max-height:100%;
+    min-height:0;
+}
+
 .application-panel__card--job-description{
-    max-height: 200px;
+    min-height: 0;
+    max-height: 100%;
     overflow-y: auto;
 
     display:flex;
@@ -122,12 +135,6 @@
 .application-panel__notes,
 .application-panel__job-description{
     font-size:15px;
-}
-
-.application-panel__main-column {
-    display: grid;
-    grid-template-rows:1fr auto;
-    gap: var(--grid-gap-sm);
 }
 
 .application-panel__documents-section{
@@ -151,7 +158,11 @@
 
 .application-panel__side-column{
     display: grid;
-    grid-template-rows: 10fr 1fr 10fr;
+    grid-template-rows: auto auto 1fr;
+}
+
+.application-panel__screening--false{
+    opacity:0;
 }
 
 .application-panel__date,
@@ -182,6 +193,8 @@
     border-radius:10px;
     flex:1;
     padding:10px;
+
+    overflow:auto;
 }
 
 .application-panel__footer{

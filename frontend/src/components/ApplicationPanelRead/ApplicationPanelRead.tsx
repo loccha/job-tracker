@@ -84,12 +84,12 @@ const ApplicationPanelRead = ({job, setPopupVisible, setIsEditing}: ApplicationP
                                     <Calendar
                                         date={job.interviewDate}
                                     />
-                                    {job.screeningCompleted &&
-                                        <>
-                                            <FontAwesomeIcon className="application-panel__check" icon={faCheck} />
-                                            <span className="application-panel__screening"><b>Screening:</b> Completed</span>
-                                        </>  
-                                    }   
+                                    
+                                    <div className={`application-panel__screening--${job.screeningCompleted}`}>
+                                        <FontAwesomeIcon className="application-panel__check" icon={faCheck} />
+                                        <span className="application-panel__screening"><b>Screening:</b> Completed</span>
+                                    </div>  
+                                       
                                 
                             </div>
                             <div className="application-panel__screening" />

@@ -199,7 +199,7 @@ const ApplicationPanelEdit = ({job, setJobs, setPopupVisible, setIsEditing, onSa
                             <p className="application-panel__confidence">Confidence 
                                 <input 
                                     type="number"
-                                    className="input editable application-form__input--score application-form__score--edit"
+                                    className="input editable application-panel__score--edit"
                                     id="score-edit" 
                                     value={confidenceScore}
                                     onChange={(e) => setConfidenceScore(e.target.value)}
@@ -214,7 +214,7 @@ const ApplicationPanelEdit = ({job, setJobs, setPopupVisible, setIsEditing, onSa
                     <div className="application-panel__main-column">
                         <div className="application-panel__card application-panel__card--job-description">
                             <input type="text"
-                                className="input editable application-form__input--short-description application-panel__short-description--edit"
+                                className="input editable application-panel__short-description--edit"
                                 id="short-description"
                                 value={shortDescription}
                                 onChange={(e) => setShortDescription(e.target.value)}
@@ -258,7 +258,7 @@ const ApplicationPanelEdit = ({job, setJobs, setPopupVisible, setIsEditing, onSa
                                     <span>
                                         <input 
                                             type="date"
-                                            className="input editable application-form__input-date application-form__input-date--edit"
+                                            className="input editable application-panel__input-date--edit"
                                             id="interviewDate" 
                                             value={interviewDate}
                                             onChange={(e) => setInterviewDate(e.target.value)}
@@ -305,7 +305,7 @@ const ApplicationPanelEdit = ({job, setJobs, setPopupVisible, setIsEditing, onSa
                         Applied on:
                         <span>
                             <input type="date"
-                                    className="input editable application-form__input-date application-form__input-date--edit"
+                                    className="input editable application-panel__input-date--edit"
                                     id="applyingDate" 
                                     value={applyingDate}
                                     onChange={(e) => setApplyingDate(e.target.value)}

@@ -1,14 +1,26 @@
 /* Pdf's name inside the dropbox field  */
+
+:root{
+    --dropbox-width: 120px;
+    --dropbox-height: 35px;
+}
+
+.dropbox-field{
+    width:var(--dropbox-width);
+}
+
 .dropbox-field > p {
     margin: 2px 0px;
     font-size: 12px;
-    word-break: break-all;
+    white-space: no-wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* Base dropbox styles */
 .dropbox {
-    width:135px;
-    height:60px;
+    width:var(--dropbox-width);
+    height: var(--dropbox-height);
     text-align: center;
     border-radius:7px;
     border: 1px solid var(--color-border-subtle);
@@ -39,5 +51,9 @@
     height:40px;
     width:120px;
 
+}
+
+.dropbox__upload-icon{
+    margin: 0 3px;
 }
 
