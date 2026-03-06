@@ -40,12 +40,12 @@ const ApplicationPanelEdit = ({job, setJobs, setPopupVisible, setIsEditing, onSa
     const[applyingDate, setApplyingDate] = useState(job.applyingDate);
 
     const[cvFile, setCvFile] = useState<File | null>(null);
-    const[cvUrl, setCvUrl] = useState<string>("");          // Server URL after CV upload
+    const[cvUrl, setCvUrl] = useState<string>(job.cvUrl);          // Server URL after CV upload
     const[cvOriginalName, setCvOriginalName] = useState(job.cvOriginalName);
 
     const[letterFile, setLetterFile] = useState<File | null>(null);
-    const[letterUrl, setLetterUrl] = useState<string | undefined>("");   // Server URL after cover letter upload
-    const[letterOriginalName, letterCvOriginalName] = useState(job.cvOriginalName);
+    const[letterUrl, setLetterUrl] = useState<string | undefined>(job.letterUrl);   // Server URL after cover letter upload
+    const[letterOriginalName, letterCvOriginalName] = useState(job.letterOriginalName);
 
 
 
@@ -102,7 +102,6 @@ const ApplicationPanelEdit = ({job, setJobs, setPopupVisible, setIsEditing, onSa
                 let finalCvUrl = cvUrl;
                 let finalLetterUrl = letterUrl;
 
-    
                 if(cvFile != null){
                     finalCvUrl = await upsertFile(cvFile, cvUrl) ?? "";
                     setCvUrl(finalCvUrl);
@@ -117,8 +116,8 @@ const ApplicationPanelEdit = ({job, setJobs, setPopupVisible, setIsEditing, onSa
                     ...modifiedJobEntry,
                     cvUrl: finalCvUrl,
                     letterUrl: finalLetterUrl,
-                    cvOriginalName: cvFile?.name,
-                    letterOriginalName: letterFile?.name
+                    cvOriginalName: cvFile ? cvFile.name : job.cvOriginalName,
+                    letterOriginalName: letterFile ? letterFile.name : job.letterOriginalName
                 };
 
                 const res = await axios.put(`http://localhost:3000/api/jobs/${job.id}`, jobToModify);

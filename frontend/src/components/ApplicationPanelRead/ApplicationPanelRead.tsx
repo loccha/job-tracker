@@ -14,11 +14,6 @@ type ApplicationPanelReadProps = {
 }
 
 const ApplicationPanelRead = ({job, setPopupVisible, setIsEditing}: ApplicationPanelReadProps) => {
-    console.log(job)
-    console.log("titre: ", job.title)
-    console.log("lien: ", job.link)
-
-
     return (
         <div className="application-panel-read">
             <div className="application-panel__header">
