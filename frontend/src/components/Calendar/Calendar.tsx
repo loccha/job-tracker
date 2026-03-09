@@ -5,8 +5,10 @@ type CalendarProps = {
 }
 
 const Calendar = ({date}: CalendarProps) => {
+
+    console.log("DATE: ", date);
     
-    const formattedDate = date ? new Date(date).toLocaleDateString("en-US", { month: "short", day: "numeric" })
+    const formattedDate = date ? new Date(date + "T00:00:00").toLocaleDateString("en-CA", { month: "short", day: "numeric" })
                                 : null;
     
     

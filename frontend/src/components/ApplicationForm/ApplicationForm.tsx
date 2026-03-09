@@ -47,7 +47,7 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
     const[company, setCompany] = useState("");
     const[shortDescription, setShortDescription] = useState("");
     const[description, setDescription] = useState("");
-    const[applyingDate, setApplyingDate] = useState("");
+    const[applyingDate, setApplyingDate] = useState(() => new Date().toLocaleDateString("en-CA"));
     const[interviewDate, setInterviewDate] = useState("");
     const[screeningCompleted, setScreeningCompleted] = useState(false);
     const[link, setLink] = useState("");
@@ -207,23 +207,29 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
 
                         {/* Job title input */}
                         <div className="application-form__item">
-                            <input type="text"
-                                className="input application-form__input--title"
+                            <input
+                                className="input application-form__input--title" 
+                                type="text"
+                                maxLength={100}
                                 id="title"
                                 placeholder="Job Title" 
                                 value={title}
-                                onChange={(e) => setTitle(e.target.value)} 
+                                onChange={(e) => setTitle(e.target.value)}
+                                required 
                             /> 
                         </div>
                         
                         {/* Company name input */}
                         <div className="application-form__item">
-                            <input type="text" 
+                            <input  
                                 className="input application-form__input--company"
+                                type="text"
+                                maxLength={100}
                                 id="company" 
                                 value={company}
                                 placeholder="Company"
                                 onChange={(e) => setCompany(e.target.value)}
+                                required
                             /> 
                         </div>
 
@@ -236,6 +242,7 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                                     value={link}
                                     onChange={(e) => setLink(e.target.value)} 
                                     className="input"
+                                    required
                                 /> 
                             </div>
                             
@@ -247,6 +254,7 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                                     id="applyingDate" 
                                     value={applyingDate}
                                     onChange={(e) => setApplyingDate(e.target.value)}
+                                    required
                                 />
                             </div>
                         </div>
@@ -260,7 +268,10 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                                 className="input application-form__input--score"
                                 id="score" 
                                 value={confidenceScore}
-                                onChange={(e) => setConfidenceScore(e.target.value)}
+                                onChange={(e) => {
+                                    const score = Math.min(100, Math.max(0, Number(e.target.value)));
+                                    setConfidenceScore(score.toString())
+                                }}
                             />
                         </div>
                         
@@ -277,7 +288,8 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                 {/* Secondary section - descriptions, documents, and interview tracking */}
                 <div className="application-form__secondary-section">
                     <div className="application-form__item">
-                        <input type="text"
+                        <input 
+                            type="text"
                             className="input application-form__input--short-description"
                             id="short-description"
                             placeholder="Short Description"
@@ -323,8 +335,9 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                         <div className="application-form__interview-section">
                             <div className="application-form__item">
                                 <label htmlFor="interview_date">Interview</label>
-                                <input type="date"
-                                    className="input application-form__input-date"
+                                <input
+                                    className="input application-form__input-date" 
+                                    type="date"
                                     id="interviewDate" 
                                     value={interviewDate}
                                     onChange={(e) => setInterviewDate(e.target.value)}

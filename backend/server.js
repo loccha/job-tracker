@@ -17,17 +17,22 @@ const app = express();
 app.use(express.json());    // Parse JSON request bodies
 app.use(cors());            // Enable Cross-Origin Resource Sharing
 
-const PORT = 3000;
-const database = "jobs_data";
+const PORT = process.env.PORT || 3000;
+const database = "jobs";
 
 // Database connection pool configuration
 // Uses environment variables for secure credential management
-const pool = new Pool({
+/*const pool = new Pool({
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     database: process.env.DB_DATABASE,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD
+});*/
+
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: { rejectUnauthorized: false }
 });
 
 // Establish database connection

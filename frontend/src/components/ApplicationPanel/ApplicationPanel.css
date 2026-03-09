@@ -196,7 +196,9 @@
     border-radius:10px;
     flex:1;
     padding:10px;
+    font-size: 14px;
 
+    max-height:120px;
     overflow:auto;
 }
 
