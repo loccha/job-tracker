@@ -25,7 +25,7 @@ function ApplicationPanel ({ job, setJobs, onClose }:ApplicationPanelProps) {
 
     const onHandleDelete = async ({}) => { 
         try {
-            const response = await fetch(`http://localhost:3000/api/delete/${job.id}`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/delete/${job.id}`, {
                 method: 'DELETE',
                 body: 'none',
             });

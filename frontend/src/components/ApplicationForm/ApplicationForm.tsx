@@ -128,7 +128,7 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                     cvOriginalName: cvFile?.name,
                     letterOriginalName: letterFile?.name
                 };
-                const res = await axios.post("http://localhost:3000/api/jobs", jobToSend);
+                const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/jobs`, jobToSend);
                 setJobs(prev => [...prev, mapJobFromApi(res.data)]);
             } catch (err) {
                 console.error(err);
@@ -151,7 +151,7 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
         formData.append('file', fileToUpload);
 
         try {
-            const response = await fetch('http://localhost:3000/api/upsert-file', {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/upsert-file`, {
                 method: 'POST',
                 body: formData,
             });
@@ -159,7 +159,7 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
             const data = await response.json();
 
             // Construct full URL for uploaded file
-            return ("http://localhost:3000/uploads/" + data.filename);
+            return (`${import.meta.env.VITE_API_URL}/uploads/` + data.filename);
 
         } catch (err) {
             console.log("Couldn't upload the file properly")

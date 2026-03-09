@@ -57,7 +57,7 @@ const ApplicationPanelEdit = ({job, setJobs, setPopupVisible, setIsEditing, onSa
         formData.append('old_url', oldUrl == null ? "": oldUrl); 
 
         try {
-            const response = await fetch('http://localhost:3000/api/upsert-file', {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/upsert-file`,{
                 method: 'POST',
                 body: formData,
             });
@@ -65,7 +65,7 @@ const ApplicationPanelEdit = ({job, setJobs, setPopupVisible, setIsEditing, onSa
             const data = await response.json();
 
             // Construct full URL for uploaded file
-            return ("http://localhost:3000/uploads/" + data.filename);
+            return (`${import.meta.env.VITE_API_URL}/uploads/` + data.filename);
 
         } catch (err) {
             console.log("Couldn't upload the file properly")
@@ -120,7 +120,7 @@ const ApplicationPanelEdit = ({job, setJobs, setPopupVisible, setIsEditing, onSa
                     letterOriginalName: letterFile ? letterFile.name : job.letterOriginalName
                 };
 
-                const res = await axios.put(`http://localhost:3000/api/jobs/${job.id}`, jobToModify);
+                const res = await axios.put(`${import.meta.env.VITE_API_URL}/api/jobs/${job.id}`, jobToModify);
                 setJobs(prev => prev.map(job => job.id === jobToModify.id ? mapJobFromApi(res.data) : job));
                 
             } catch (err) {

@@ -18,7 +18,7 @@ const App = () => {
     const[selectedJob, setSelectedJob] = useState<number | null>(null)
 
       useEffect(() => {
-          fetch('http://localhost:3000/api')
+          fetch(`${import.meta.env.VITE_API_URL}/api`)
           .then(res => res.json())
           .then(data => {
             const mappedJobs: Job[] = data.map(mapJobFromApi);
