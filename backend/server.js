@@ -14,10 +14,15 @@ dotenv.config();
 // Initialize Express application
 const app = express();
 
-app.use(express.json());    // Parse JSON request bodies
 app.use(cors({
     origin: process.env.ALLOWED_ORIGIN,
 }));            // Enable Cross-Origin Resource Sharing
+
+console.log("ALLOWED_ORIGIN:", process.env.ALLOWED_ORIGIN);
+
+
+app.use(express.json());    // Parse JSON request bodies
+
 
 const PORT = process.env.PORT || 3000;
 const database = "jobs_data";
