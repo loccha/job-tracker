@@ -15,8 +15,8 @@ dotenv.config();
 const app = express();
 
 app.use(cors({
-    origin: process.env.ALLOWED_ORIGIN,
-}));            // Enable Cross-Origin Resource Sharing
+    origin: '*',
+}));           // Enable Cross-Origin Resource Sharing
 
 console.log("ALLOWED_ORIGIN:", process.env.ALLOWED_ORIGIN);
 
