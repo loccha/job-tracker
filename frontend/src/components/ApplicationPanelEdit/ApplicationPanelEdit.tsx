@@ -40,7 +40,7 @@ const ApplicationPanelEdit = ({job, setJobs, setPopupVisible, setIsEditing, onSa
     const[applyingDate, setApplyingDate] = useState(job.applyingDate);
 
     const[cvFile, setCvFile] = useState<File | null>(null);
-    const[cvUrl, setCvUrl] = useState<string>(job.cvUrl);          // Server URL after CV upload
+    const[cvUrl, setCvUrl] = useState<string | undefined>(job.cvUrl);          // Server URL after CV upload
     const[cvOriginalName, setCvOriginalName] = useState(job.cvOriginalName);
 
     const[letterFile, setLetterFile] = useState<File | null>(null);

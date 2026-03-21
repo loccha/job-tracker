@@ -18,7 +18,7 @@ app.use(express.json());    // Parse JSON request bodies
 app.use(cors());            // Enable Cross-Origin Resource Sharing
 
 const PORT = process.env.PORT || 3000;
-const database = "jobs";
+const database = "jobs_data";
 
 // Database connection pool configuration
 // Uses environment variables for secure credential management
@@ -32,7 +32,7 @@ const database = "jobs";
 
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
-    ssl: { rejectUnauthorized: false }
+    ssl: process.env.DATABASE_URL.includes("railway") ? { rejectUnauthorized: false } : false
 });
 
 // Establish database connection
@@ -152,8 +152,10 @@ app.delete('/api/delete/:id', async (req, res) => {
         const urls_response = await pool.query(urls_query);
         const row = urls_response.rows[0];
 
-        const relativePathCvUrl = "." + new URL(row.cv_url).pathname;
-        await fs.promises.unlink(relativePathCvUrl);
+        if(row.cv_url){
+            const relativePathCvUrl = "." + new URL(row.cv_url).pathname;
+            await fs.promises.unlink(relativePathCvUrl);
+        }
 
         if(row.letter_url){
             const relativePathLetterUrl = "." + new URL(row.letter_url).pathname;

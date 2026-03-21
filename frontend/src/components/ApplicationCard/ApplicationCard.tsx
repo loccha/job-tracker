@@ -48,10 +48,12 @@ function ApplicationCard({
         {/* Document attachments section - links to external resources */}
         <div className={"application-card__attachments"}>
 
-            {/* Link to uploaded CV/resume */}
-            <a href={`${job.cvUrl}`} target="_blank">
-                <FontAwesomeIcon className="application-card__icon application-card__icon--cv" icon={faIdCard} />
-            </a>
+            {/* Optional link to resume (if provided) */}
+            {job.cvUrl ? (
+                <a href={`${job.cvUrl}`} target="_blank">
+                    <FontAwesomeIcon className="application-card__icon application-card__icon--cv" icon={faIdCard} />
+                </a>
+            ) : null}
             
             {/* Link to original job posting */}
             <a href={`${job.link}`} target="_blank">

@@ -8,8 +8,8 @@ export type Job = {
       interviewDate: string | undefined;
       screeningCompleted: boolean;
       link: string;
-      cvUrl: string;
-      cvOriginalName: string;
+      cvUrl?: string;
+      cvOriginalName?: string;
       letterUrl?: string;
       letterOriginalName?: string;
       createdAt: string;
