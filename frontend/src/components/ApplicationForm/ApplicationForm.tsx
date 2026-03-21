@@ -177,7 +177,8 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
     const { fill, trail } = getScoreColor(score);
     
     return (
-        <div ref={formRef} className="application-form">
+        <div 
+            ref={formRef} className="application-form">
             <form className="application-form__form" onSubmit={handleSubmit}>
 
                 {/* Header section - form title and status selector */}
