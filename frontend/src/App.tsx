@@ -39,7 +39,7 @@ const App = () => {
   };
 
   return (
-    <div>
+    <div className="app">
         {selectedJob && (
           <>
             <div className="blur-overlay" onClick={() => setSelectedJob(null)}></div>
