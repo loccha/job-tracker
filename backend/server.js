@@ -15,10 +15,12 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());    // Parse JSON request bodies
-app.use(cors());            // Enable Cross-Origin Resource Sharing
+app.use(cors({
+    origin: process.env.ALLOWED_ORIGIN,
+}));            // Enable Cross-Origin Resource Sharing
 
 const PORT = process.env.PORT || 3000;
-const database = "jobs";
+const database = "jobs_data";
 
 // Database connection pool configuration
 // Uses environment variables for secure credential management
