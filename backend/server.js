@@ -18,9 +18,6 @@ app.use(cors({
     origin: '*',
 }));           // Enable Cross-Origin Resource Sharing
 
-console.log("ALLOWED_ORIGIN:", process.env.ALLOWED_ORIGIN);
-
-
 app.use(express.json());    // Parse JSON request bodies
 
 
