@@ -1,7 +1,9 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink, faTrashCan, faPenToSquare, faCheck } from '@fortawesome/free-solid-svg-icons';
 
-import { Job } from '../../types/job';
+import { Job } from '../../types/Job';
+import { useEffect, useRef} from "react";
+import { marked } from "marked";
 
 import Calendar from "../Calendar/Calendar";
 import './ApplicationPanelRead.css'
@@ -14,6 +16,14 @@ type ApplicationPanelReadProps = {
 }
 
 const ApplicationPanelRead = ({job, setPopupVisible, setIsEditing}: ApplicationPanelReadProps) => {
+    const descriptionRef = useRef<HTMLParagraphElement>(null);
+
+    useEffect(() => {
+        if (descriptionRef.current) {
+            descriptionRef.current.innerHTML = marked.parse(job.description, { async: false });
+        }
+    }, [job.description]);
+
     return (
         <div className="application-panel-read">
             <div className="application-panel__header">
@@ -50,7 +60,11 @@ const ApplicationPanelRead = ({job, setPopupVisible, setIsEditing}: ApplicationP
                     <div className="application-panel__main-column">
                         <div className="application-panel__card application-panel__card--job-description">
                             <p className="application-panel__title application-panel__title--job-description">Job Description</p>
-                            <p className="application-panel__job-description ">{job.description}</p>
+                            <p 
+                                className="application-panel__job-description " 
+                                id='description' 
+                                ref={descriptionRef} 
+                            />
                         </div>
                         
                         <div className="application-panel__card application-panel__documents-section">

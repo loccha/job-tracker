@@ -1,7 +1,6 @@
 import { useState } from "react";
 
-import { Job } from '../../types/job';
-
+import { Job } from '../../types/Job';
 
 import ApplicationPanelRead from "../ApplicationPanelRead/ApplicationPanelRead";
 import ApplicationPanelEdit from "../ApplicationPanelEdit/ApplicationPanelEdit";
