@@ -1,10 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilePen } from '@fortawesome/free-solid-svg-icons';
 
-import { useRef, useState } from "react";
+import { useRef, useReducer } from "react";
 import axios from "axios";
 
-import { Job } from '../../types/job'
+import { Job } from '../../types/Job'
+import { DraftJob } from '../../types/DraftJob'
+
 import { mapJobFromApi } from '../../mappers/jobMapper'
 
 import useClickOutside from '../../hooks/useClickOutside'
@@ -22,6 +24,10 @@ type ApplicationFormProps = {
     setJobs: React.Dispatch<React.SetStateAction<Job[]>>;
     onClose: () => void;
 };
+
+type FormAction =
+    | {type: "SET_FIELD"; field: keyof DraftJob; value: DraftJob[keyof DraftJob]}
+    | {type: "RESET"};
 
 /**
  * Form data structure for new job entries
@@ -42,28 +48,46 @@ export type FormJobEntry = Omit<Job, "id" | "createdAt">;
  * - Automatic file upload to server with URL generation
  */
 const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
-    // Form state management - individual fields for controlled inputs    
-    const[title, setTitle] = useState("");
-    const[company, setCompany] = useState("");
-    const[shortDescription, setShortDescription] = useState("");
-    const[description, setDescription] = useState("");
-    const[applyingDate, setApplyingDate] = useState(() => new Date().toLocaleDateString("en-CA"));
-    const[interviewDate, setInterviewDate] = useState("");
-    const[screeningCompleted, setScreeningCompleted] = useState(false);
-    const[link, setLink] = useState("");
+    // Form state management - individual fields for controlled inputs  
+    
+    const initialState = {
+        title: "",
+        company: "",
+        shortDescription: "",
+        description: "",
+        applyingDate: new Date().toLocaleDateString("en-CA"),
+        interviewDate: "",
+        screeningCompleted: false,
+        link: "",
+        cvUrl: "",
+        cvOriginalName: "",
+        cvFile: null,
+        letterUrl: "",
+        letterOriginalName: "",
+        letterFile: null,
+        confidenceScore: "",
+        status: "applied",
+        personnalNotes: ""
+    };
 
-    const[cvUrl, setCvUrl] = useState<string>("");          // Server URL after CV upload
-    const[cvOriginalName, setCvOriginalName] = useState("");
-    const[cvFile, setCvFile] = useState<File | null>(null);
+    function formReducer(state: DraftJob, action: FormAction): DraftJob{
+        switch(action.type){
+            case "SET_FIELD":
+                return {
+                    ...state,
+                    [action.field]:action.value
+                };
 
-    const[letterUrl, setLetterUrl] = useState<string | undefined>("");   // Server URL after cover letter upload
-    const[letterOriginalName, setLetterOriginalName] = useState("");
-    const[letterFile, setLetterFile] = useState<File | null>(null);
+            case "RESET":
+                return initialState;
 
-    const[confidenceScore, setConfidenceScore] = useState("");
-    const[status, setStatus] = useState("applied");         // Application status (applied, interview, offer, declined)
+            default:
+                return state;
+        }
+    }
 
-    const[personnalNotes, setPersonnalNotes] = useState("");
+    const[form, dispatch] = useReducer(formReducer, initialState);
+    
     // Ref for click-outside detection
     const formRef = useRef<HTMLDivElement>(null);
 
@@ -81,23 +105,23 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
         event.preventDefault(); 
 
         // Parse confidence score to number for database storage
-        const parsedScore: number = Number(confidenceScore)
+        const parsedScore: number = Number(form.confidenceScore)
         const newJobEntry = {
-            title,
-            company,
-            shortDescription,
-            description,
-            applyingDate,
-            interviewDate,
-            screeningCompleted,
-            link,
-            cvUrl,
-            cvOriginalName,
-            letterUrl,
-            letterOriginalName,
+            title: form.title,
+            company: form.company,
+            shortDescription: form.shortDescription,
+            description: form.description,
+            applyingDate: form.applyingDate,
+            interviewDate: form.interviewDate,
+            screeningCompleted: form.screeningCompleted,
+            link: form.link,
+            cvUrl: form.cvUrl,
+            cvOriginalName: form.cvOriginalName,
+            letterUrl: form.letterUrl,
+            letterOriginalName: form.letterOriginalName,
             confidenceScore: parsedScore,
-            status,
-            personnalNotes
+            status: form.status,
+            personnalNotes: form.personnalNotes
         };
 
 
@@ -108,26 +132,27 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
         const addJob = async (newJobEntry: FormJobEntry) => {    
             try {
 
-                let finalCvUrl = cvUrl;
-                let finalLetterUrl = letterUrl;
+                let finalCvUrl: string | undefined= form.cvUrl;
+                let finalLetterUrl: string | undefined = form.letterUrl;
 
-                if(cvFile != null){
-                    finalCvUrl = await uploadFile(cvFile) ?? "";
-                    setCvUrl(finalCvUrl);
+                if(form.cvFile != null){
+                    finalCvUrl = await uploadFile(form.cvFile) ?? "";
+                    dispatch({ type: "SET_FIELD", field: "cvUrl", value: finalCvUrl });
                 }
 
-                if (letterFile != null) {
-                    finalLetterUrl = await uploadFile(letterFile) ?? undefined;
-                    setLetterUrl(finalLetterUrl);
+                if (form.letterFile != null) {
+                    finalLetterUrl = await uploadFile(form.letterFile) ?? "";
+                    dispatch({ type: "SET_FIELD", field: "letterUrl", value: finalLetterUrl });
                 }
                 
                 const jobToSend = {
                     ...newJobEntry,
                     cvUrl: finalCvUrl,
                     letterUrl: finalLetterUrl,
-                    cvOriginalName: cvFile?.name,
-                    letterOriginalName: letterFile?.name
+                    cvOriginalName: form.cvFile?.name,
+                    letterOriginalName: form.letterFile?.name
                 };
+
                 const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/jobs`, jobToSend);
                 setJobs(prev => [...prev, mapJobFromApi(res.data)]);
             } catch (err) {
@@ -166,7 +191,7 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
         };
     };
 
-    const score = Number(confidenceScore) || 0;
+    const score = Number(form.confidenceScore) || 0;
     const getScoreColor = (score: number) => {
         if (score >= 85) return { fill: 'var(--color-offer-column)', trail: 'var(--color-offer-column-faded)' };
         if (score >= 60) return { fill: 'var(--color-interview-column)', trail: 'var(--color-interview-column-faded)' };
@@ -191,8 +216,8 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                     {/* Status dropdown - tracks application progress */}
                     <select name="status" 
                             id="status"
-                            value={status}
-                            onChange={(e) => setStatus(e.target.value)}
+                            value={form.status}
+                            onChange={(e) => dispatch({ type: "SET_FIELD", field: "status", value: e.target.value})}
                             className="application-form__status"
                     >
                         <option value="applied">Applied</option>
@@ -214,8 +239,8 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                                 maxLength={100}
                                 id="title"
                                 placeholder="Job Title" 
-                                value={title}
-                                onChange={(e) => setTitle(e.target.value)}
+                                value={form.title}
+                                onChange={(e) => dispatch({ type: "SET_FIELD", field: "title", value: e.target.value })}
                                 required 
                             /> 
                         </div>
@@ -227,9 +252,9 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                                 type="text"
                                 maxLength={100}
                                 id="company" 
-                                value={company}
+                                value={form.company}
                                 placeholder="Company"
-                                onChange={(e) => setCompany(e.target.value)}
+                                onChange={(e) => dispatch({ type: "SET_FIELD", field: "company", value: e.target.value })}
                                 required
                             /> 
                         </div>
@@ -240,8 +265,8 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                                 <label htmlFor="link">Job Link</label> 
                                 <input type="text"
                                     id="link" 
-                                    value={link}
-                                    onChange={(e) => setLink(e.target.value)} 
+                                    value={form.link}
+                                    onChange={(e) => dispatch({ type: "SET_FIELD", field: "link", value: e.target.value })} 
                                     className="input"
                                     required
                                 /> 
@@ -253,8 +278,8 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                                 <input type="date"
                                     className="input application-form__input-date"
                                     id="applyingDate" 
-                                    value={applyingDate}
-                                    onChange={(e) => setApplyingDate(e.target.value)}
+                                    value={form.applyingDate}
+                                    onChange={(e) => dispatch({ type: "SET_FIELD", field: "applyingDate", value: e.target.value })}
                                     required
                                 />
                             </div>
@@ -268,10 +293,10 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                             <input type="number"
                                 className="input application-form__input--score"
                                 id="score" 
-                                value={confidenceScore}
+                                value={form.confidenceScore}
                                 onChange={(e) => {
                                     const score = Math.min(100, Math.max(0, Number(e.target.value)));
-                                    setConfidenceScore(score.toString())
+                                    dispatch({ type: "SET_FIELD", field: "confidenceScore", value: score.toString() })
                                 }}
                             />
                         </div>
@@ -294,8 +319,8 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                             className="input application-form__input--short-description"
                             id="short-description"
                             placeholder="Short Description"
-                            value={shortDescription}
-                            onChange={(e) => setShortDescription(e.target.value)}
+                            value={form.shortDescription}
+                            onChange={(e) => dispatch({ type: "SET_FIELD", field: "shortDescription", value: e.target.value })}
                         />
                     </div>
 
@@ -305,8 +330,8 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                         <textarea
                             className="input application-form__input--description"
                             id="description"
-                            value={description}
-                            onChange={(e) => setDescription(e.target.value)} 
+                            value={form.description}
+                            onChange={(e) => dispatch({ type: "SET_FIELD", field: "description", value: e.target.value })} 
                         />
                     </div>
 
@@ -318,13 +343,13 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                                 <div className="application-form__dropboxes">
                                     {/* Resume dropzone */}
                                     <Dropbox
-                                        onDrop={(file) => setCvFile(file)}
+                                        onDrop={(file) => dispatch({ type: "SET_FIELD", field: "cvFile", value: file })}
                                         label={"Resume"}
                                         fileName={undefined}
                                     />
                                     {/* Cover letter dropzone */}
                                     <Dropbox
-                                        onDrop={(file) => setLetterFile(file)}
+                                        onDrop={(file) => dispatch({ type: "SET_FIELD", field: "letterFile", value: file })}
                                         label={"Cover Letter"}
                                         fileName={undefined}
                                     />
@@ -340,8 +365,8 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                                     className="input application-form__input-date" 
                                     type="date"
                                     id="interviewDate" 
-                                    value={interviewDate}
-                                    onChange={(e) => setInterviewDate(e.target.value)}
+                                    value={form.interviewDate}
+                                    onChange={(e) => dispatch({ type: "SET_FIELD", field: "interviewDate", value: e.target.value })}
                                 />
                             </div>
                             
@@ -350,8 +375,8 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                                 <label className="application-form__checkbox">
                                     <input
                                         type="checkbox" 
-                                        checked={screeningCompleted}
-                                        onChange={(e) => setScreeningCompleted(e.target.checked)}
+                                        checked={form.screeningCompleted}
+                                        onChange={(e) => dispatch({ type: "SET_FIELD", field: "screeningCompleted", value: e.target.checked })}
                                     />Screening Completed
                                 </label>
                             </div>
@@ -362,7 +387,13 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                 {/* Footer - form submission */}
                 <div className="application-form__footer">
                     <button className="button-primary application-form__button application-form__button--save-job" type="submit">Save Job</button>
-                    <button className="button-subtle application-form__button application-form__button--cancel">Cancel</button>
+                    <button 
+                        className="button-subtle application-form__button application-form__button--cancel"
+                        type="button"
+                        onClick={onClose}
+                    >
+                            Cancel
+                    </button>
                 </div>
                                       
             </form>

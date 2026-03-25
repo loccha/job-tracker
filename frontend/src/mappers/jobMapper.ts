@@ -1,4 +1,4 @@
-import { Job } from "../types/job";
+import { Job } from "../types/Job";
 
 export const mapJobFromApi = (job: any): Job => ({
     id: job.id,

@@ -4,7 +4,8 @@ import { faLink, faTrashCan, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { useState } from "react";
 import axios from "axios";
 
-import { Job } from '../../types/job';
+import { Job } from '../../types/Job';
+import { DraftJob } from '../../types/DraftJob';
 
 import Calendar from "../Calendar/Calendar";
 import Dropbox from "../Dropbox/Dropbox";

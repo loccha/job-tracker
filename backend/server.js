@@ -8,6 +8,8 @@ import fs from "fs";
 import cors from "cors";
 import { Pool } from 'pg';
 
+import aiRoutes from "./ai/aiRoutes.js";
+
 // Load environment variables from .env file
 dotenv.config();
 
@@ -20,19 +22,12 @@ app.use(cors({
 
 app.use(express.json());    // Parse JSON request bodies
 
+app.use('/api/ai', aiRoutes);
+
 
 const PORT = process.env.PORT || 3000;
 const database = "jobs";
 
-// Database connection pool configuration
-// Uses environment variables for secure credential management
-/*const pool = new Pool({
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    database: process.env.DB_DATABASE,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD
-});*/
 
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
