@@ -131,6 +131,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .application-form__input--score{
     width:25px;
+    text-align: center;
 }
 
 
