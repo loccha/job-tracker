@@ -26,7 +26,7 @@ app.use('/api/ai', aiRoutes);
 
 
 const PORT = process.env.PORT || 3000;
-const database = "jobs";
+const table = "jobs";
 
 
 const pool = new Pool({
@@ -44,7 +44,7 @@ await pool.connect();
  */
 app.get('/api', async(req, res) => {
     try {
-        const result = await pool.query(`SELECT * FROM ${database} ORDER BY created_at`);
+        const result = await pool.query(`SELECT * FROM ${table} ORDER BY applying_date DESC`);
         res.json(result.rows);
     } catch(e) {
         res.status(500).json({ error: e.message });
@@ -98,7 +98,7 @@ app.post('/api/jobs', async (req, res) => {
     try {
         const safeInterviewDate = interviewDate || null;
         const query = {
-            text: `INSERT INTO ${database}(title, company, short_description, description, applying_date, interview_date, screening_completed, link, cv_url, cv_original_name, letter_url, letter_original_name, confidence_score, status, personnal_notes) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING *`,
+            text: `INSERT INTO ${table}(title, company, short_description, description, applying_date, interview_date, screening_completed, link, cv_url, cv_original_name, letter_url, letter_original_name, confidence_score, status, personnal_notes) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15) RETURNING *`,
             values: [title, company, shortDescription, description, applyingDate, safeInterviewDate, screeningCompleted, link, cvUrl, cvOriginalName, letterUrl, letterOriginalName, confidenceScore, status, personnalNotes],
         };
         const result = await pool.query(query);
@@ -124,7 +124,7 @@ app.put('/api/jobs/:id', async (req, res) => {
         const safeInterviewDate = interviewDate || null;
 
         const query = {
-            text: `UPDATE ${database} SET title = $1, company = $2, short_description = $3, description = $4, applying_date = $5, interview_date = $6, screening_completed = $7, link = $8, cv_url = $9, cv_original_name = $10, letter_url = $11, letter_original_name = $12, confidence_score = $13, status = $14, personnal_notes = $15 WHERE id = $16 RETURNING *`,
+            text: `UPDATE ${table} SET title = $1, company = $2, short_description = $3, description = $4, applying_date = $5, interview_date = $6, screening_completed = $7, link = $8, cv_url = $9, cv_original_name = $10, letter_url = $11, letter_original_name = $12, confidence_score = $13, status = $14, personnal_notes = $15 WHERE id = $16 RETURNING *`,
             values: [title, company, shortDescription, description, safeApplyingDate, safeInterviewDate, screeningCompleted, link, cvUrl, cvOriginalName, letterUrl, letterOriginalName, confidenceScore, status, personnalNotes, id],
         };
 
@@ -144,7 +144,7 @@ app.delete('/api/delete/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const urls_query = {
-            text: `SELECT cv_url, letter_url from ${database} WHERE id = $1`,
+            text: `SELECT cv_url, letter_url from ${table} WHERE id = $1`,
             values: [id],
         };
 
@@ -162,7 +162,7 @@ app.delete('/api/delete/:id', async (req, res) => {
         }
 
         const delete_query = {
-            text:`DELETE FROM ${database} WHERE id = $1`,
+            text:`DELETE FROM ${table} WHERE id = $1`,
             values: [id],
         };
 

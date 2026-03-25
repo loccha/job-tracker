@@ -154,7 +154,7 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                 };
 
                 const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/jobs`, jobToSend);
-                setJobs(prev => [...prev, mapJobFromApi(res.data)]);
+                setJobs(prev => [mapJobFromApi(res.data), ...prev]);
             } catch (err) {
                 console.error(err);
             }
