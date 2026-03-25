@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFilePen } from '@fortawesome/free-solid-svg-icons';
+import { faFilePen, faRobot } from '@fortawesome/free-solid-svg-icons';
 
 import { useRef, useReducer } from "react";
 import axios from "axios";
@@ -246,27 +246,27 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                         </div>
                         
                         {/* Company name input */}
-                        <div className="application-form__item">
+                        <div className="application-form__item application-form__item--link">
                             <input  
-                                className="input application-form__input--company"
+                                className="input application-form__input--link"
                                 type="text"
-                                maxLength={100}
-                                id="company" 
-                                value={form.company}
-                                placeholder="Company"
-                                onChange={(e) => dispatch({ type: "SET_FIELD", field: "company", value: e.target.value })}
+                                id="link" 
+                                value={form.link}
+                                placeholder="Job Link"
+                                onChange={(e) => dispatch({ type: "SET_FIELD", field: "link", value: e.target.value })}
                                 required
-                            /> 
+                            />
+                            <button className='button-primary button-primary--robot'><FontAwesomeIcon icon={faRobot} /> Quick Fill </button> 
                         </div>
 
                         {/* Job link and application date row */}
                         <div className="application-form__link-date-row">
-                            <div className="application-form__item application-form__item--link">
-                                <label htmlFor="link">Job Link</label> 
+                            <div className="application-form__item application-form__item--company">
+                                <label htmlFor="company">Job Company</label> 
                                 <input type="text"
-                                    id="link" 
-                                    value={form.link}
-                                    onChange={(e) => dispatch({ type: "SET_FIELD", field: "link", value: e.target.value })} 
+                                    id="company" 
+                                    value={form.company}
+                                    onChange={(e) => dispatch({ type: "SET_FIELD", field: "company", value: e.target.value })} 
                                     className="input"
                                     required
                                 /> 

@@ -94,6 +94,19 @@ input[type="number"]::-webkit-outer-spin-button {
     gap: var(--grid-gap-md);
 }
 
+.application-form__item--link{
+    flex-direction: row;
+}
+
+.application-form__input--link{
+    flex: 1;
+}
+
+.button-primary--robot {
+    width: fit-content;
+    height: fit-content;
+}
+
 .application-form__link-date-row{
     display: grid;
     grid-template-columns: 1fr 1fr;
