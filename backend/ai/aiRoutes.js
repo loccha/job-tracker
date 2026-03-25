@@ -1,13 +1,13 @@
 import express from "express";
-import { generateScore } from "./aiServices.js"
+import { autoFill } from "./aiServices.js"
 
 const router = express.Router();
 
-router.post("/generate-score", async(req, res) => {
+router.post("/autofill", async(req, res) => {
     try {
-        const { description, cv_text } = req.body;
-        const { score } = await generateScore(description, cv_text);
-        res.json({ score });
+        const { link } = req.body;
+        const { title, company, shortDescription, description } = await autoFill(link);
+        res.json({ title, company, shortDescription, description });
     } catch(e){
         res.status(500).json({ error: e.message });
     }

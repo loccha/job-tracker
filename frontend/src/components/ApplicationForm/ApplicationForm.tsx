@@ -27,6 +27,7 @@ type ApplicationFormProps = {
 
 type FormAction =
     | {type: "SET_FIELD"; field: keyof DraftJob; value: DraftJob[keyof DraftJob]}
+    | {type: "AUTO_FILL"; payload: Partial<DraftJob>}
     | {type: "RESET"};
 
 /**
@@ -76,6 +77,12 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                 return {
                     ...state,
                     [action.field]:action.value
+                };
+
+            case "AUTO_FILL":
+                return{
+                    ...state,
+                    ...action.payload
                 };
 
             case "RESET":
@@ -200,6 +207,20 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
     };
 
     const { fill, trail } = getScoreColor(score);
+
+    function autoFill(link: string) {
+        return async (e: React.MouseEvent<HTMLButtonElement>) => {
+            e.preventDefault();
+            try {
+                const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/ai/autofill`, { link });
+                const aiData = res.data;
+                console.log(aiData)
+                dispatch({ type: "AUTO_FILL", payload: aiData});
+            } catch (err) {
+                console.error("Auto-fill failed:", err);
+            }
+        }
+    };
     
     return (
         <div 
@@ -236,7 +257,7 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                             <input
                                 className="input application-form__input--title" 
                                 type="text"
-                                maxLength={100}
+                                maxLength={50}
                                 id="title"
                                 placeholder="Job Title" 
                                 value={form.title}
@@ -256,7 +277,12 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
                                 onChange={(e) => dispatch({ type: "SET_FIELD", field: "link", value: e.target.value })}
                                 required
                             />
-                            <button className='button-primary button-primary--robot'><FontAwesomeIcon icon={faRobot} /> Quick Fill </button> 
+                            <button 
+                                className='button-primary button-primary--robot'
+                                onClick={autoFill(form.link)}
+                            >
+                                <FontAwesomeIcon icon={faRobot} /> Quick Fill 
+                            </button> 
                         </div>
 
                         {/* Job link and application date row */}
@@ -386,7 +412,10 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
 
                 {/* Footer - form submission */}
                 <div className="application-form__footer">
-                    <button className="button-primary application-form__button application-form__button--save-job" type="submit">Save Job</button>
+                    <button 
+                        className="button-primary application-form__button application-form__button--save-job" 
+                        type="submit">Save Job
+                    </button>
                     <button 
                         className="button-subtle application-form__button application-form__button--cancel"
                         type="button"

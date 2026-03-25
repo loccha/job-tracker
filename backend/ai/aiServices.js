@@ -7,12 +7,28 @@ const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY
 })
 
-export async function generateScore(description, cv_text){
+export async function autoFill(link){
     const prompt = `
-    Return only valid JSON. No text.
-    Exact response format (example):
+    With this link : ${link},
+    return a json with no text with this format as an example:
 
-    {"score": integer from 1 to 100}
+    {
+        "title" : "job title"
+        "company" : "desjardins"
+        "shortDescription" : "Fullstack developper using SQL, React and Python"
+        "description" : "long text"
+    }
+
+    the title's length must not be longer than 50 chars.
+
+    the short description shouldn't be longer than 8 words 
+    and describes the overview of the job posting.
+
+    the description is a copy/paste of the job description and requirement. Everything that
+    is important for the candidate to be reminded needs to be in this field.
+    the description should be well formatted with bullet points and sections, so it's easy to
+    read for the user. Don't write "job description" at the top since the title of the field
+    is already "job description".
     `
 
     const response = await openai.responses.create({
@@ -25,14 +41,16 @@ export async function generateScore(description, cv_text){
                 schema: {
                     type: "object",
                     properties: {
-                        score: { type: "number" }
+                        title: { type: "string" },
+                        company: { type: "string" },
+                        shortDescription: {type: "string"},
+                        description: {type: "string"}
                     },
-                    required:["score"],
+                    required:["title", "company", "shortDescription", "description"],
                     additionalProperties: false
                 }
             }
         }
     })
-
     return JSON.parse(response.output[0].content[0].text);
 }
