@@ -293,6 +293,7 @@ const ApplicationPanelEdit = ({job, setJobs, setPopupVisible, setIsEditing, onSa
                                 className="input editable application-panel__notes-card application-panel__notes-card--edit" 
                                 value={personnalNotes}
                                 onChange={(e) => setPersonnalNotes(e.target.value)}
+                                maxLength={150}
                                 spellCheck="false"
                             />     
                         </div>

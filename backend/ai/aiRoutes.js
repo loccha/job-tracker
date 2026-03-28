@@ -6,8 +6,8 @@ const router = express.Router();
 router.post("/autofill", async(req, res) => {
     try {
         const { link } = req.body;
-        const { title, company, shortDescription, description } = await autoFill(link);
-        res.json({ title, company, shortDescription, description });
+        const { title, company, shortDescription } = await autoFill(link);
+        res.json({ title, company, shortDescription });
     } catch(e){
         res.status(500).json({ error: e.message });
     }

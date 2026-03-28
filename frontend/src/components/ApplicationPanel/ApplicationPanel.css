@@ -199,8 +199,12 @@
     padding:10px;
     font-size: 14px;
 
-    max-height:120px;
+    /*max-height:120px;*/
     overflow:auto;
+}
+
+.application-panel__notes-card{
+    word-break: break-all;
 }
 
 .application-panel__footer{

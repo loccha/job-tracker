@@ -16,19 +16,17 @@ export async function autoFill(link){
         "title" : "job title"
         "company" : "desjardins"
         "shortDescription" : "Fullstack developper using SQL, React and Python"
-        "description" : "long text"
     }
 
     the title's length must not be longer than 50 chars.
 
-    the short description shouldn't be longer than 8 words 
+    the short description won't be longer than 8 words 
     and describes the overview of the job posting.
+    
 
-    the description is a copy/paste of the job description and requirement. Everything that
-    is important for the candidate to be reminded needs to be in this field.
-    the description should be well formatted with bullet points and sections, so it's easy to
-    read for the user. Don't write "job description" at the top since the title of the field
-    is already "job description".
+    The language for the field should always be in the language of the offer.
+    Example: If the offer is in french, the field will be in french.
+
     `
 
     const response = await openai.responses.create({
@@ -44,9 +42,8 @@ export async function autoFill(link){
                         title: { type: "string" },
                         company: { type: "string" },
                         shortDescription: {type: "string"},
-                        description: {type: "string"}
                     },
-                    required:["title", "company", "shortDescription", "description"],
+                    required:["title", "company", "shortDescription"],
                     additionalProperties: false
                 }
             }
