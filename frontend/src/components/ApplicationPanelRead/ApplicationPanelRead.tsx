@@ -20,7 +20,7 @@ const ApplicationPanelRead = ({job, setPopupVisible, setIsEditing}: ApplicationP
 
     useEffect(() => {
         if (descriptionRef.current) {
-            descriptionRef.current.innerHTML = marked.parse(job.description, { async: false });
+            descriptionRef.current.innerHTML = job.description ? marked.parse(job.description, { async: false }) : '';
         }
     }, [job.description]);
 
