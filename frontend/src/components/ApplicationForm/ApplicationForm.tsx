@@ -23,6 +23,7 @@ import '../../styles/variables.css'
 type ApplicationFormProps = {
     setJobs: React.Dispatch<React.SetStateAction<Job[]>>;
     onClose: () => void;
+    isClosing?: boolean;
 };
 
 type FormAction =
@@ -48,7 +49,7 @@ export type FormJobEntry = Omit<Job, "id" | "createdAt">;
  * - Click-outside detection to close the form
  * - Automatic file upload to server with URL generation
  */
-const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
+const ApplicationForm = ({ setJobs, onClose, isClosing = false }: ApplicationFormProps) => {
     // Form state management - individual fields for controlled inputs  
     
     const initialState = {
@@ -224,7 +225,7 @@ const ApplicationForm = ({ setJobs, onClose }: ApplicationFormProps) => {
     
     return (
         <div 
-            ref={formRef} className="application-form">
+            ref={formRef} className={`application-form ${isClosing ? 'closing' : ''}`}>
             <form className="application-form__form" onSubmit={handleSubmit}>
 
                 {/* Header section - form title and status selector */}

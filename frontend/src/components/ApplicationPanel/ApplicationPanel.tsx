@@ -15,9 +15,10 @@ type ApplicationPanelProps = {
     job: Job;
     setJobs: React.Dispatch<React.SetStateAction<Job[]>>;
     onClose: () => void;
+    isClosing?: boolean;
 }
 
-function ApplicationPanel ({ job, setJobs, onClose }:ApplicationPanelProps) {
+function ApplicationPanel ({ job, setJobs, onClose, isClosing = false }:ApplicationPanelProps) {
 
     const[popupVisible, setPopupVisible] = useState(false);
     const[isEditing, setIsEditing] = useState(false);
@@ -39,7 +40,7 @@ function ApplicationPanel ({ job, setJobs, onClose }:ApplicationPanelProps) {
     }
 
     return (
-        <div className="application-panel">
+        <div className={`application-panel ${isClosing ? 'closing' : ''}`}>
             {popupVisible &&
                 <Popup 
                     onClose={() => setPopupVisible(false)}

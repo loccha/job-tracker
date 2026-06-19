@@ -69,10 +69,11 @@ button {
     margin:0px 5px;
     
     cursor:pointer;
+    transition: filter 0.15s ease;
 }
 
 .button-primary:hover{
-       background: #803322; 
+       filter: brightness(0.8);
 }
 
 .button-subtle{
@@ -87,6 +88,7 @@ button {
 
     padding: 9px 14px;
     margin:0px 5px;
+    transition: background 0.3s ease;
 }
 
 .button-subtle:hover{

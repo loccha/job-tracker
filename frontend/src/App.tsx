@@ -17,6 +17,8 @@ const App = () => {
     const[jobs, setJobs] = useState<Job[]>([]);
     const[formVisible, setFormVisible] = useState(false)
     const[selectedJob, setSelectedJob] = useState<number | null>(null)
+    const[isClosingPanel, setIsClosingPanel] = useState(false);
+    const[isClosingForm, setIsClosingForm] = useState(false);
 
       useEffect(() => {
           fetch(`${import.meta.env.VITE_API_URL}/api`)
@@ -39,25 +41,43 @@ const App = () => {
       setSelectedJob(id);
   };
 
+  const handleClosePanel = () => {
+    setIsClosingPanel(true);
+    setTimeout(() => {
+      setSelectedJob(null);
+      setIsClosingPanel(false);
+    }, 300);
+  };
+
+  const handleCloseForm = () => {
+    setIsClosingForm(true);
+    setTimeout(() => {
+      setFormVisible(false);
+      setIsClosingForm(false);
+    }, 300);
+  };
+
   return (
     <div className="app">
         {selectedJob && (
           <>
-            <div className="blur-overlay" onClick={() => setSelectedJob(null)}></div>
+            <div className={`blur-overlay ${isClosingPanel ? 'closing' : ''}`} onClick={handleClosePanel}></div>
             <ApplicationPanel
               job = {jobs.find(job => job.id === selectedJob)!}
               setJobs={setJobs}
-              onClose={() => setSelectedJob(null)}
+              onClose={handleClosePanel}
+              isClosing={isClosingPanel}
             />
           </>
         )}
 
         {formVisible && (
           <>
-            <div className="blur-overlay" onClick={() => setFormVisible(false)}></div>
+            <div className={`blur-overlay ${isClosingForm ? 'closing' : ''}`} onClick={handleCloseForm}></div>
             <ApplicationForm 
               setJobs={setJobs} 
-              onClose={() => setFormVisible(false)}
+              onClose={handleCloseForm}
+              isClosing={isClosingForm}
             />
           </>
         )}

@@ -4,11 +4,56 @@
   padding: 3rem;
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slideUpAndFade {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -45%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes slideDownAndFade {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -45%);
+  }
+}
+
 .blur-overlay{
   position: fixed;
   inset: 0;
   backdrop-filter: blur(5px);
   z-index:100;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.blur-overlay.closing{
+  animation: fadeOut 0.1s ease-in forwards;
 }
 
 .app{
