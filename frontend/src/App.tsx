@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import StatusColumn from './components/StatusColumn/StatusColumn'
 import ApplicationForm from './components/ApplicationForm/ApplicationForm'
 import ApplicationPanel from './components/ApplicationPanel/ApplicationPanel'
+import StatsBar from './components/StatsBar/StatsBar'
 
 import { Job } from './types/job'
 import { mapJobFromApi } from './mappers/jobMapper'
@@ -78,6 +79,7 @@ const App = () => {
           </div>
 
         </div>
+        <StatsBar jobs={jobs} />
         <div className="kanban-board">
           {columns.map(column => (
               <StatusColumn
