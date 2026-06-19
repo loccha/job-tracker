@@ -48,18 +48,24 @@
 }
 
 .stats-sidesheet__chart{
-  width: 220px;
-  height: 220px;
+  margin: 0 auto;
+  width: fit-content;
+  height: fit-content;
   border-radius: 50%;
-  position: relative;
-  display: flex;
+  display:flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 1.25rem;
-  background: linear-gradient(135deg, #eef2ff, #f0f9ff);
+  margin-bottom: 40px;
+  /*background: linear-gradient(135deg, #d9dce9, #dce4ea);*/
+
+  position: relative;
 }
 
-.stats-sidesheet__chart::before{
+.stats-sidesheet__donut-svg {
+  display: block;
+}
+
+/*.stats-sidesheet__chart::before{
   content: '';
   position: absolute;
   inset: 0;
@@ -68,7 +74,7 @@
   background: linear-gradient(180deg, rgba(255,255,255,0.22), rgba(255,255,255,0.45));
   -webkit-mask: radial-gradient(circle at center, transparent 40%, black 41%);
   mask: radial-gradient(circle at center, transparent 40%, black 41%);
-}
+}*/
 
 .stats-sidesheet__center{
   position: relative;
@@ -89,13 +95,23 @@
   display: block;
   color: #343d49;
   font-size: 1.2rem;
-  margin-bottom: 0.4rem;
   font-weight: 600;
 }
 
+.stats-sidesheet__center-label {
+  font-size: 14px;
+  font-weight: 500;
+  fill: var(--color-text-primary, #1a1a1a);
+  font-family: inherit;
+}
+
+
+
 .stats-sidesheet__center-value{
-  font-size: 2rem;
-  color: #0f172a;
+  font-size: 30px;
+  font-weight: 700;
+  fill: var(--color-text-primary, #1a1a1a);
+  font-family: inherit;
 }
 
 .stats-sidesheet__legend{
@@ -113,6 +129,12 @@
   background: rgba(15,23,42,0.03);
   position: relative;
   cursor: default;
+}
+
+.stats-sidesheet__legend-text,
+.stats-sidesheet__legend-count,
+.stats-sidesheet__center-label{
+  white-space: nowrap;
 }
 
 .stats-sidesheet__legend-item:hover{
