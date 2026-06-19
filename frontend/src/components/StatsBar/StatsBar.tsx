@@ -9,7 +9,7 @@ type StatsBarProps = {
 };
 
 const StatsBar = ({ jobs }: StatsBarProps) => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [hoveredSegmentLabel, setHoveredSegmentLabel] = useState<string | null>(null);
 
   const statusCounts = jobs.reduce(
