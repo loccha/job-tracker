@@ -179,6 +179,17 @@
   font-weight: 700;
 }
 
+.stats-sidesheet__interview-stat{
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.85rem 1rem;
+  border-radius: 16px;
+  background: rgba(15,23,42,0.03);
+  margin-top: 0.5rem;
+}
+
 @media (max-width: 900px) {
   .stats-sidesheet{
     right: 0.5rem;

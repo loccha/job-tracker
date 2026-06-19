@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAnglesLeft, faAnglesRight } from '@fortawesome/free-solid-svg-icons';
+import { faAnglesLeft, faAnglesRight, faCalendarDay } from '@fortawesome/free-solid-svg-icons';
 import { Job } from '../../types/job';
 import './StatsBar.css';
 
@@ -34,8 +34,8 @@ const StatsBar = ({ jobs }: StatsBarProps) => {
 
   // Dégradés clair -> foncé par segment pour donner du relief
   const segments = [
-    { label: 'Offres', value: statusCounts.offer, colorLight: '#4ade80', colorDark: '#16803c' },
-    { label: 'Interview secured', value: interviewCount, colorLight: '#60a5fa', colorDark: '#0b3aa8' },
+    { label: 'Offers', value: statusCounts.offer, colorLight: '#4ade80', colorDark: '#16803c' },
+    { label: 'Interview', value: statusCounts.interview, colorLight: '#60a5fa', colorDark: '#0b3aa8' },
     { label: 'Pending response', value: statusCounts.applied, colorLight: '#c084fc', colorDark: '#7c1fc9' },
     { label: 'Declined', value: statusCounts.declined, colorLight: '#fb7185', colorDark: '#d8233f' },
   ];
@@ -161,6 +161,15 @@ const StatsBar = ({ jobs }: StatsBarProps) => {
               </div>
             );
           })}
+        </div>
+        <div className="stats-sidesheet__interview-stat">
+            <span className="stats-sidesheet__legend-text">
+              <FontAwesomeIcon icon={faCalendarDay} style={{ marginRight: '0.5rem' }} />
+              Interview secured
+            </span>
+            <span className="stats-sidesheet__legend-count">
+              {totalApplications ? ((interviewCount / totalApplications) * 100).toFixed(0) : 0}%
+            </span>
         </div>
       </div>
     </aside>
