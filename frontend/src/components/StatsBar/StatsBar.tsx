@@ -168,7 +168,7 @@ const StatsBar = ({ jobs }: StatsBarProps) => {
               Interview secured
             </span>
             <span className="stats-sidesheet__legend-count">
-              {totalApplications ? ((interviewCount / totalApplications) * 100).toFixed(0) : 0}%
+              {totalApplications ? ((interviewCount / totalApplications) * 100).toFixed(2) : 0}%
             </span>
         </div>
       </div>

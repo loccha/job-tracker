@@ -1,6 +1,6 @@
 .stats-sidesheet{
   position: fixed;
-  right: 1rem;
+  right: 0rem;
   top: 50%;
   transform: translateY(-50%);
   width: 72px;
@@ -192,7 +192,7 @@
 
 @media (max-width: 900px) {
   .stats-sidesheet{
-    right: 0.5rem;
+    right: 0rem;
     top: auto;
     bottom: 1rem;
     transform: none;
