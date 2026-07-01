@@ -1,3 +1,4 @@
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLink, faFileLines, faIdCard, faCalendarDay } from '@fortawesome/free-solid-svg-icons';
 import { Job } from '../../types/job';
@@ -14,6 +15,7 @@ type ApplicationCardProps = {
     job: Job;
     
     onClick: () => void;
+    onDragStart?: (e: React.DragEvent) => void;
 };
 
 /**
@@ -43,6 +45,8 @@ function ApplicationCard({
     <article 
         className={`application-card application-card--${scoreClass}`}
         onClick={onClick}
+        draggable={true}
+        onDragStart={(e) => { e.dataTransfer.setData('text/plain', String(job.id)); if (typeof onDragStart === 'function') onDragStart(e); }}
     >
 
         {/* Document attachments section - links to external resources */}

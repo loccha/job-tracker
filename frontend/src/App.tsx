@@ -107,7 +107,7 @@ const App = () => {
                   title={column.title}
                   status={column.status}
                   jobs={jobs}
-
+                  setJobs={setJobs}
                   onSelectJob={handleSelectJob}
               />
             ))
